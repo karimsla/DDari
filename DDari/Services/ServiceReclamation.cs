@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -16,6 +18,9 @@ namespace DDari.Services
         {
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8081");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
         }
 
@@ -35,42 +40,115 @@ namespace DDari.Services
             return response.StatusCode;
 
         }
-        public bool treat(int id, string treatement)
+        public async Task<bool> treat(int id, string treatement)
         {
+            HttpResponseMessage response = await client.PutAsJsonAsync(
+               $"/reclamation/treat/{id}", treatement);
+            response.EnsureSuccessStatusCode();
 
-            return true;
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+     
         }
-        public Reclamation getOne(int id)
+        public async Task<Reclamation> getOne(int id)
         {
-            return new Reclamation();
+            Reclamation reclamation = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamation = await response.Content.ReadAsAsync<Reclamation>();
+            }
+            return reclamation;
         }
-        public List<Reclamation> findAll()
+
+        public async Task<List<Reclamation>> findAll()
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/all");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
+             
         }
-        public List<Reclamation> findNotTreated()
+        public async Task<List<Reclamation>> findNotTreated()
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/notTreated");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
-        public List<Reclamation> findMyReclam(int id)
+
+
+        public async Task<List<Reclamation>> findMyReclam(int id)
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/myReclam/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
-        public List<Reclamation> filter(string filter)
+
+
+        public async Task<List<Reclamation>> filter(string filter)
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("/reclamation/search"),
+                Method = HttpMethod.Get,
+            };
+            request.Content = new StringContent(filter, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
-        public List<Reclamation> findBetweenDate(DateTime start, DateTime end)
+        public async Task<List<Reclamation>> findBetweenDate(DateTime start, DateTime end)
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/between?start={start}&end={end}");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
-        public List<Reclamation> findByType(string type)
+        public async Task<List<Reclamation>> findByType(string type)
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/type?type={type}");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
-        public List<Reclamation> searchMultiCriteria(string filter, string type, bool mine, DateTime start, DateTime end, bool treated, int id)
+        public async Task<List<Reclamation>> searchMultiCriteria(string filter, string type, bool mine, DateTime start, DateTime end, bool treated, int id)
         {
-            return null;
+            IEnumerable<Reclamation> reclamations = null;
+            HttpResponseMessage response = await client.GetAsync($"/reclamation/searchmulti?filter={filter}&type={type}&mine={mine}&id={id}&start={start}&end={end}&treated={treated}");
+            if (response.IsSuccessStatusCode)
+            {
+                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+            }
+            return reclamations.ToList();
         }
     }
 }

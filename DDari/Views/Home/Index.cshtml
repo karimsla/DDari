@@ -2,30 +2,714 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="clearfix"></div>
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="image-cover hero-banner" style="background:url(Content/img/banner-3.jpg) no-repeat;" data-overlay="6">
+    <div class="container">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h1 class="big-header-capt mb-0">Find Your Property</h1>
+        <p class="text-center mb-5">From as low as $10 per day with limited time offer</p>
+
+        <div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
+            <div class="hero-search-content">
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 b-r">
+                        <div class="form-group borders">
+                            <div class="input-with-icon">
+                                <input type="text" class="form-control" placeholder="Neighborhood">
+                                <i class="ti-search"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-group borders">
+                            <div class="input-with-icon">
+                                <select id="ptypes" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="1">Any Type</option>
+                                    <option value="2">Apartment</option>
+                                    <option value="3">Villas</option>
+                                    <option value="4">Commercial</option>
+                                    <option value="5">Offices</option>
+                                    <option value="6">Garage</option>
+                                </select>
+                                <i class="ti-briefcase"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-group borders">
+                            <div class="input-with-icon b-l">
+                                <select id="location" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="1">New York City</option>
+                                    <option value="2">Chicago, Illinois</option>
+                                    <option value="3">Las Vegas</option>
+                                    <option value="4">New Orleans</option>
+                                    <option value="5">San Francisco</option>
+                                    <option value="6">Washington</option>
+                                </select>
+                                <i class="ti-location-pin"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-12">
+                        <div class="form-group">
+                            <a href="#" class="btn search-btn">Search</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ================= Explore Property ================= -->
+<section>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-10 text-center">
+                <div class="sec-heading center">
+                    <h2>Explore Good places</h2>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="~/Content/img/p-1.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-9.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-10.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Banyon Tree Realty</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$7,000</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="Content/img/p-2.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-11.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-12.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Blue Reef Properties</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$8,400</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="Content/img/p-3.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-13.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-14.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Beacon Homes LLC</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$9,200</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="Content/img/p-4.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-15.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-16.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Bluebell Real Estate</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$6,500</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="Content/img/p-5.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-16.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-17.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Found Property Group</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$2,850</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+            <!-- Single Property -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="property-listing property-2">
+
+                    <div class="listing-img-wrapper">
+                        <div class="list-img-slide">
+                            <div class="click">
+                                <div><a href="single-property-1.html"><img src="Content/img/p-6.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-12.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                                <div><a href="single-property-1.html"><img src="Content/img/p-25.jpg" class="img-fluid mx-auto" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-wrapper">
+                        <div class="listing-short-detail-wrap">
+                            <div class="listing-short-detail">
+                                <span class="property-type">For Rent</span>
+                                <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Strive Partners Realty</a></h4>
+                            </div>
+                            <div class="listing-short-detail-flex">
+                                <h6 class="listing-card-info-price">$8,100</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bed.svg" width="13" alt=""></div>3 Beds
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/bathtub.svg" width="13" alt=""></div>1 Bath
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="Content/img/move.svg" width="13" alt=""></div>800 sqft
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-detail-footer">
+                        <div class="footer-first">
+                            <div class="foot-location"><img src="Content/img/pin.svg" width="18" alt="">210 Zirak Road, Canada</div>
+                        </div>
+                        <div class="footer-flex">
+                            <a href="property-detail.html" class="prt-view">View</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Single Property -->
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <a href="listings-list-with-sidebar.html" class="btn btn-theme-light-2 rounded">Browse More Properties</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ================================= Explore Property =============================== -->
+<!-- ============================ Property Location Start ================================== -->
+<section class="bg-light">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-10 text-center">
+                <div class="sec-heading center">
+                    <h2>Find By Locations</h2>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-1.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">San Francisco, California</h4>
+                            <span>12 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-2.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">Dunao, California</h4>
+                            <span>142 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-3.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">Liverpool, London</h4>
+                            <span>17 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-4.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">San Francisco, New York</h4>
+                            <span>72 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-5.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">New Orleans, Louisiana</h4>
+                            <span>102 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="location-property-wrap">
+                    <div class="location-property-thumb">
+                        <a href="listings-list-with-sidebar.html"><img src="Content/img/c-6.png" class="img-fluid" alt=""></a>
+                    </div>
+                    <div class="location-property-content">
+                        <div class="lp-content-flex">
+                            <h4 class="lp-content-title">Los Angeles</h4>
+                            <span>95 Properties</span>
+                        </div>
+                        <div class="lp-content-right">
+                            <a href="listings-list-with-sidebar.html" class="lp-property-view"><i class="ti-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <a href="listings-list-with-sidebar.html" class="btn btn-theme-light rounded">Browse More Locations</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ============================ Property Location End ================================== -->
+<!-- ============================ Step How To Use Start ================================== -->
+<section>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-10 text-center">
+                <div class="sec-heading center">
+                    <h2>How It Works?</h2>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="middle-icon-features-item">
+                    <div class="icon-features-wrap"><div class="middle-icon-large-features-box f-light-success"><i class="ti-receipt text-success"></i></div></div>
+                    <div class="middle-icon-features-content">
+                        <h4>Evaluate Property</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="middle-icon-features-item">
+                    <div class="icon-features-wrap"><div class="middle-icon-large-features-box f-light-warning"><i class="ti-user text-warning"></i></div></div>
+                    <div class="middle-icon-features-content">
+                        <h4>Meet Your Agent</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="middle-icon-features-item remove">
+                    <div class="icon-features-wrap"><div class="middle-icon-large-features-box f-light-blue"><i class="ti-shield text-blue"></i></div></div>
+                    <div class="middle-icon-features-content">
+                        <h4>Close The Deal</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class="clearfix"></div>
+<!-- ============================ Step How To Use End ====================== -->
+<!-- ============================ Smart Testimonials ================================== -->
+<section class="image-cover" style="background:url(Content/img/banner-2.jpg) no-repeat;" data-overlay="5">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 col-md-8">
+
+                <div class="caption-wrap-content text-center">
+                    <h2>Search Perfect Place in your City</h2>
+                    <p class="mb-5">We post regulary most powerful articles for help and support.</p>
+                    <a href="#" class="btn btn-light btn-md rounded">Explore More Property</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Smart Testimonials End ================================== -->
+<!-- ================================= Blog Grid ================================== -->
+<section>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-10 text-center">
+                <div class="sec-heading center">
+                    <h2>News By Resido</h2>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Single blog Grid -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-wrap-grid">
+
+                    <div class="blog-thumb">
+                        <a href="blog-detail.html"><img src="Content/img/p-11.jpg" class="img-fluid" alt=""></a>
+                    </div>
+
+                    <div class="blog-info">
+                        <span class="post-date"><i class="ti-calendar"></i>30 july 2018</span>
+                    </div>
+
+                    <div class="blog-body">
+                        <h4 class="bl-title"><a href="blog-detail.html">Why people choose listio for own properties</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
+                        <a href="blo-detail.html" class="bl-continue">Continue</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Single blog Grid -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-wrap-grid">
+
+                    <div class="blog-thumb">
+                        <a href="blog-detail.html"><img src="Content/img/p-8.jpg" class="img-fluid" alt=""></a>
+                    </div>
+
+                    <div class="blog-info">
+                        <span class="post-date"><i class="ti-calendar"></i>10 August 2018</span>
+                    </div>
+
+                    <div class="blog-body">
+                        <h4 class="bl-title"><a href="blog-detail.html">List of benifits and impressive listeo services</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
+                        <a href="blo-detail.html" class="bl-continue">Continue</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Single blog Grid -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-wrap-grid">
+
+                    <div class="blog-thumb">
+                        <a href="blog-detail.html"><img src="Content/img/p-10.jpg" class="img-fluid" alt=""></a>
+                    </div>
+
+                    <div class="blog-info">
+                        <span class="post-date"><i class="ti-calendar"></i>30 Sep 2018</span>
+                    </div>
+
+                    <div class="blog-body">
+                        <h4 class="bl-title"><a href="blog-detail.html">What people says about listio properties</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
+                        <a href="blo-detail.html" class="bl-continue">Continue</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ================= Blog Grid End ================= -->
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="call-to-act">
+                    <div class="call-to-act-head">
+                        <h3>Want to Become a Real Estate Agent?</h3>
+                        <span>We'll help you to grow your career and growth.</span>
+                    </div>
+                    <a href="#" class="btn btn-call-to-act">SignUp Today</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Call To Action End ================================== -->
