@@ -21,9 +21,11 @@ namespace DDari.Controllers
         public  ActionResult Index()
         {
             //all reclams
-            var reclamations =  serviceReclamation.findAll();
+            var task = Task.Run(async () => await serviceReclamation.FindAll());
+          //  var reclamations = serviceReclamation.FindAll();
+            var reclams = task.Result;
 
-            return View();
+            return View(reclams);
         }
 
         // GET: Reclamation/Details/5
