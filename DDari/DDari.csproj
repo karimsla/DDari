@@ -122,6 +122,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
@@ -130,12 +131,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChatRoom.cs" />
+    <Compile Include="Models\DeliveryMan.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Reclamation.cs" />
     <Compile Include="Models\Subscribe.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServiceDelivery.cs" />
     <Compile Include="Services\ServiceMessages.cs" />
     <Compile Include="Services\ServiceReclamation.cs" />
     <Compile Include="Services\ServiceSubscription.cs" />
@@ -635,10 +638,12 @@
     <Content Include="Scripts\vendors\themefy_icon\fonts\themify.woff" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Reclamation\Create.cshtml" />
+    <Content Include="Views\Deliveries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Message\" />
+    <Folder Include="Views\Reclamation\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
