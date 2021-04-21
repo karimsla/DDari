@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>MediCare dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/Back/css/bootstrap.min.css">
+    <!-- themefy CSS -->
+    <link rel="stylesheet" href="~/Scripts/vendors/themefy_icon/themify-icons.css">
+    <!-- select2 CSS -->
+    <link rel="stylesheet" href="~/Scripts/vendors/niceselect/css/nice-select.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="~/Scripts/vendors/owl_carousel/css/owl.carousel.css">
+    <!-- gijgo css -->
+    <link rel="stylesheet" href="~/Scripts/vendors/gijgo/gijgo.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/Scripts/vendors/font_awesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Scripts/vendors/tagsinput/tagsinput.css">
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="~/Scripts/vendors/datepicker/date-picker.css">
+
+    <link rel="stylesheet" href="~/Scripts/vendors/vectormap-home/vectormap-2.0.2.css">
+
+    <!-- scrollabe  -->
+    <link rel="stylesheet" href="~/Scripts/vendors/scroll/scrollable.css">
+    <!-- datatable CSS -->
+    <link rel="stylesheet" href="~/Scripts/vendors/datatable/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="~/Scripts/vendors/datatable/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/Scripts/vendors/datatable/css/buttons.dataTables.min.css">
+    <!-- text editor css -->
+    <link rel="stylesheet" href="~/Scripts/vendors/text_editor/summernote-bs4.css">
+    <!-- morris css -->
+    <link rel="stylesheet" href="~/Scripts/vendors/morris/morris.css" >
+    <!-- metarial icon css -->
+    <link rel="stylesheet" href="~/Scripts/vendors/material_icon/material-icons.css">
+
+    <!-- menu css  -->
+    <link rel="stylesheet" href="~/Content/Back/css/metisMenu.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="~/Content/Back/css/style.css">
+
+</head>
+<body class="crm_body_bg">
+
+    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
+        <div class="logo d-flex justify-content-between">
+            <a href=""><img src=""></a>
+            <div class="sidebar_close_icon d-lg-none">
+                <i class="ti-close"></i>
+            </div>
+        </div>
+        <ul id="sidebar_menu">
+            <li class="mm-active">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/Scripts/img/menu-icon/dashboard.svg" alt="">
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+                <ul>
+                    <li><a class="active" href="index.html">Marketing</a></li>
+                    <li><a href="index_2.html">Default</a></li>
+                    <li><a href="index_3.html">Dark Menu</a></li>
+                </ul>
+            </li>
+
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <i class="ti-user" aria-hidden="true" style="color:#47B181"></i>
+                    </div>
+                    <span>Users</span>
+                </a>
+                <ul>
+                    <li><a href="">Clients</a></li>
+                    <li><a href="">Consultants</a></li>
+                    <li><a href="">Moderators</a></li>
+
+                </ul>
+            </li>
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
+
+                    <div class="icon_menu">
+                        <img src="~/Scripts/img/menu-icon/3.svg" alt="">
+                    </div>
+                    <span>Manage services</span>
+                </a>
+                <ul>
+                    <li><a href="">Our services</a></li>
+                    <li><a href="">Add a service</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="" aria-expanded="false">
+
+                    <div class="icon_menu">
+                        <img src="~/Scripts/img/menu-icon/4.svg" alt="">
+                    </div>
+                    <span>Manage blogs</span>
+                </a>
+
+            </li>
+            <li class="">
+                <a href="" aria-expanded="false">
+                    <div class="icon_menu">
+                        <i class="fas fa-cog" style="color:#47B181"></i>
+
+
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <section class="main_content dashboard_part large_header_bg">
+     
+        <!-- menu  -->
+        <div class="container-fluid no-gutters">
+            <div class="row">
+                <div class="col-lg-12 p-0 ">
+                    <div class="header_iner d-flex justify-content-between align-items-center">
+                        <div class="sidebar_icon d-lg-none">
+                            <i class="ti-menu"></i>
+                        </div>
+                        <div class="serach_field-area d-flex align-items-center">
+                            <div class="search_inner">
+                                <form action="#">
+                                    <div class="search_field">
+                                        <input type="text" placeholder="Search here...">
+                                    </div>
+                                    <button type="submit"> <img src="~/Scripts/img/icon/icon_search.svg" alt=""> </button>
+                                </form>
+                            </div>
+                            <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
+                        </div>
+                        <div class="header_right d-flex justify-content-between align-items-center">
+                            <div class="header_notification_warp d-flex align-items-center">
+
+                            </div>
+                            <div class="profile_info">
+                                <img src="~/Scripts/img/client_img.png" alt="#">
+                                <div class="profile_info_iner">
+                                    <div class="profile_author_name">
+                                        <p>Neurologist </p>
+                                        <h5>Dr. Robar Smith</h5>
+                                    </div>
+                                    <div class="profile_info_details">
+                                        <a href="#">My Profile </a>
+                                        <a href="#">Settings</a>
+                                        <a href="#">Log Out </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+        <!--/ menu  -->
+        @RenderBody()
+        <!-- footer part -->
+    </section>
+
+
+    <!-- footer  -->
+    <script src="~/Scripts/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/Scripts/js/popper.min.js"></script>
+    <!-- bootstarp js -->
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <!-- sidebar menu  -->
+    <script src="~/Scripts/js/metisMenu.js"></script>
+    <!-- waypoints js -->
+    <script src="~/Scripts/vendors/count_up/jquery.waypoints.min.js"></script>
+    <!-- waypoints js -->
+    <script src="~/Scripts/vendors/chartlist/Chart.min.js"></script>
+    <!-- counterup js -->
+    <script src="~/Scripts/vendors/count_up/jquery.counterup.min.js"></script>
+
+    <!-- nice select -->
+    <script src="~/Scripts/vendors/niceselect/js/jquery.nice-select.min.js"></script>
+    <!-- owl carousel -->
+    <script src="~/Scripts/vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+    <!-- responsive table -->
+    <script src="~/Scripts/vendors/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/buttons.flash.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/jszip.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/pdfmake.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/vfs_fonts.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/Scripts/vendors/datatable/js/buttons.print.min.js"></script>
+
+    <!-- datepicker  -->
+    <script src="~/Scripts/vendors/datepicker/datepicker.js"></script>
+    <script src="~/Scripts/vendors/datepicker/datepicker.en.js"></script>
+    <script src="~/Scripts/vendors/datepicker/datepicker.custom.js"></script>
+
+    <script src="~/Scripts/js/chart.min.js"></script>
+    <script src="~/Scripts/vendors/chartjs/roundedBar.min.js"></script>
+
+    <!-- progressbar js -->
+    <script src="~/Scripts/vendors/progressbar/jquery.barfiller.js"></script>
+    <!-- tag input -->
+    <script src="~/Scripts/vendors/tagsinput/tagsinput.js"></script>
+    <!-- text editor js -->
+    <script src="~/Scripts/vendors/text_editor/summernote-bs4.js"></script>
+    <script src="~/Scripts/vendors/am_chart/amcharts.js"></script>
+
+    <!-- scrollabe  -->
+    <script src="~/Scripts/vendors/scroll/perfect-scrollbar.min.js"></script>
+    <script src="~/Scripts/vendors/scroll/scrollable-custom.js"></script>
+
+
+    <!-- apex chrat  -->
+    <script src="~/Scripts/vendors/apex_chart/apex-chart2.js"></script>
+    <script src="~/Scripts/vendors/apex_chart/apex_dashboard.js"></script>
+
+    <script src="~/Scripts/vendors/echart/echarts.min.js"></script>
+
+
+    <script src="~/Scripts/vendors/chart_am/core.js"></script>
+    <script src="~/Scripts/vendors/chart_am/charts.js"></script>
+    <script src="~/Scripts/vendors/chart_am/animated.js"></script>
+    <script src="~/Scripts/vendors/chart_am/kelly.js"></script>
+    <script src="~/Scripts/vendors/chart_am/chart-custom.js"></script>
+    <!-- custom js -->
+    <script src="~/Scripts/js/dashboard_init.js"></script>
+    <script src="~/Scripts/js/custom.js"></script>
+</body>
+
+</html>

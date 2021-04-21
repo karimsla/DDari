@@ -21,9 +21,11 @@ namespace DDari.Controllers
         public  ActionResult Index()
         {
             //all reclams
-            var reclamations =  serviceReclamation.findAll();
+            var task = Task.Run(async () => await serviceReclamation.FindAll());
+          //  var reclamations = serviceReclamation.FindAll();
+            var reclams = task.Result;
 
-            return View();
+            return View(reclams);
         }
 
         // GET: Reclamation/Details/5
@@ -40,18 +42,28 @@ namespace DDari.Controllers
 
         // POST: Reclamation/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Reclamation reclamation)
         {
+            ModelState.Remove("dateTime");
+            ModelState.Remove("treatement");
+            ModelState.Remove("state");
+            ModelState.Remove("priority");
+            if (ModelState.IsValid)
+            {
+
+            
             try
             {
+                    _ = serviceReclamation.Create(reclamation, 1);
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
-            }
+                return View(reclamation);
+            }}
+            return View(reclamation);
         }
 
         // GET: Reclamation/Edit/5

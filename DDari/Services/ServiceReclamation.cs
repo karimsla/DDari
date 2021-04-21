@@ -68,15 +68,15 @@ namespace DDari.Services
             return reclamation;
         }
 
-        public async Task<List<Reclamation>> findAll()
+        public async Task<dynamic> FindAll()
         {
-            IEnumerable<Reclamation> reclamations = null;
+           dynamic reclamations=null ;
             HttpResponseMessage response = await client.GetAsync($"/reclamation/all");
             if (response.IsSuccessStatusCode)
             {
-                reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();
+                reclamations =  response.Content.ReadAsAsync<IEnumerable<Reclamation>>().Result;
             }
-            return reclamations.ToList();
+            return reclamations;
              
         }
         public async Task<List<Reclamation>> findNotTreated()
