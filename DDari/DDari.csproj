@@ -657,6 +657,7 @@
     <Content Include="Views\Reclamation\Create.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
     <Content Include="Views\Buy\Create.cshtml" />
+    <Content Include="Views\Reclamation\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
