@@ -48,7 +48,7 @@ namespace DDari.Controllers
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8081");
-            client.PostAsJsonAsync<Buy>("AddBuy", buy).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            client.PostAsJsonAsync<Buy>("/buy/AddBuy", buy).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
 
             return RedirectToAction("Index");
 

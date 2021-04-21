@@ -656,10 +656,10 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Reclamation\Create.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
+    <Content Include="Views\Buy\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Buy\" />
     <Folder Include="Views\Message\" />
     <Folder Include="Views\Rent\" />
     <Folder Include="Views\Subscription\" />
