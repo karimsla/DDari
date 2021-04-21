@@ -1,9 +1,11 @@
 ﻿using DDari.Models;
+using DDari.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,26 +13,23 @@ namespace DDari.Controllers
 {
     public class SubscriptionController : Controller
     {
+        static ServiceSubscription serviceSub = null;
 
-        static HttpClient client = null;
+        public SubscriptionController()
+        {
+            serviceSub= new ServiceSubscription();
+
+        }
         // GET: Subscription
         public ActionResult Index()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
-           // client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("/api/subscription").Result;
-            if (response.IsSuccessStatusCode)
-            {
-              //  ViewBag.result = response.Content.ReadAsStringAsync(IEnumerable<Subscription>).Result;
-            }
-            else
-            {
-                ViewBag.result("error");
-            }
-            return View();
+
+            //all subs
+            var task = Task.Run(async () => await serviceSub.FindAll());
+          
+            var subs = task.Result;
+
+            return View(subs);
         }
 
         // GET: Subscription/Details/5
@@ -51,13 +50,17 @@ namespace DDari.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                Subscription s = new Subscription();
+                s.title = "title";
+                s.description = "description";
+                s.price = 100;
+                var task = Task.Run(async () => await serviceSub.Create(s));
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

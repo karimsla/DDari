@@ -634,12 +634,12 @@
     <Content Include="Scripts\vendors\themefy_icon\fonts\themify.ttf" />
     <Content Include="Scripts\vendors\themefy_icon\fonts\themify.woff" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Subscription\Index.cshtml" />
+    <Content Include="Views\Subscription\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Message\" />
-    <Folder Include="Views\Reclamation\" />
-    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

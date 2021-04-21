@@ -17,7 +17,7 @@ namespace DDari.Controllers
             serviceReclamation = new ServiceReclamation();
 
         }
-        // GET: Reclamation
+        // GET: Subscript
         public  ActionResult Index()
         {
             //all reclams
