@@ -31,7 +31,9 @@ namespace DDari.Controllers
         // GET: Reclamation/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var taskt = Task.Run(async () => await serviceReclamation.getOne(id));
+            var reclam = taskt.Result;
+            return View(reclam);
         }
 
         // GET: Reclamation/Create
@@ -91,23 +93,22 @@ namespace DDari.Controllers
         // GET: Reclamation/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var task = Task.Run(async () => await serviceReclamation.Delete(id));
+            var result = task.Result;
+            return RedirectToAction("Index");
         }
 
         // POST: Reclamation/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+       
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+        public ActionResult TreatClaim(int id, string treatement)
+        {
+            var task = Task.Run(async () => await serviceReclamation.treat(id, treatement));
+            var res = task.Result;
+            return RedirectToAction("Details", new { id = id });
         }
+
+
     }
 }
