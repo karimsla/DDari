@@ -25,5 +25,24 @@ namespace DDari.Controllers
             
             return View(task.Result);
         }
+
+        public ActionResult Create()
+        {
+
+            return View();
+
+        }
+        [HttpPost]
+            public ActionResult Create(DeliveryMan dm)
+        {
+            if (ModelState.IsValid)
+            {
+                var task = Task.Run(async () => await deliveriesService.AddDmAsync(dm));
+                return RedirectToAction("index");
+
+            }
+
+            return View(dm);
+        }
     }
 }

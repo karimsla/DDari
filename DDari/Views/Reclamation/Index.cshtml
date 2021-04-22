@@ -78,9 +78,9 @@
                                                     @Html.DisplayFor(modelItem => item.state)
                                                 </td>
                                                 <td>
-                                                    @Html.ActionLink("Edit", "Edit",null, new { id = item.id ,style = "color: #2e9de4" }) |
-                                                    @Html.ActionLink("Details", "Details", null, new { id = item.id, style = "color: #2c323f" }) |
-                                                    @Html.ActionLink("Delete", "Delete", null, new { id = item.id, style = "color: #fd517d" })
+                                                    @Html.ActionLink("Edit", "Edit","Reclamation", new { id = item.id } ,new{ style = "color: #2e9de4" }) |
+                                                    @Html.ActionLink("Details", "Details", "Reclamation", new { id = item.id }, new { style = "color: #2c323f" }) |
+                                                    @Html.ActionLink("Delete", "Delete", "Reclamation", new { id = item.id }, new { style = "color: #fd517d" })
                                                 </td>
                                             </tr>
                                         }
