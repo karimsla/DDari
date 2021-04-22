@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
+    <Compile Include="Controllers\Contract_buyController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -149,6 +150,8 @@
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Buy.cs" />
     <Compile Include="Models\ChatRoom.cs" />
+    <Compile Include="Models\Contract_buy.cs" />
+    <Compile Include="Models\Contract_rent.cs" />
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\DeliveryMan.cs" />
     <Compile Include="Models\Message.cs" />
@@ -807,9 +810,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Contract_buy\" />
     <Folder Include="Views\Message\" />
     <Folder Include="Views\Rent\" />
-    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
