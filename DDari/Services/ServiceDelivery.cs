@@ -33,7 +33,7 @@ namespace DDari.Services
             return response.StatusCode==HttpStatusCode.OK;
         }
 
-        public async Task<dynamic> FindAllDm()
+        public async Task<List<DeliveryMan>> FindAllDm()
         {
             List<DeliveryMan> dms = null;
             HttpResponseMessage response = await client.GetAsync($"/deliveries/listdm");
@@ -44,5 +44,96 @@ namespace DDari.Services
             return dms;
 
         }
+
+        public async Task<bool> AddDeliveryAsync(Delivery delivery)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                $"/deliveries/add", delivery);
+            response.EnsureSuccessStatusCode();
+
+            // return URI of the created resource.
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+        public async Task<bool> UpdateDSAsync(int id, int state)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                 $"/Appointments/deliverystate/{id}?deliveryState={state}", "");
+
+            response.EnsureSuccessStatusCode();
+
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<List<Delivery>> ListDeliveryPerDm(int id)
+        {
+            List<Delivery> dms = null;
+            HttpResponseMessage response = await client.GetAsync($"/deliveries/listperdm/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                dms = response.Content.ReadAsAsync<IEnumerable<Delivery>>().Result.ToList();
+            }
+            return dms;
+
+        }
+        public async Task<List<Delivery>> ListDeliveries()
+        {
+            List<Delivery> dms = null;
+            HttpResponseMessage response = await client.GetAsync($"/deliveries/");
+            if (response.IsSuccessStatusCode)
+            {
+                dms = response.Content.ReadAsAsync<IEnumerable<Delivery>>().Result.ToList();
+            }
+            return dms;
+
+        }
+
+        public async Task<bool> cancelDelivery(int id)
+        {
+            HttpResponseMessage response = await client.GetAsync($"/deliveries/cancel/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+             return true;
+            }
+            return false;
+
+        }
+        public async Task<bool> deleteDM(int id)
+        {
+            HttpResponseMessage response = await client.GetAsync($"/deliveries/deletedm/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+
+        }
+        public async Task<bool> LocateAsync(int id, double latitude, string longitude)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                 $"/deliveries/locate/{id}?latitude={latitude}&longitude={longitude}", "");
+
+            response.EnsureSuccessStatusCode();
+
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }
