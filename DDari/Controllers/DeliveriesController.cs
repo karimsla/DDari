@@ -19,9 +19,8 @@ namespace DDari.Controllers
         }
             public ActionResult Index()
         {
-            DeliveryMan dm = new DeliveryMan();
-     
-            var task = Task.Run(async () => await deliveriesService.FindAllDm());
+  
+            var task = Task.Run(async () => await deliveriesService.ListDeliveries());
             
             return View(task.Result);
         }
@@ -43,6 +42,43 @@ namespace DDari.Controllers
             }
 
             return View(dm);
+        }
+        public ActionResult listdm()
+        {
+            var task = Task.Run(async () => await deliveriesService.FindAllDm());
+
+            return View(task.Result);
+
+        }
+        [HttpPost]
+        public ActionResult listdm(Delivery dm)
+        {
+            if (ModelState.IsValid)
+            {
+             
+
+            }
+
+            return View();
+        }
+
+        public ActionResult assign()
+        {
+          
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult assign(Delivery delivery)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+            }
+
+            return View();
         }
     }
 }

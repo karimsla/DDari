@@ -16,7 +16,6 @@ namespace DDari.Models
         public string phone { get; set; }
         public string email { get; set; }
         public bool enabled { get; set; }
-        public string region { get; set; }
  
     }
 }
