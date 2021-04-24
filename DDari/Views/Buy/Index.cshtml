@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DDari.Models.Buy>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Properties For BUY </h2>
+
+<div class="add_button ml-10">
+    @Html.ActionLink("Add New", "Create",null,new { @class = "form-control" })
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_prop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbrooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.surface)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.superficie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_prop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbrooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surface)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.superficie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
+            </td>
+        </tr>
+
+    }
+</table>
