@@ -76,7 +76,7 @@ namespace DDari.Controllers
 
         // POST: Subscription/Edit/5
        
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, Subscription subscription)
         {
 
          /*   if (ModelState.IsValid)
@@ -105,7 +105,8 @@ namespace DDari.Controllers
         public ActionResult Delete(int id)
         {
 
-            var task  = serviceSub.Delete(id);
+            var task = Task.Run(async () => await serviceSub.Delete(id));
+            var result = task.Result;
             return RedirectToAction("Index");
 
 
