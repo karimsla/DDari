@@ -12,8 +12,6 @@ namespace DDari.Models
         public int nbrooms { get; set; }
         public float surface { get; set; }
         public float superficie { get; set; }
-        public string image { get; set; }
-        public string video { get; set; }
         public float loyer { get; set; }
         public float prix { get; set; }
         public string adress { get; set; }

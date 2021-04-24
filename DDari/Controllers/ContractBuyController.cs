@@ -8,72 +8,69 @@ using System.Web.Mvc;
 
 namespace DDari.Controllers
 {
-    public class RentController : Controller
+    public class ContractBuyController : Controller
     {
-        // GET: Rent
+        // GET: ContractBuy
         public ActionResult Index()
         {
-            IEnumerable<Rent> rents = null;
+            IEnumerable<Contract_buy> cbuys = null;
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:8081");
+                client.BaseAddress = new Uri("http://localhost:8081/");
                 //HTTP GET
-                var responseTask = client.GetAsync("/rent/get");
+                var responseTask = client.GetAsync("/Contract_Buy/get");
                 responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<IList<Rent>>();
+                    var readTask = result.Content.ReadAsAsync<IList<Contract_buy>>();
                     readTask.Wait();
 
-                    rents = readTask.Result;
+                    cbuys = readTask.Result;
                 }
                 else //web api sent error response 
                 {
                     //log response status here..
 
-                    rents = Enumerable.Empty<Rent>();
+                    cbuys = Enumerable.Empty<Contract_buy>();
 
                     ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }
             }
-            return View(rents);
+            return View(cbuys);
         }
 
-        // GET: Rent/Details/5
+        // GET: ContractBuy/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Rent/Create
-        [HttpGet]
+        // GET: ContractBuy/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Rent/Create
+        // POST: ContractBuy/Create
         [HttpPost]
-        public ActionResult Create(Rent rent)
+        public ActionResult Create(Contract_buy cb)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8081");
-            client.PostAsJsonAsync<Rent>("/rent/AddRent", rent).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
-
+            client.PostAsJsonAsync<Contract_buy>("/Contract_Buy/Add", cb).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
             return RedirectToAction("Index");
-
         }
 
-        // GET: Rent/Edit/5
+        // GET: ContractBuy/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Rent/Edit/5
+        // POST: ContractBuy/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -88,13 +85,12 @@ namespace DDari.Controllers
                 return View();
             }
         }
-
-        public async System.Threading.Tasks.Task<ActionResult> Delete(int id)
+        public async System.Threading.Tasks.Task<ActionResult> Delete(int id_user,int id_property)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081/rent/");
+            client.BaseAddress = new Uri("http://localhost:8081/Contract_Buy/");
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await client.DeleteAsync("delete/" + id);
+            HttpResponseMessage response = await client.DeleteAsync("Delete/"+ id_user + "/" + id_property);
             return RedirectToAction("Index");
         }
     }
