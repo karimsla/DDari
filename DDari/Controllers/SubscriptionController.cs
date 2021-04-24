@@ -75,22 +75,31 @@ namespace DDari.Controllers
         }
 
         // POST: Subscription/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+       
+        public ActionResult Edit(int id)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+         /*   if (ModelState.IsValid)
             {
-                return View();
+
+
+                try
+                {
+                   var p  = serviceSub.Update(id);
+                    // TODO: Add insert logic here
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View(sub);
+                }
             }
+            return View(sub);
+         */
         }
 
-       
+
 
         // POST: Subscription/Delete/5
         public ActionResult Delete(int id)
