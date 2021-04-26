@@ -7,7 +7,7 @@ namespace DDari.Models
 {
     public class Subscription
     {
-        public int id { get; set; }
+        public int id_sub { get; set; }
         public String title { get; set; }
 
         public float price { get; set; }

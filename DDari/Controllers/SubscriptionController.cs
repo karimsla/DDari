@@ -17,7 +17,7 @@ namespace DDari.Controllers
 
         public SubscriptionController()
         {
-            serviceSub= new ServiceSubscription();
+            serviceSub = new ServiceSubscription();
 
         }
         // GET: Subscription
@@ -26,7 +26,7 @@ namespace DDari.Controllers
 
             //all subs
             var task = Task.Run(async () => await serviceSub.FindAll());
-          
+
             var subs = task.Result;
 
             return View(subs);
@@ -46,22 +46,26 @@ namespace DDari.Controllers
 
         // POST: Subscription/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(Subscription sub)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Subscription s = new Subscription();
-                s.title = "title";
-                s.description = "description";
-                s.price = 100;
-                var task = Task.Run(async () => await serviceSub.Create(s));
 
-                return RedirectToAction("Index");
+
+                try
+                {
+                    await (_ = serviceSub.Create(sub));
+                    // TODO: Add insert logic here
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View(sub);
+                }
             }
-            catch
-            {
-                return RedirectToAction("Index");
-            }
+            return View(sub);
+
         }
 
         // GET: Subscription/Edit/5
@@ -71,41 +75,41 @@ namespace DDari.Controllers
         }
 
         // POST: Subscription/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+       
+        public ActionResult Edit(int id, Subscription subscription)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+         /*   if (ModelState.IsValid)
             {
-                return View();
+
+
+                try
+                {
+                   var p  = serviceSub.Update(id);
+                    // TODO: Add insert logic here
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View(sub);
+                }
             }
+            return View(sub);
+         */
         }
 
-        // GET: Subscription/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+
 
         // POST: Subscription/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var task = Task.Run(async () => await serviceSub.Delete(id));
+            var result = task.Result;
+            return RedirectToAction("Index");
+
+
         }
     }
 }

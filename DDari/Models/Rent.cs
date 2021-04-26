@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DDari.Models
 {
-    public class Rent
+    public class Rent : Property
     {
         // public Utilisateur user{get;set;}
         public float pricePerMonth { get; set; }

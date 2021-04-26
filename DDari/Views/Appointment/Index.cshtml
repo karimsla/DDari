@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DDari.Models.Appointment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.appointmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.appointmentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ownerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.agentId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.appointmentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.appointmentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ownerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.agentId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.appointmentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.appointmentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.appointmentId })
+        </td>
+    </tr>
+}
+
+</table>

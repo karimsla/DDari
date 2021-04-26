@@ -35,12 +35,12 @@ namespace DDari.Services
 
         public async Task<System.Net.HttpStatusCode> Delete(int id)
         {
-            HttpResponseMessage response = await client.DeleteAsync($"/Subscription/delete/{id}");
+            HttpResponseMessage response = await client.GetAsync($"/Subscription/delete/{id}");
             return response.StatusCode;
 
         }
 
-        public async Task<Models.Subscription> getOne(int id)
+        public async Task<Subscription> getOne(int id)
         {
             Subscription sub= null;
             HttpResponseMessage response = await client.GetAsync($"/Subscription/getOne/{id}");
@@ -61,6 +61,18 @@ namespace DDari.Services
             }
             return subs;
 
+        }
+
+
+       public async Task<Subscription> Update(int id , Subscription subscription)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                $"/Subscription/Modify",subscription);
+            response.EnsureSuccessStatusCode();
+
+            // Deserialize the updated product from the response body.
+            subscription = await response.Content.ReadAsAsync<Subscription>();
+            return subscription;
         }
 
 
