@@ -1,0 +1,354 @@
+﻿@model IEnumerable<DDari.Models.Reclamation>
+
+@{
+    ViewBag.Title = "MyReclam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- datatable CSS -->
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/responsive.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="/Content/Back/css/style.css">
+<!-- Custom CSS -->
+<link href="~/Content/css/styles.css" rel="stylesheet">
+
+<!-- Custom Color Option -->
+<link href="~/Content/css/colors.css" rel="stylesheet">
+
+<div id="main-wrapper">
+    <!-- ============================ Page Title Start================================== -->
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <h2 class="ipt-title">Welcome!</h2>
+                    <span class="ipn-subtitle">Welcome To Your Account</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================ Page Title End ================================== -->
+    <!-- ============================ User Dashboard ================================== -->
+    <section class="bg-light">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="filter_search_opt">
+                        <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-12">
+
+                    <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                        <div class="search-sidebar_header">
+                            <h4 class="ssh_heading">Close Filter</h4>
+                            <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
+                        </div>
+
+                        <div class="sidebar-widgets">
+                            <div class="dashboard-navbar">
+
+                                <div class="d-user-avater">
+                                    <img src="~/Content/img/user-3.jpg" class="img-fluid avater" alt="">
+                                    <h4>Adam Harshvardhan</h4>
+                                    <span>Canada USA</span>
+                                </div>
+
+                                <div class="d-navigation">
+                                    <ul>
+                                        <li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
+                                        <li><a href="my-profile.html"><i class="ti-user"></i>My Profile</a></li>
+                                        <li><a href="bookmark-list.html"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
+                                        <li><a href="my-property.html"><i class="ti-layers"></i>My Properties</a></li>
+                                        <li><a href="submit-property-dashboard.html"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
+                                        <li><a href="change-password.html"><i class="ti-unlock"></i>Change Password</a></li>
+                                        <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-md-12">
+                    <div class="dashboard-wraper">
+                        <a href="#" class="btn btn-link mb-3" id="adsear">Show advanced search</a>
+                        <div class="container-fluid p-0 sm_padding_15px" id="searcharea" style="display:none;">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12">
+                                    <div class="white_card card_height_100 mb_30">
+                                        <div class="white_card_header">
+                                            <div class="box_header m-0">
+                                                <div class="main-title">
+                                                    <h3 class="m-0">Advanced search</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="white_card_body">
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-xl-4 col-sm-7">
+                                                        @if (ViewBag.treated != null && ViewBag.treated == true)
+                                                        {
+                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-theme mb-3">Treated</a>
+
+                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-thememb-3">Not Treated</a>
+                                                        }
+                                                        else if (ViewBag.treated != null && ViewBag.treated == false)
+                                                        {
+
+
+                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-theme mb-3">Treated</a>
+
+
+
+                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-theme mb-3">Not Treated</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-theme mb-3">Treated</a>
+
+                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-theme mb-3">Not Treated</a>
+                                                        }
+                                                    </div>
+
+                                                    <div class="col-xl-4 col-sm-7">
+
+
+                                                        <form action="@Url.Action("findbytype","Reclamation")" method="POST">
+                                                            <select name="type" id="myselect" class="form-control" onchange="this.form.submit()">
+                                                                <option>Select type</option>
+                                                                <option value="fact">Fact</option>
+                                                                <option value="definition">Definition</option>
+                                                                <option value="value">Value</option>
+                                                                <option value="cause">Cause</option>
+                                                                <option value="comparison">Comparison</option>
+                                                                <option value="policy">Policy</option>
+                                                            </select>
+                                                        </form>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <div class="row">
+
+
+
+                                                    <div class="col-xl-4 col-sm-7">
+                                                        <form action="@Url.Action("betweendate","Reclamation")">
+                                                            <div class="input-group common_date_picker">
+                                                                <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick start date" name="date1">
+                                                                <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
+                                                                <button type="submit" class="btn btn-link mb-3"> search between two date</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <h4>Multi criteria search</h4>
+
+                                                <div class="row">
+
+                                                    <form action="@Url.Action("searchMulti","Reclamation")" method="post">
+
+                                                        <div class="form-row">
+
+                                                            <div class="search_field">
+
+                                                                <input type="text" name="filter" placeholder="filter..." class="form-control" />
+
+                                                            </div>
+
+
+                                                            <div class="form-group col-md-6">
+                                                                <select name="type" id="myselect1" class="form-control">
+                                                                    <option>Select type</option>
+                                                                    <option value="fact">Fact</option>
+                                                                    <option value="definition">Definition</option>
+                                                                    <option value="value">Value</option>
+                                                                    <option value="cause">Cause</option>
+                                                                    <option value="comparison">Comparison</option>
+                                                                    <option value="policy">Policy</option>
+                                                                </select>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+                                                        <div class="input-group common_date_picker">
+                                                            <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick start date" name="date1">
+                                                            <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
+                                                        </div>
+
+                                                        <div class="mt-3">
+                                                            <div class="form-check">
+
+                                                                <input class="form-check-input" type="radio" name="treat" id="treatr" value="true">
+                                                                <label class="form-check-label" for="gridRadios1">
+                                                                    Treated
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="treat" id="treatr1" value="false">
+                                                                <label class="form-check-label" for="gridRadios1">
+                                                                    Not treated
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+                                                    </form>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="container-fluid p-0">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12">
+                                        <div class="white_card card_height_100 mb_30">
+                                            <div class="white_card_header">
+                                                <div class="box_header m-0">
+                                                    <div class="main-title">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="white_card_body">
+                                                <div class="QA_section">
+                                                    <div class="white_box_tittle list_header">
+                                                        <h4>My Claims</h4>
+                                                        <div class="box_right d-flex lms_block">
+                                                            <div class="serach_field_2">
+                                                                <div class="search_inner">
+                                                                    <form action="">
+                                                                        <div class="search_field">
+                                                                            <input type="text" name="search" placeholder="Search content here...">
+                                                                        </div>
+                                                                        <button type="submit"><i class="ti-search"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add_button ml-10">
+                                                                @Html.ActionLink("Add New", "Create", null, new { @class = "btn_1" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="QA_table mb_30">
+                                                        <!-- table-responsive -->
+                                                        <table class="table lms_table_active ">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col"> @Html.DisplayNameFor(model => model.type)</th>
+                                                                    <th scope="col">    @Html.DisplayNameFor(model => model.title)</th>
+                                                                    <th scope="col"> @Html.DisplayNameFor(model => model.explication)</th>
+                                                                    <th scope="col"> @Html.DisplayNameFor(model => model.dateTime)</th>
+
+                                                                    <th scope="col"> @Html.DisplayNameFor(model => model.state)</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var item in Model)
+                                                                {
+                                                                    <tr>
+                                                                        <th scope="row">
+                                                                            <a href="#"
+                                                                               class="question_content">            @Html.DisplayFor(modelItem => item.title)</a>
+
+                                                                        </th>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.type)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.explication)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.dateTime)
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.state)
+                                                                        </td>
+                                                                        <td>
+
+                                                                            @Html.ActionLink("Details", "Details", "Reclamation", new { id = item.id }, new { style = "color: #2c323f" }) |
+                                                                            @Html.ActionLink("Delete", "Delete", "Reclamation", new { id = item.id }, new { style = "color: #fd517d" })
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ============================ User Dashboard End ================================== -->
+</div>
+<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#adsear").click(() => {
+
+            $("#searcharea").toggle(500);
+        })
+
+    })
+</script>
+    <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/Back/js/custom.js"></script>
+    <!-- responsive table -->
+    <script src="~/Content/Back/vendors/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.flash.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/jszip.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/pdfmake.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/vfs_fonts.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.print.min.js"></script>
