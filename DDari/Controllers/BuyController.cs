@@ -13,19 +13,31 @@ namespace DDari.Controllers
         // GET: Buy
         public ActionResult Index()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("buy").Result;
-            if (response.IsSuccessStatusCode)
+            IEnumerable<Buy> buys = null;
+
+            using (var client = new HttpClient())
             {
-                ViewBag.result = response.Content.ReadAsAsync<IEnumerable<Buy>>().Result;
+                client.BaseAddress = new Uri("http://localhost:8081");
+                //HTTP GET
+                var responseTask = client.GetAsync("/buy/get");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<Buy>>();
+                    readTask.Wait();
+                    buys = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+                    //log response status here..
+
+                    buys = Enumerable.Empty<Buy>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
             }
-            else
-            {
-                ViewBag.result = "error";
-            }
-            return View();
+            return View(buys);
         }
 
         // GET: Buy/Details/5
@@ -54,59 +66,60 @@ namespace DDari.Controllers
 
         }
 
-        // GET: Buy/Edit/5
-        public ActionResult Edit(int id)
+       public ActionResult Edit(int id)
         {
-            return View();
+            Buy buy = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/buy/");
+                //HTTP GET
+                var responseTask = client.GetAsync("getOne/" + id);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<Buy>();
+                    readTask.Wait();
+
+                    buy = readTask.Result;
+                }
+            }
+            return View(buy);
         }
 
-        // POST: Buy/Edit/5
+
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Buy buy)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri("http://localhost:8081/buy/");
 
-                return RedirectToAction("Index");
+                //HTTP POST
+                var putTask = client.PutAsJsonAsync<Buy>("put", buy);
+                putTask.Wait();
+
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(buy);
+        }
+       
+        public async System.Threading.Tasks.Task<ActionResult> Delete(int id)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081/buy/");
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.DeleteAsync("Delete/" + id);
+            return RedirectToAction("Index");
         }
 
-        // GET: Buy/Delete/5
-        [HttpDelete]
-        public ActionResult Delete(int id)
-        {
-
-            HttpClient Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://localhost:8081");
-            Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = Client.GetAsync("/buy/getOne/" + id).Result;
-            return View(response.Content.ReadAsAsync<Buy>().Result);
-        }
-
-        // POST: Buy/Delete/5
-        [HttpDelete]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                HttpClient Client = new HttpClient();
-                Client.BaseAddress = new Uri("http://localhost:8081");
-                Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = Client.DeleteAsync("/buy/Delete/" + id).Result;
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-
-                return View();
-            }
-        }
     }
 }
 

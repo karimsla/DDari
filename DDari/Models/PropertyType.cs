@@ -5,10 +5,8 @@ using System.Web;
 
 namespace DDari.Models
 {
-    public class Buy : Property
+    public enum PropertyType
     {
-        //public Utilisateur user{get;set;}
-        public float price{ get; set; }
-
+        Apartment, Office, Collocation, Building, Shop, Villa, Ground, ConstructionZone, Garage
     }
 }

@@ -64,5 +64,17 @@ namespace DDari.Services
         }
 
 
+       public async Task<Subscription> Update(int id , Subscription subscription)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                $"/Subscription/Modify",subscription);
+            response.EnsureSuccessStatusCode();
+
+            // Deserialize the updated product from the response body.
+            subscription = await response.Content.ReadAsAsync<Subscription>();
+            return subscription;
+        }
+
+
     }
 }

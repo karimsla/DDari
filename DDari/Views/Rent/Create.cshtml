@@ -1,12 +1,12 @@
 ﻿@using DDari.Models
-@model DDari.Models.Buy
+@model DDari.Models.Rent
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Property for Buy</h2>
+<h2>New Property for Rent</h2>
 <!-- ============================ Submit Property Start ================================== -->
 <section class="gray-simple">
     <div class="container">
@@ -36,8 +36,13 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label>Price</label>
-                                        @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
+                                        <label>Price Per Day</label>
+                                        @Html.TextBoxFor(m => m.pricePerDay, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Price Per Month</label>
+                                        @Html.TextBoxFor(m => m.pricePerMonth, new { @class = "form-control" })
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -57,7 +62,7 @@
                             </div>
                         </div>
 
-                  
+
 
                         <!-- Location -->
                         <div class="form-submit">
@@ -114,11 +119,11 @@
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12">
-                            <label>GDPR Agreement *</label>
+                            <label>Mahdi's Agreement *</label>
                             <ul class="no-ul-list">
                                 <li>
                                     <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox">
-                                    <label for="aj-1" class="checkbox-custom-label">I swear not to rob the property.</label>
+                                    <label for="aj-1" class="checkbox-custom-label" >I swear not to rob the property.</label>
                                 </li>
                             </ul>
                         </div>

@@ -1,6 +1,8 @@
 ﻿using DDari.Models;
+using Microsoft.ML;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,6 +28,10 @@ namespace DDari.Services
 
         public async Task<bool> AddMessageAsync(string message, long by, long to)
         {
+            if (isSpam(message))
+            {
+                return false;
+            }
             HttpResponseMessage response = await client.PostAsJsonAsync(
                  $"/message/add?by={by}&to={to}&message={message}",new Message());
 
@@ -66,5 +72,31 @@ namespace DDari.Services
 
         }
        // public List<Utilisateur> getUsers(int id);
+
+
+        public bool isSpam(string text)
+        {
+            // Create MLContext
+            MLContext mlContext = new MLContext();
+            //Define DataViewSchema for data preparation pipeline and trained model
+            DataViewSchema modelSchema;
+            string filePath = HttpContext.Current.Server.MapPath("~/Content/model.zip");
+            // Load trained model
+            var model = mlContext.Model.Load(filePath, out modelSchema);
+
+            var predictor = mlContext.Model.CreatePredictionEngine<SpamInput, SpamPrediction>(model);
+            var input = new SpamInput { Message = text };
+            var prediction = predictor.Predict(input);
+         
+
+            if (prediction.isSpam=="spam")
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+
     }
 }

@@ -16,6 +16,11 @@ namespace DDari.Controllers
             serviceMessages = new ServiceMessages();
 
         }
+
+
+      
+
+
         // GET: Message
         public ActionResult Index()
         {
