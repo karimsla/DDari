@@ -144,6 +144,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
     <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="Controllers\SubscribeController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -818,6 +819,11 @@
     <Content Include="Views\ContractRent\Index.cshtml" />
     <Content Include="Views\ContractRent\Create.cshtml" />
     <Content Include="Views\Buy\Edit.cshtml" />
+    <Content Include="Views\Subscription\Create.cshtml" />
+    <Content Include="Views\Subscription\Index.cshtml" />
+    <Content Include="Views\Subscription\Edit.cshtml" />
+    <Content Include="Views\Subscribe\Index.cshtml" />
+    <Content Include="Views\Subscribe\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

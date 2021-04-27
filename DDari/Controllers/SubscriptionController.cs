@@ -71,45 +71,70 @@ namespace DDari.Controllers
         // GET: Subscription/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Subscription sub = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/Subscription/");
+                //HTTP GET
+                var responseTask = client.GetAsync("getOne/" + id);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<Subscription>();
+                    readTask.Wait();
+
+                    sub = readTask.Result;
+                }
+            }
+            return View(sub);
         }
 
         // POST: Subscription/Edit/5
        
-        public ActionResult Edit(int id, Subscription subscription)
+        public ActionResult EditP( Subscription subscription)
         {
-
-         /*   if (ModelState.IsValid)
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri("http://localhost:8081/Subscription/");
 
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<Subscription>("Modify", subscription);
+                postTask.Wait();
 
-                try
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
                 {
-                   var p  = serviceSub.Update(id);
-                    // TODO: Add insert logic here
 
                     return RedirectToAction("Index");
                 }
-                catch
-                {
-                    return View(sub);
-                }
             }
-            return View(sub);
-         */
+            return View(subscription);
+
+
         }
 
 
 
         // POST: Subscription/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
 
-            var task = Task.Run(async () => await serviceSub.Delete(id));
-            var result = task.Result;
+            /* var task = Task.Run(async () => await serviceSub.Delete(id));
+             var result = task.Result;
+             return RedirectToAction("Index");*/
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081/Subscription/");
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.GetAsync("delete/" + id);
             return RedirectToAction("Index");
 
 
         }
     }
+
+
 }
