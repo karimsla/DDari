@@ -905,6 +905,8 @@
     <Content Include="Views\ContractRent\Create.cshtml" />
     <Content Include="Views\Buy\Edit.cshtml" />
     <Content Include="Views\Reclamation\MyReclam.cshtml" />
+    <Content Include="Views\Shared\dashboardCustomer.cshtml" />
+    <Content Include="Views\Appointment\requested.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

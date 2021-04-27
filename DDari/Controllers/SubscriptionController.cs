@@ -94,9 +94,9 @@ namespace DDari.Controllers
                 {
                     return View(sub);
                 }
-            }
-            return View(sub);
-         */
+            }*/
+            return View(subscription);
+         
         }
 
 
