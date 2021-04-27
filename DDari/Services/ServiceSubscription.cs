@@ -33,6 +33,17 @@ namespace DDari.Services
 
         }
 
+
+        public async Task<Uri> CreateSubscribe(Models.Subscribe subscribe)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                 $"/Subscription/addsubscribe", subscribe);
+            response.EnsureSuccessStatusCode();
+
+            // return URI of the created resource.
+            return response.Headers.Location;
+
+        }
         public async Task<System.Net.HttpStatusCode> Delete(int id)
         {
             HttpResponseMessage response = await client.GetAsync($"/Subscription/delete/{id}");
@@ -64,7 +75,8 @@ namespace DDari.Services
         }
 
 
-       public async Task<Subscription> Update(int id , Subscription subscription)
+
+        public async Task<Subscription> Update(int id , Subscription subscription)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
                 $"/Subscription/Modify",subscription);

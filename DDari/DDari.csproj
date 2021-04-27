@@ -228,6 +228,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
     <Compile Include="Controllers\RentController.cs" />
+    <Compile Include="Controllers\SubscribeController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -907,10 +908,10 @@
     <Content Include="Views\Reclamation\MyReclam.cshtml" />
     <Content Include="Views\Shared\dashboardCustomer.cshtml" />
     <Content Include="Views\Appointment\requested.cshtml" />
+    <Content Include="Views\Message\chat_bot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
