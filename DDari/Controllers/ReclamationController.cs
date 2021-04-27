@@ -229,16 +229,22 @@ namespace DDari.Controllers
             }
             return View("Index", reclams);
         }
+         
+        
+       
 
         public ActionResult searchMulti(string filter,string type,string date1,string date2, bool treat)
         {
             DateTime d1 = DateTime.Now, d2 = DateTime.Now;
-            if (string.IsNullOrEmpty(date1))
+            if(string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
+            {
+
+            }else if (string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
             {
                 d1 = DateTime.Now.AddYears(-20);
                 d2 = DateTime.Parse(date2);
             }
-            else if (string.IsNullOrEmpty(date2))
+            else if (string.IsNullOrEmpty(date2) && string.IsNullOrEmpty(date1))
             {
                 d1 = DateTime.Parse(date1);
                 d2 = DateTime.Now.AddDays(30);
@@ -253,6 +259,50 @@ namespace DDari.Controllers
             reclams = task.Result;
             return View("Index", reclams);
         }
+
+   
+        
+        
+        
+      public ActionResult DeleteMy(int id)
+        {
+            var task = Task.Run(async () => await serviceReclamation.Delete(id));
+            var result = task.Result;
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult searchMultimine(string filter, string type, string date1, string date2, bool treat)
+        {
+            DateTime d1 = DateTime.Now, d2 = DateTime.Now;
+            if (string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
+            {
+
+            }
+            else if (string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
+            {
+                d1 = DateTime.Now.AddYears(-20);
+                d2 = DateTime.Parse(date2);
+            }
+            else if (string.IsNullOrEmpty(date2) && string.IsNullOrEmpty(date1))
+            {
+                d1 = DateTime.Parse(date1);
+                d2 = DateTime.Now.AddDays(30);
+            }
+            else if (!string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
+            {
+                d1 = DateTime.Parse(date1);
+                d2 = DateTime.Parse(date2);
+            }
+            List<Reclamation> reclams = new List<Reclamation>();
+            var task = Task.Run(async () => await serviceReclamation.searchMultiCriteria(filter, type, true,
+                d1.ToString("yyyy-MM-dd HH:mm"), d2.ToString("yyyy-MM-dd HH:mm"), treat, 1));
+            reclams = task.Result;
+            return View("MyReclam", reclams);
+        }
+
+      
+
 
 
     }

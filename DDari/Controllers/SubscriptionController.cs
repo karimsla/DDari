@@ -79,24 +79,25 @@ namespace DDari.Controllers
         public ActionResult Edit(int id, Subscription subscription)
         {
 
-         /*   if (ModelState.IsValid)
-            {
+            /*   if (ModelState.IsValid)
+               {
 
 
-                try
-                {
-                   var p  = serviceSub.Update(id);
-                    // TODO: Add insert logic here
+                   try
+                   {
+                      var p  = serviceSub.Update(id);
+                       // TODO: Add insert logic here
 
-                    return RedirectToAction("Index");
-                }
-                catch
-                {
-                    return View(sub);
-                }
-            }
-            return View(sub);
-         */
+                       return RedirectToAction("Index");
+                   }
+                   catch
+                   {
+                       return View(sub);
+                   }
+               }
+               return View(sub);
+            */
+            return View();
         }
 
 

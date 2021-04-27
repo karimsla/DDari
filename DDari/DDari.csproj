@@ -905,10 +905,10 @@
     <Content Include="Views\ContractRent\Create.cshtml" />
     <Content Include="Views\Buy\Edit.cshtml" />
     <Content Include="Views\Reclamation\MyReclam.cshtml" />
+    <Content Include="Views\Message\chat_bot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
