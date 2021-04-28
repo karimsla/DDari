@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+<h4>Simulation crédit</h4>
+
+<div class="row">
+    <div class="col-xl-4">
+        <form>
+
+            <div class="form-group mx-sm-3 mb-sm-1">
+                
+                    <label for="montant">Montant</label>
+                    <input type="text" class="form-control input-sm" id="montant" placeholder="exp:1800">
+                </div>
+
+
+                <div class="form-group mx-sm-3 mb-3">
+
+                    <label for="taux">Taux</label>
+
+
+                    <input type="text" class="form-control" id="taux" placeholder="exp:0.8 %">
+                </div>
+
+
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="duree">Durée</label>
+                    <input type="text" class="form-control" id="duree" placeholder="exp:6 ans">
+                </div>
+
+</form>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-outline-warning align-center" id="button">Warning</button>
+        </div>
+</div>
+    </div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <label for="mensualité">Mensualité</label>
+    </div>
+    <div class="col-sm-6">
+
+        <input type="text" readonly class="form-control-plaintext" id="mensualite" value="Mensualité">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <label for="cout">Cout Total : </label>
+    </div>
+    <div class="col-sm-6">
+
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Cout total">
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $("#button").click(function () {
+        let i = $("#montant").val();
+        let j = $("#taux").val();
+        let k = $("#duree").val();
+        $.ajax({
+            url: 'mensualite',
+            type: 'GET',
+            dataType: 'Application/Json',
+            data: { montant: i, taux : j,duree: k } ,
+            success: function (data) {
+                
+                console.log("ay haja");
+               $("#mensualite").append(data);     // code_html contient le HTML renvoyé
+
+            }
+        });
+
+    });
+</script>
+

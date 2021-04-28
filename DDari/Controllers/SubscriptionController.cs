@@ -93,8 +93,8 @@ namespace DDari.Controllers
         }
 
         // POST: Subscription/Edit/5
-       
-        public ActionResult EditP( Subscription subscription)
+        [HttpPost]
+        public ActionResult Edit( Subscription subscription)
         {
             using (var client = new HttpClient())
             {
@@ -119,7 +119,7 @@ namespace DDari.Controllers
 
 
         // POST: Subscription/Delete/5
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult> Delete(int id)
         {
 
             /* var task = Task.Run(async () => await serviceSub.Delete(id));
