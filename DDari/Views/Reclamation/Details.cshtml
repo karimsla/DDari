@@ -1,0 +1,93 @@
+﻿@model DDari.Models.Reclamation
+
+@{ Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Details";
+
+}
+
+ 
+<div class="col-lg-6">
+    <div class="card_box position-relative  mb_30 white_bg  ">
+        <div class="white_box_tittle blue_bg    ">
+            <div class="main-title2 ">
+                <h4 class="mb-2 nowrap text_white">  @Html.DisplayFor(model => model.title)</h4>
+
+            </div>
+        </div>
+        <div class="box_body">
+
+
+            <h4>
+                Claim type
+            </h4>
+
+            <p class="f-w-400 ">
+                @Html.DisplayFor(model => model.type)
+            </p>
+
+
+
+            <h4>
+                Explication
+            </h4>
+
+            <p class="f-w-400 ">
+                @Html.DisplayFor(model => model.explication)
+            </p>
+
+            <h4>
+                Date
+            </h4>
+
+            <p>
+                @Html.DisplayFor(model => model.dateTime)
+            </p>
+
+
+
+
+
+            @if (Model.state == true)
+            {
+                <h4>
+                    @Html.DisplayNameFor(model => model.treatement)
+                </h4>
+
+                <p class="f-w-400 ">
+                    @Html.DisplayFor(model => model.treatement)
+                </p>
+                <div class="alert text-white bg-success" role="alert">
+                    <div class="alert-text">Treated</div>
+                </div>
+            }
+            else
+            {
+                <form action="@Url.Action("TreatClaim","Reclamation")" method="post">
+                    <div class="white_card_body">
+
+
+                        <input name="id" value="@Model.id" hidden="hidden"/>
+
+                        <h4 class="card-subtitle mb-2 mt-2">Treat the claim</h4>
+                        
+                        <textarea class="form-control" maxlength="225" rows="3" name="treatement" id="maxlength-textarea" placeholder="This textarea has a limit of 225 chars."></textarea>
+                        <button type="submit" class="btn btn-outline-secondary rounded-pill mb-3 mt-3 pull-right">Treat</button>
+                    </div>
+                </form>
+
+                <div class="alert text-white bg-danger mt-3" role="alert">
+                    <div class="alert-text">Pending</div>
+                </div>
+
+
+            }
+            <p class="f-w-400 ">
+
+            </p>
+
+        </div>
+        <div class="card_footer">
+           
+        </div>
+    </div>
+</div>

@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace DDari.Services
 {
@@ -120,7 +119,7 @@ namespace DDari.Services
             }
             return reclamations.ToList();
         }
-        public async Task<List<Reclamation>> findBetweenDate(DateTime start, DateTime end)
+        public async Task<List<Reclamation>> findBetweenDate(string start, string end)
         {
             IEnumerable<Reclamation> reclamations = null;
             HttpResponseMessage response = await client.GetAsync($"/reclamation/between?start={start}&end={end}");
@@ -140,7 +139,7 @@ namespace DDari.Services
             }
             return reclamations.ToList();
         }
-        public async Task<List<Reclamation>> searchMultiCriteria(string filter, string type, bool mine, DateTime start, DateTime end, bool treated, int id)
+        public async Task<List<Reclamation>> searchMultiCriteria(string filter, string type, bool mine, string start, string end, bool treated, int id)
         {
             IEnumerable<Reclamation> reclamations = null;
             HttpResponseMessage response = await client.GetAsync($"/reclamation/searchmulti?filter={filter}&type={type}&mine={mine}&id={id}&start={start}&end={end}&treated={treated}");
@@ -150,5 +149,9 @@ namespace DDari.Services
             }
             return reclamations.ToList();
         }
+
+
+
+
     }
 }

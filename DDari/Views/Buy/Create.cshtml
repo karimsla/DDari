@@ -1,0 +1,137 @@
+﻿@using DDari.Models
+@model DDari.Models.Buy
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Property for Buy</h2>
+<!-- ============================ Submit Property Start ================================== -->
+<section class="gray-simple">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="alert alert-success" role="alert">
+                    <p>Please, Sign In before you submit a property. If you don't have an account you can create one by <a href="#">Clicking Here</a></p>
+                </div>
+            </div>
+            <!-- Submit Form -->
+            @using (Html.BeginForm())
+            {
+                <div class="col-lg-12 col-md-12">
+                    <div class="submit-page">
+                        <!-- Basic Information -->
+                        <div class="form-submit">
+                            <h3>Basic Information</h3>
+                            <div class="submit-section">
+                                <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <label>Property Type</label>
+                                        @Html.DropDownListFor(m => m.type,
+                                        new SelectList(Enum.GetValues(typeof(PropertyType))),
+                                         "Select Property Type",
+                                        new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Price</label>
+                                        @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Number of rooms</label>
+                                        @Html.TextBoxFor(m => m.nbrooms, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>surface</label>
+                                        @Html.TextBoxFor(m => m.surface, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>surface</label>
+                                        @Html.TextBoxFor(m => m.superficie, new { @class = "form-control" })
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                  
+
+                        <!-- Location -->
+                        <div class="form-submit">
+                            <h3>Location</h3>
+                            <div class="submit-section">
+                                <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(m => m.adress, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>City</label>
+                                        @Html.TextBoxFor(m => m.city, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>State</label>
+                                        @Html.TextBoxFor(m => m.state, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Zip Code</label>
+                                        @Html.TextBoxFor(m => m.zipCode, new { @class = "form-control" })
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact Information -->
+                        <div class="form-submit">
+                            <h3>Contact Information</h3>
+                            <div class="submit-section">
+                                <div class="row">
+
+                                    <div class="form-group col-md-4">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label>Phone (optional)</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-lg-12 col-md-12">
+                            <label>GDPR Agreement *</label>
+                            <ul class="no-ul-list">
+                                <li>
+                                    <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox">
+                                    <label for="aj-1" class="checkbox-custom-label">I swear not to rob the property.</label>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group col-lg-12 col-md-12">
+                            <button class="btn btn-theme-light-2 rounded" type="submit">Submit & Preview</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</section>
+<!-- ============================ Submit Property End ================================== -->

@@ -4,95 +4,169 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- @section scripts{
-     
-     } 
 
-<!-- ============================ Submit Property Start ================================== -->
-<section class="gray-simple">
+<!-- datatable CSS -->
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/responsive.dataTables.min.css" />
+<link rel="stylesheet" href="~/Content/Back/vendors/datatable/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="/Content/Back/css/style.css">
+<!-- Custom CSS -->
+<link href="~/Content/css/styles.css" rel="stylesheet">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
+<!-- Custom Color Option -->
+<link href="~/Content/css/colors.css" rel="stylesheet">
 
-                <div class="alert alert-success" role="alert">
-                    <p>Please, Sign In before you submit a property. If you don't have an account you can create one by <a href="#">Clicking Here</a></p>
-                </div>
-
-            </div>
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <!-- Submit Form -->
+<div id="main-wrapper">
+    <!-- ============================ Page Title Start================================== -->
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
                 <div class="col-lg-12 col-md-12">
 
-                    <div class="submit-page">
+                    <h2 class="ipt-title">Welcome!</h2>
+                    <span class="ipn-subtitle">Welcome To Your Account</span>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================ Page Title End ================================== -->
+    <!-- ============================ User Dashboard ================================== -->
+    <section class="bg-light">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="filter_search_opt">
+                        <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
 
-                        <div class="form-submit">
-                            <h3>Contact Information</h3>
-                            <div class="submit-section">
-                                <div class="row">
+                <div class="col-lg-3 col-md-12">
 
-                                    <div class="form-group col-md-4">
-                                        @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="simple-sidebar sm-sidebar" id="filter_search">
 
-                                        @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
-                                      
-                                            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-                                        </div>
-                                    
-
-                                    </div>
-                            </div>
+                        <div class="search-sidebar_header">
+                            <h4 class="ssh_heading">Close Filter</h4>
+                            <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
                         </div>
 
-                        <!-- Detailed Information -->
-                        <div class="form-submit">
-                            <h3>Detailed Information</h3>
-                            <div class="submit-section">
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        @Html.LabelFor(model => model.explication, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="sidebar-widgets">
+                            <div class="dashboard-navbar">
 
-                                        @Html.TextAreaFor(model => model.explication,  new { @class = "form-control h-120"  })
-                                        @Html.ValidationMessageFor(model => model.explication, "", new { @class = "text-danger" })
-                                  
-                                        </div>
-                                    </div>
+                                <div class="d-user-avater">
+                                    <img src="~/Content/img/user-3.jpg" class="img-fluid avater" alt="">
+                                    <h4>Adam Harshvardhan</h4>
+                                    <span>Canada USA</span>
                                 </div>
-                        </div>
 
-                        <!-- Contact Information -->
+                                <div class="d-navigation">
+                                    <ul>
+                                        <li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
+                                        <li><a href="my-profile.html"><i class="ti-user"></i>My Profile</a></li>
+                                        <li><a href="bookmark-list.html"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
+                                        <li><a href="my-property.html"><i class="ti-layers"></i>My Properties</a></li>
+                                        <li><a href="submit-property-dashboard.html"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
+                                        <li><a href="change-password.html"><i class="ti-unlock"></i>Change Password</a></li>
+                                        <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+                                    </ul>
+                                </div>
 
-
-                        <div class="form-group col-lg-12 col-md-12">
-                            <label>GDPR Agreement *</label>
-                            <ul class="no-ul-list">
-                                <li>
-                                    <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox">
-                                    <label for="aj-1" class="checkbox-custom-label">I consent to having this website store my submitted information so they can respond to my inquiry.</label>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="form-group col-lg-12 col-md-12">
-                            <button class="btn btn-theme-light-2 rounded" type="submit">Submit & Preview</button>
+                            </div>
                         </div>
 
                     </div>
                 </div>
-            }
 
-        </div>
-    </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="dashboard-wraper">
+                        
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <!-- Submit Form -->
+                                        <div class="col-lg-12 col-md-12">
 
-</section>
-<!-- ============================ Submit Property End ================================== -->
+                                            <div class="submit-page">
+
+
+
+                                                <div class="form-submit">
+                                                    <h3>Contact Information</h3>
+                                                    <div class="submit-section">
+                                                        <div class="row">
+
+                                                            <div class="form-group col-md-4">
+                                                                @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                <select id="type" class="form-control " name="type">
+                                                                    <option>Select type</option>
+                                                                    <option value="fact">Fact</option>
+                                                                    <option value="definition">Definition</option>
+                                                                    <option value="value">Value</option>
+                                                                    <option value="cause">Cause</option>
+                                                                    <option value="comparison">Comparison</option>
+                                                                    <option value="policy">Policy</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group col-md-4">
+                                                                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                                                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Detailed Information -->
+                                                <div class="form-submit">
+                                                    <h3>Detailed Information</h3>
+                                                    <div class="submit-section">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12">
+                                                                @Html.LabelFor(model => model.explication, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                                                @Html.TextAreaFor(model => model.explication, new { @class = "form-control h-120" })
+                                                                @Html.ValidationMessageFor(model => model.explication, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Contact Information -->
+
+
+                                                <div class="form-group col-lg-12 col-md-12">
+                                                    <label>GDPR Agreement *</label>
+                                                    <ul class="no-ul-list">
+                                                        <li>
+                                                            <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox">
+                                                            <label for="aj-1" class="checkbox-custom-label">I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="form-group col-lg-12 col-md-12">
+                                                    <button class="btn btn-theme-light-2 rounded" type="submit">Submit & Preview</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    }
+
+                                
+                        <!-- ============================ Submit Property End ================================== -->
+
+                    </div>
+
+                </div>
+            </div>
+    </section>
+    <!-- ============================ User Dashboard End ================================== -->
+</div>

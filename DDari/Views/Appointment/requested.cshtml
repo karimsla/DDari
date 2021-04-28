@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DDari.Models.Appointment>
+
+
+@foreach (var item in Model)
+{
+    var color = item.state.Equals("ACCEPTED") ? "green" : "cornflowerblue";
+    string apptype = "Appointment type waiting to be defined";
+    if (item.appointmentType != null)
+    {
+        apptype = "The appointment will be" + (item.appointmentType.Equals("FACE_TO_FACE") ? "face to face" : "Online");
+    }
+    <div class="col-md-12 col-sm-12 col-md-12">
+        <div class="singles-dashboard-list">
+
+            <div class="sd-list-right">
+                <h4 class="listing_dashboard_title"><a href="#" class="theme-cl" style="color:@color">@item.state</a></h4>
+                <div class="user_dashboard_listed">
+                    <b>  Property Owner :</b> @item.ownerId
+                </div>
+                <div class="user_dashboard_listed">
+                    @if (item.agentId == null)
+                    {<p><b>Agent</b>: No agent contacted</p>
+                    }
+                    else
+                    {
+                        <p><b>Agent</b>: @item.agentId</p>}
+                </div>
+                @if (item.state.Equals("ACCEPTED"))
+                {
+                    <div class="user_dashboard_listed">
+                        <b>Date</b>: @item.appointmentDate
+                    </div>
+                    <div class="user_dashboard_listed">
+                        <b>Address/Url</b>: @item.address
+                    </div>
+                }
+                    <div class="modal-divider"></div>
+                    <div class="user_dashboard_listed">
+                        <b>@apptype</b>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+}
+
+

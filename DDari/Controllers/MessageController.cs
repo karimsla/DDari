@@ -3,6 +3,7 @@ using DDari.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,6 +17,16 @@ namespace DDari.Controllers
             serviceMessages = new ServiceMessages();
 
         }
+
+        
+        public ActionResult chat_bot()
+        {
+            return View();
+        }
+
+      
+
+
         // GET: Message
         public ActionResult Index()
         {
@@ -48,7 +59,9 @@ namespace DDari.Controllers
 
         public ActionResult chatbot( string input)
         {
-            string response = serviceMessages.chatBot(input).Result;
+            var task= Task.Run(async()=> await serviceMessages.chatBot(input));
+            var response = task.Result;
+
             if (String.IsNullOrEmpty(response))
             {
                 return Json("something wrong happened! please try again in few moments");

@@ -5,10 +5,156 @@
     ViewBag.Title = "Index";
 }
 
- 
 
 
 <div class="main_content_iner ">
+    <a href="#" class="btn btn-link mb-3" id="adsear">Show advanced search</a>
+    <div class="container-fluid p-0 sm_padding_15px" id="searcharea" style="display:none;">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Advanced search</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-xl-4 col-sm-7">
+                                    @if (ViewBag.treated != null && ViewBag.treated == true)
+                                    {
+                                        <a href="@Url.Action("treated",new { treated = true })" class="btn btn-secondary mb-3">Treated</a>
+
+                                        <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-secondary mb-3">Not Treated</a>
+                                    }
+                                    else if (ViewBag.treated != null && ViewBag.treated == false)
+                                    {
+
+
+                                        <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-secondary mb-3">Treated</a>
+
+
+
+                                        <a href="@Url.Action("treated",new { treated = false })" class="btn btn-secondary mb-3">Not Treated</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-secondary mb-3">Treated</a>
+
+                                        <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-secondary mb-3">Not Treated</a>
+                                    }
+                                </div>
+
+                                <div class="col-xl-4 col-sm-7">
+
+
+                                    <form action="@Url.Action("findbytype","Reclamation")" method="POST">
+                                        <select name="type" id="myselect" class="form-control" onchange="this.form.submit()">
+                                            <option>Select type</option>
+                                            <option value="fact">Fact</option>
+                                            <option value="definition">Definition</option>
+                                            <option value="value">Value</option>
+                                            <option value="cause">Cause</option>
+                                            <option value="comparison">Comparison</option>
+                                            <option value="policy">Policy</option>
+                                        </select>
+                                    </form>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="row">
+
+
+
+                                <div class="col-xl-4 col-sm-7">
+                                    <form action="@Url.Action("betweendate","Reclamation")">
+                                        <div class="input-group common_date_picker">
+                                            <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick start date" name="date1">
+                                            <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
+                                            <button type="submit" class="btn btn-link mb-3"> search between two date</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                            <h4>Multi criteria search</h4>
+
+                            <div class="row">
+
+                                <form action="@Url.Action("searchMulti","Reclamation")" method="post">
+
+                                    <div class="form-row">
+
+                                        <div class="search_field">
+
+                                            <input type="text" name="filter" placeholder="filter..." class="form-control" />
+
+                                        </div>
+
+
+                                        <div class="form-group col-md-6">
+                                            <select name="type" id="myselect1" class="form-control">
+                                                <option>Select type</option>
+                                                <option value="fact">Fact</option>
+                                                <option value="definition">Definition</option>
+                                                <option value="value">Value</option>
+                                                <option value="cause">Cause</option>
+                                                <option value="comparison">Comparison</option>
+                                                <option value="policy">Policy</option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="input-group common_date_picker">
+                                        <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick start date" name="date1">
+                                        <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <div class="form-check">
+
+                                            <input class="form-check-input" type="radio" name="treat" id="treatr" value="true">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                Treated
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="treat" id="treatr1" value="false">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                Not treated
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+                                </form>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -27,7 +173,7 @@
                                 <div class="box_right d-flex lms_block">
                                     <div class="serach_field_2">
                                         <div class="search_inner">
-                                            <form action="">
+                                            <form action="@Url.Action("Index","Reclamation")">
                                                 <div class="search_field">
                                                     <input type="text" name="search" placeholder="Search content here...">
                                                 </div>
@@ -35,9 +181,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="add_button ml-10">
-                                        @Html.ActionLink("Add New","Create",null,new {@class="btn_1"}) 
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -46,11 +190,11 @@
                                 <table class="table lms_table_active ">
                                     <thead>
                                         <tr>
-                                            <th scope="col"> @Html.DisplayNameFor(model => model.type)</th>
-                                            <th scope="col">    @Html.DisplayNameFor(model => model.title)</th>
+                                            <th scope="col"> @Html.DisplayNameFor(model => model.title)</th>
+                                            <th scope="col">    @Html.DisplayNameFor(model => model.type)</th>
                                             <th scope="col"> @Html.DisplayNameFor(model => model.explication)</th>
                                             <th scope="col"> @Html.DisplayNameFor(model => model.dateTime)</th>
-                                          
+
                                             <th scope="col"> @Html.DisplayNameFor(model => model.state)</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -62,7 +206,7 @@
                                                 <th scope="row">
                                                     <a href="#"
                                                        class="question_content">            @Html.DisplayFor(modelItem => item.title)</a>
-                                        
+
                                                 </th>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.type)
@@ -73,19 +217,19 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.dateTime)
                                                 </td>
-                                               
+
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.state)
                                                 </td>
                                                 <td>
-                                                    @Html.ActionLink("Edit", "Edit",null, new { id = item.id ,style = "color: #2e9de4" }) |
-                                                    @Html.ActionLink("Details", "Details", null, new { id = item.id, style = "color: #2c323f" }) |
-                                                    @Html.ActionLink("Delete", "Delete", null, new { id = item.id, style = "color: #fd517d" })
+
+                                                    @Html.ActionLink("Details", "Details", "Reclamation", new { id = item.id }, new { style = "color: #2c323f" }) |
+                                                    @Html.ActionLink("Delete", "Delete", "Reclamation", new { id = item.id }, new { style = "color: #fd517d" })
                                                 </td>
                                             </tr>
                                         }
-                                       
-                                       
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -99,3 +243,92 @@
         </div>
     </div>
 </div>
+
+<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#adsear").click(() => {
+
+            $("#searcharea").toggle(500);
+        })
+
+    })
+</script>
+<script>
+    $('#treatr').bind('click mousedown', (function () {
+        //Capture radio button status within its handler scope,
+        //so we do not use any global vars and every radio button keeps its own status.
+        //This required to uncheck them later.
+        //We need to store status separately as browser updates checked status before click handler called,
+        //so radio button will always be checked.
+        var isChecked;
+
+        return function (event) {
+            //console.log(event.type + ": " + this.checked);
+
+            if (event.type == 'click') {
+                //console.log(isChecked);
+
+                if (isChecked) {
+                    //Uncheck and update status
+                    isChecked = this.checked = false;
+                } else {
+                    //Update status
+                    //Browser will check the button by itself
+                    isChecked = true;
+
+                    //Do something else if radio button selected
+                    /*
+                    if(this.value == 'somevalue') {
+                        doSomething();
+                    } else {
+                        doSomethingElse();
+                    }
+                    */
+                }
+            } else {
+                //Get the right status before browser sets it
+                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                isChecked = this.checked;
+            }
+        }
+    })()); $('#treatr1').bind('click mousedown', (function () {
+        //Capture radio button status within its handler scope,
+        //so we do not use any global vars and every radio button keeps its own status.
+        //This required to uncheck them later.
+        //We need to store status separately as browser updates checked status before click handler called,
+        //so radio button will always be checked.
+        var isChecked;
+
+        return function (event) {
+            //console.log(event.type + ": " + this.checked);
+
+            if (event.type == 'click') {
+                //console.log(isChecked);
+
+                if (isChecked) {
+                    //Uncheck and update status
+                    isChecked = this.checked = false;
+                } else {
+                    //Update status
+                    //Browser will check the button by itself
+                    isChecked = true;
+
+                    //Do something else if radio button selected
+                    /*
+                    if(this.value == 'somevalue') {
+                        doSomething();
+                    } else {
+                        doSomethingElse();
+                    }
+                    */
+                }
+            } else {
+                //Get the right status before browser sets it
+                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                isChecked = this.checked;
+            }
+        }
+    })());
+</script>
