@@ -1,0 +1,120 @@
+﻿@{ var user = (DDari.Models.Utilisateur)Session["user"]; }
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="filter_search_opt">
+                    <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12">
+
+                <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                    <div class="search-sidebar_header">
+                        <h4 class="ssh_heading">Close Filter</h4>
+                        <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
+                    </div>
+
+                    <div class="sidebar-widgets">
+                        <div class="dashboard-navbar">
+
+                            <div class="d-user-avater">
+                                <img src="assets/img/user-3.jpg" class="img-fluid avater" alt="">
+                                <h4>Adam Harshvardhan</h4>
+                                <span>Canada USA</span>
+                            </div>
+
+                            <div class="d-navigation">
+                                <ul>
+                                    <li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
+                                    <li class="active"><a href="my-profile.html"><i class="ti-user"></i>My Profile</a></li>
+                                    <li><a href="bookmark-list.html"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
+                                    <li><a href="my-property.html"><i class="ti-layers"></i>My Properties</a></li>
+                                    <li><a href="submit-property-dashboard.html"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
+                                    <li><a href="change-password.html"><i class="ti-unlock"></i>Change Password</a></li>
+                                    <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-12">
+                <div class="dashboard-wraper">
+                    @model DDari.Models.Utilisateur
+
+                    <!-- Basic Information -->
+                    <div class="form-submit">
+                        <h4> Welcome aboard @user.firstName !</h4>
+                        <div class="submit-section">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row">
+
+                                    <input value="@user.utilisateurId" type="hidden" />
+                                    <div class="form-group col-md-6">
+                                        <label>Firstname</label>
+                                        <!-- <input type="text" class="form-control" value="@user.firstName">-->
+                                        @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", placeholder = "username" })
+                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", placeholder = "firstname" })
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Lastname</label>
+                                        @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", placeholder = "lastname" })
+                                        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Phone</label>
+                                        @Html.TextBoxFor(model => model.phone, new { @class = "form-control", placeholder = "phone" })
+                                        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Username</label>
+                                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", placeholder = user.username })
+                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                    </div>
+
+
+
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Save changes</button>
+                                </div>
+                            }
+                        </div>
+                            
+                    </div>
+
+                    <div class="form-submit">
+                        
+                    </div>
+
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
