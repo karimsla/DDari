@@ -122,7 +122,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
@@ -135,9 +138,11 @@
     <Compile Include="Models\ChatRoom.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DeliveryMan.cs" />
+    <Compile Include="Models\ForgotPasswordRequest.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Reclamation.cs" />
+    <Compile Include="Models\ResetPassword.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Subscribe.cs" />
@@ -645,11 +650,17 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Reclamation\Create.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\ForgotPassword\ForgotPage.cshtml" />
+    <Content Include="Views\ForgotPassword\resetPassword.cshtml" />
+    <Content Include="Views\Agent\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Message\" />
-    <Folder Include="Views\Reclamation\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>

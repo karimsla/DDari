@@ -1,5 +1,6 @@
 ﻿using DDari.Models;
 using DDari.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace DDari.Controllers
         // GET: User
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -48,23 +50,29 @@ namespace DDari.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Utilisateur user = (Utilisateur)Session["user"];
+            if (user == null)
+                return Redirect("Login");
+            return View(user);
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Utilisateur user)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Utilisateur u = (Utilisateur)Session["user"];
+            if (u == null)
+                return Redirect("Login");
+            HttpClient httpClient = HttpClientBuilder.Get(Session["api-cookie"]);
+            user.utilisateurId = u.utilisateurId;
+            HttpResponseMessage response = httpClient.PostAsJsonAsync<Utilisateur>("Customer/updateProfile", user).Result;
+            response.EnsureSuccessStatusCode();
+            string message = response.Content.ReadAsStringAsync().Result;
+           
+                Session["user"] = user;
+                
+           
+            return View(user);
         }
 
         // GET: User/Delete/5
@@ -96,17 +104,78 @@ namespace DDari.Controllers
         [HttpPost]
         public ActionResult Register(Utilisateur user)
         {
+           // Session["user"] = user;
             HttpClient httpClient = HttpClientBuilder.Get();
+            string regtype = Request.Form["registerType"];
             if (ModelState.IsValid)
             {
+                if (regtype.Equals("customer")) { 
                 HttpResponseMessage response = httpClient.PostAsJsonAsync<Utilisateur>("Auth/signupCustomer", user).Result;
                 response.EnsureSuccessStatusCode();
                 string message = response.Content.ReadAsStringAsync().Result;
-                
+                }
+                if (regtype.Equals("agent"))
+                {
+                    HttpResponseMessage response = httpClient.PostAsJsonAsync<Utilisateur>("Auth/signupAgent", user).Result;
+                    response.EnsureSuccessStatusCode();
+                    string message = response.Content.ReadAsStringAsync().Result;
+                }
+                return RedirectToAction("Index", "Home");
 
             }
             return View(user);
         }
+        [HttpPost]
+        public ActionResult Login(Utilisateur user)
+        {
+            // Session["user"] = user;
+            HttpClient httpClient = HttpClientBuilder.Get();
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "multipart/form-data");
+           
+
+            var loginForm = new MultipartFormDataContent
+            {
+                { new StringContent(user.username), "username" },
+                { new StringContent(user.password), "password" }
+            };
+            HttpResponseMessage response = httpClient.PostAsync("/login", loginForm).Result;
+            string message = response.Content.ReadAsStringAsync().Result;
+            string f = message.Substring(5,5);
+            Utilisateur u = null;
+            if (message.Contains("TYPE ")) {
+                ModelState.AddModelError("passowrd", "Bad Credentials");
+                
+            }
+
+            else
+            {
+
+                 u = response.Content.ReadAsAsync<Utilisateur>().Result;
+                Role r = response.Content.ReadAsAsync<Role>().Result;
+            }
+            // string message = response.Content.ReadAsStringAsync().Result;
+
+            if (u != null)
+            {
+                string role = httpClient.GetStringAsync("UserCrud/getLoggedInRole").Result;
+                Session["user"] = u;
+                Session["role"] = role;
+                if (role.Equals("USER"))
+                {
+                   return RedirectToAction("Edit", "Home", new { id = u.utilisateurId });
+                }
+                if (role.Equals("AGENT"))
+                {
+                    return RedirectToAction("Index", "Agent");
+                }
+            }
+             ModelState.AddModelError("password", "Wrong username or password");
+            return RedirectToAction("Index", "Home");
+        }
+        
+    
+          
+    }
 
     }
-}
+
