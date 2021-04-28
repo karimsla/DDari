@@ -2,62 +2,137 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.appointmentDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.appointmentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ownerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.customerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.agentId)
-        </th>
-        <th></th>
-    </tr>
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.appointmentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.appointmentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ownerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.agentId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.appointmentId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.appointmentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.appointmentId })
-        </td>
-    </tr>
+
+
 }
 
-</table>
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit">
+            <h4>My Appointments</h4>
+        </div>
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                var color = item.state.Equals("ACCEPTED") ? "green" : "cornflowerblue";
+                string apptype = "Appointment type waiting to be defined";
+                if (item.appointmentType != null)
+                {
+                    apptype = "The appointment will be " + (item.appointmentType.Equals("FACE_TO_FACE") ? "face to face" : "Online");
+                }
+
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="singles-dashboard-list">
+
+                        <div class="sd-list-right">
+                            <h4 class="listing_dashboard_title" style="color:@color;">@item.state</h4>
+                            <div class="user_dashboard_listed">
+                                <b>Requested by :</b> @item.customerId
+                            </div>
+                            <div class="user_dashboard_listed">
+                                @if (item.agentId == null)
+                                {<p><b>Agent</b>: No agent contacted</p>
+                                }
+                                else
+                                {
+                                    <p><b>Agent:</b> @item.agentId</p>}
+                            </div>
+                            @if (item.state.Equals("ACCEPTED"))
+                            {<div class="user_dashboard_listed">
+                                    <b>Address/Url  </b>: @item.address
+                                </div>
+                                <div class="user_dashboard_listed">
+                                    <b>Date</b>: @item.appointmentDate
+                                </div>
+                            }
+                            <div class="modal-divider"></div>
+
+                            <div class="user_dashboard_listed">
+                                <b>@apptype</b>
+                            </div>
+
+                            <div class="action">
+                                @if (!item.state.Equals("ACCEPTED"))
+                                {<a href="#" data-bs-toggle="modal" data-id="@item.appointmentId" class="appoint" data-bs-target="#login" title="Edit"><i class="ti-pencil"></i></a>
+                                }
+                                <a href="@Url.Action("Delete",new { id = item.appointmentId })" onclick="return confirm('Are you sure you want to cancel this appointment?');" class="delete"><i class="ti-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+            <div class="form-submit">
+                <h4>Requested Appointments</h4>
+            </div>
+
+            @Html.Action("requested")
+        </div>
+
+    </div>
+   
+</div>
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="registermodal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+        <div class="modal-content" id="registermodal">
+            <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+            <div class="modal-body">
+                <h4 class="modal-header-title">Log In</h4>
+                <div class="login-form">
+                    <form method="post" action="@Url.Action("Edit",new { id = 0 } )">
+                        <input name="id" id="appid" />
+                        <div class="form-group">
+                            <label>Appointment date</label>
+                            <div class="input-with-icon">
+                                <input name="date" type="date" class="form-control">
+                                <i class="ti-agenda"></i>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <div class="input-with-icon">
+                                <input type="text" name="address" class="form-control" placeholder="13 RUE GARIBALDI..">
+                                <i class="ti-map"></i>
+                            </div>
+                        </div>
+                        <br />
+                        <input type="radio" id="online" name="at" value="0">
+                        <label for="online">Online</label><br>
+                        <input type="radio" id="ftf" name="at" value="1">
+                        <label for="ftf">Face To Face</label><br>
+                        <div class="modal-divider"></div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Accept</button>
+                        </div>
+
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $(document).on("click", ".appoint", function () {
+        var appid = $(this).data('id');
+        $(".modal-body #appid").val(appid);
+        // As pointed out in comments, 
+        // it is unnecessary to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+
+</script>

@@ -16,6 +16,8 @@
 <!-- Custom Color Option -->
 <link href="~/Content/css/colors.css" rel="stylesheet">
 
+<link href="~/Scripts/vendors/datepicker/date-picker.css" rel="stylesheet" />
+
 <div id="main-wrapper">
     <!-- ============================ Page Title Start================================== -->
     <div class="page-title">
@@ -96,75 +98,12 @@
                                         </div>
                                         <div class="white_card_body">
                                             <div class="card-body">
-                                                <div class="row">
-
-                                                    <div class="col-xl-4 col-sm-7">
-                                                        @if (ViewBag.treated != null && ViewBag.treated == true)
-                                                        {
-                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-theme mb-3">Treated</a>
-
-                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-thememb-3">Not Treated</a>
-                                                        }
-                                                        else if (ViewBag.treated != null && ViewBag.treated == false)
-                                                        {
-
-
-                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-theme mb-3">Treated</a>
-
-
-
-                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-theme mb-3">Not Treated</a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="@Url.Action("treated",new { treated = true })" class="btn btn-outline-theme mb-3">Treated</a>
-
-                                                            <a href="@Url.Action("treated",new { treated = false })" class="btn btn-outline-theme mb-3">Not Treated</a>
-                                                        }
-                                                    </div>
-
-                                                    <div class="col-xl-4 col-sm-7">
-
-
-                                                        <form action="@Url.Action("findbytype","Reclamation")" method="POST">
-                                                            <select name="type" id="myselect" class="form-control" onchange="this.form.submit()">
-                                                                <option>Select type</option>
-                                                                <option value="fact">Fact</option>
-                                                                <option value="definition">Definition</option>
-                                                                <option value="value">Value</option>
-                                                                <option value="cause">Cause</option>
-                                                                <option value="comparison">Comparison</option>
-                                                                <option value="policy">Policy</option>
-                                                            </select>
-                                                        </form>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="row">
-
-
-
-                                                    <div class="col-xl-4 col-sm-7">
-                                                        <form action="@Url.Action("betweendate","Reclamation")">
-                                                            <div class="input-group common_date_picker">
-                                                                <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick start date" name="date1">
-                                                                <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
-                                                                <button type="submit" class="btn btn-link mb-3"> search between two date</button>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
-
-                                                </div>
 
                                                 <h4>Multi criteria search</h4>
 
                                                 <div class="row">
 
-                                                    <form action="@Url.Action("searchMulti","Reclamation")" method="post">
+                                                    <form action="@Url.Action("searchMineMulti","Reclamation")" method="post">
 
                                                         <div class="form-row">
 
@@ -198,15 +137,15 @@
                                                             <input class="datepicker-here  digits" type="text" data-language="en" placeholder="Pick end date" name="date2">
                                                         </div>
 
-                                                        <div class="mt-3">
-                                                            <div class="form-check">
+                                                        <div class="mt-3 ">
+                                                            <div class=" ">
 
                                                                 <input class="form-check-input" type="radio" name="treat" id="treatr" value="true">
-                                                                <label class="form-check-label" for="gridRadios1">
+                                                                <label class="form-check-label " for="gridRadios1">
                                                                     Treated
                                                                 </label>
                                                             </div>
-                                                            <div class="form-check">
+                                                            <div class="">
                                                                 <input class="form-check-input" type="radio" name="treat" id="treatr1" value="false">
                                                                 <label class="form-check-label" for="gridRadios1">
                                                                     Not treated
@@ -214,7 +153,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+                                                        <button type="submit" class="btn btn-outline-theme mb-3 mt-3">Search</button>
                                                     </form>
 
 
@@ -299,9 +238,18 @@
                                                                             @Html.DisplayFor(modelItem => item.state)
                                                                         </td>
                                                                         <td>
+                                                                            <a  
+                                                                               id="modalin"   style="color: #2c323f" 
+                                                                               href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#modaltreat"
+                                                                               data-id="@item.id"
+                                                                               data-title="@item.title"
+                                                                               data-type="@item.type"
+                                                                               data-desc="@item.explication"
+                                                                               data-datec="@item.dateTime"
+                                                                               data-state="@item.state"
+                                                                               data-treat="@item.treatement">  Detail </a>
 
-                                                                            @Html.ActionLink("Details", "Details", "Reclamation", new { id = item.id }, new { style = "color: #2c323f" }) |
-                                                                            @Html.ActionLink("Delete", "Delete", "Reclamation", new { id = item.id }, new { style = "color: #fd517d" })
+                                                                            @Html.ActionLink("Delete", "DeleteMy", "Reclamation", new { id = item.id }, new { style = "color: #fd517d" })
                                                                         </td>
                                                                     </tr>
                                                                 }
@@ -329,7 +277,142 @@
     </section>
     <!-- ============================ User Dashboard End ================================== -->
 </div>
+
+
+<div class="modal fade signup" id="modaltreat" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+        <div class="modal-content">
+            <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="card_box position-relative  mb_30 white_bg  ">
+                    <div class="white_box_tittle blue_bg    ">
+                        <div class="main-title2 ">
+                            <h4 class="mb-2 nowrap text_white" id="ctit">  </h4>
+
+                        </div>
+                    </div>
+                    <div class="box_body">
+
+
+                        <h4>
+                            Claim type
+                        </h4>
+
+                        <p class="f-w-400 " id="ctype">
+
+                        </p>
+
+
+
+                        <h4>
+                            Explication
+                        </h4>
+
+                        <p class="f-w-400 " id="cexp">
+
+                        </p>
+
+                        <h4>
+                            Date
+                        </h4>
+
+                        <p id="cdate">
+
+                        </p>
+
+
+
+                        <h4>
+                            Treatement
+                        </h4>
+
+                        <p class="f-w-400 " id="ctreat">
+
+                        </p>
+
+
+
+                        <div class="" role="alert">
+                            <div class="alert-text" id="cstate"></div>
+                        </div>
+                        <p class="f-w-400 ">
+
+                        </p>
+
+                    </div>
+                    <div class="card_footer">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer  ">
+
+                <div id="formaff" class="w-100">
+
+
+                    <div class="col-md-4  form-group">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
 <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).on("click", "#modalin", function () {
+
+
+
+        let cid = $(this).data("id");
+        let title = $(this).data("title");
+        let explication = $(this).data("desc");
+        let datec = $(this).data("datec");
+
+        let state = $(this).data('state');
+        let type = $(this).data('type');
+        let treat = $(this).data("treat");
+
+        $("#ctype").empty().append(type);
+        $("#cexp").empty().append(explication);
+        $("#cdate").empty().append(datec);
+        console.log(state);
+        if (state == "True") {
+            $("#cstate").empty().append("Treated").removeClass().addClass("alert text-white bg-success");
+
+        } else {
+            $("#cstate").empty().append("Not Treated").removeClass().addClass("alert text-white bg-danger");
+
+        }
+        $("#ctreat").empty().append(treat);
+
+
+        $('.modal-title').empty().append(title);
+
+
+        $("exampleModalLong").modal("show");
+    });
+</script>
+
+
 <script>
     $(document).ready(function () {
 
@@ -340,15 +423,97 @@
 
     })
 </script>
-    <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
-    <script src="~/Content/Back/js/custom.js"></script>
-    <!-- responsive table -->
-    <script src="~/Content/Back/vendors/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/buttons.flash.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/jszip.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/pdfmake.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/vfs_fonts.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/buttons.html5.min.js"></script>
-    <script src="~/Content/Back/vendors/datatable/js/buttons.print.min.js"></script>
+
+
+<script>
+    $('#treatr').bind('click mousedown', (function () {
+        //Capture radio button status within its handler scope,
+        //so we do not use any global vars and every radio button keeps its own status.
+        //This required to uncheck them later.
+        //We need to store status separately as browser updates checked status before click handler called,
+        //so radio button will always be checked.
+        var isChecked;
+
+        return function (event) {
+            //console.log(event.type + ": " + this.checked);
+
+            if (event.type == 'click') {
+                //console.log(isChecked);
+
+                if (isChecked) {
+                    //Uncheck and update status
+                    isChecked = this.checked = false;
+                } else {
+                    //Update status
+                    //Browser will check the button by itself
+                    isChecked = true;
+
+                    //Do something else if radio button selected
+                    /*
+                    if(this.value == 'somevalue') {
+                        doSomething();
+                    } else {
+                        doSomethingElse();
+                    }
+                    */
+                }
+            } else {
+                //Get the right status before browser sets it
+                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                isChecked = this.checked;
+            }
+        }
+    })()); $('#treatr1').bind('click mousedown', (function () {
+        //Capture radio button status within its handler scope,
+        //so we do not use any global vars and every radio button keeps its own status.
+        //This required to uncheck them later.
+        //We need to store status separately as browser updates checked status before click handler called,
+        //so radio button will always be checked.
+        var isChecked;
+
+        return function (event) {
+            //console.log(event.type + ": " + this.checked);
+
+            if (event.type == 'click') {
+                //console.log(isChecked);
+
+                if (isChecked) {
+                    //Uncheck and update status
+                    isChecked = this.checked = false;
+                } else {
+                    //Update status
+                    //Browser will check the button by itself
+                    isChecked = true;
+
+                    //Do something else if radio button selected
+                    /*
+                    if(this.value == 'somevalue') {
+                        doSomething();
+                    } else {
+                        doSomethingElse();
+                    }
+                    */
+                }
+            } else {
+                //Get the right status before browser sets it
+                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                isChecked = this.checked;
+            }
+        }
+    })());
+</script>
+
+<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+<script src="~/Content/Back/js/custom.js"></script>
+<!-- responsive table -->
+<script src="~/Content/Back/vendors/datatable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/dataTables.responsive.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/dataTables.buttons.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/buttons.flash.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/jszip.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/pdfmake.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/vfs_fonts.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/buttons.html5.min.js"></script>
+<script src="~/Content/Back/vendors/datatable/js/buttons.print.min.js"></script>
+
+<script src="~/Scripts/vendors/datepicker/datepicker.js"></script>

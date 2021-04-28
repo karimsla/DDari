@@ -110,10 +110,13 @@ namespace DDari.Controllers
 
                     return RedirectToAction("Index");
                 }
-            }
+                catch
+                {
+                    return View(sub);
+                }
+            }*/
             return View(subscription);
-
-
+         
         }
 
 

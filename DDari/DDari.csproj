@@ -228,14 +228,18 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\ContractBuyController.cs" />
     <Compile Include="Controllers\ContractRentController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\SimulationController.cs" />
     <Compile Include="Controllers\SubscribeController.cs" />
@@ -243,18 +247,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Buy.cs" />
     <Compile Include="Models\ChatRoom.cs" />
     <Compile Include="Models\Contract_buy.cs" />
     <Compile Include="Models\Contract_rent.cs" />
     <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DeliveryMan.cs" />
+    <Compile Include="Models\ForgotPasswordRequest.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\PropertyType.cs" />
     <Compile Include="Models\Reclamation.cs" />
+    <Compile Include="Models\ResetPassword.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Rent.cs" />
     <Compile Include="Models\SpamInput.cs" />
     <Compile Include="Models\SpamPrediction.cs" />
@@ -265,7 +275,7 @@
     <Compile Include="Services\ServiceDelivery.cs" />
     <Compile Include="Services\ServiceMessages.cs" />
     <Compile Include="Services\ServiceReclamation.cs" />
-    <Compile Include="Services\ServiceSimulation.cs" />
+    <Compile Include="Utils\HttpClientBuilder.cs" />
     <Compile Include="Services\ServiceSubscription.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -906,6 +916,13 @@
     <Content Include="Views\Reclamation\Details.cshtml" />
     <Content Include="Views\Appointment\Index.cshtml" />
     <Content Include="Views\Deliveries\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\ForgotPassword\ForgotPage.cshtml" />
+    <Content Include="Views\ForgotPassword\resetPassword.cshtml" />
+    <Content Include="Views\Agent\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Deliveries\listdm.cshtml" />
     <Content Include="Views\Deliveries\assign.cshtml" />
     <Content Include="Views\Buy\Index.cshtml" />
@@ -917,16 +934,9 @@
     <Content Include="Views\ContractRent\Create.cshtml" />
     <Content Include="Views\Buy\Edit.cshtml" />
     <Content Include="Views\Reclamation\MyReclam.cshtml" />
-    <Content Include="Views\Subscription\Create.cshtml" />
-    <Content Include="Views\Subscription\Edit.cshtml" />
-    <Content Include="Views\Subscription\Index.cshtml" />
-    <Content Include="Views\Subscribe\Create.cshtml" />
-    <Content Include="Views\Subscribe\Index.cshtml" />
-    <Content Include="Views\Simulation\Simul.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\" />
     <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>

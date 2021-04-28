@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "ForgotPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="form-submit">
+    
+    <div class="col-lg-9 col-md-12">
+        <div class="dashboard-wraper">
+            <h4>Change Your Password</h4>
+            <div class="submit-section">
+                @using (Html.BeginForm())
+                {
+                <div class="row">
+                    @model DDari.Models.Utilisateur
+
+                    <div class="form-group col-lg-12 col-md-6">
+                        <label>Email</label>
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12">
+                        <button class="btn btn-theme-light-2 rounded" type="submit">Send a request</button>
+                    </div>
+
+                    @*  <div class="form-group col-md-6">
+            <label>New Password</label>
+            <input type="password" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Confirm password</label>
+            <input type="password" class="form-control">
+        </div>
+
+        <div class="form-group col-lg-12 col-md-12">
+            <button class="btn btn-theme-light-2 rounded" type="submit">Save Changes</button>
+        </div>*@
+
+                </div>
+                }
+                </div>
+                
+        </div>
+        </div>
+</div>

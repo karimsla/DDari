@@ -62,11 +62,11 @@ namespace DDari.Services
         public async Task<string> chatBot(string input)
         {
             string message = "";
-            HttpResponseMessage response = await client.GetAsync("/message/chatbot");
-
+            HttpResponseMessage response = await client.PostAsJsonAsync("/message/chatbot",input);
+            response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
-                message = await response.Content.ReadAsAsync<string>();
+                message = await response.Content.ReadAsStringAsync();
             }
             return message;
 

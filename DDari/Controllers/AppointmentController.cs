@@ -26,8 +26,15 @@ namespace DDari.Controllers
             
             return View(task.Result);
         }
-        
 
+        // GET: Appointment
+        public ActionResult requested()
+        {
+
+            var task = Task.Run(async () => await appointmentService.CustAppAsync(4));
+
+            return PartialView(task.Result);
+        }
         // GET: Appointment/Details/5
         public ActionResult Details(int id)
         {
@@ -68,9 +75,10 @@ namespace DDari.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                 var task = Task.Run(async () => await appointmentService.AcceptAppAsync(Int32.Parse(collection["id"]),collection["date"], collection["address"], Int32.Parse(collection["at"])));
+                var t = task.Result;
+                return RedirectToAction("index");
 
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -81,7 +89,9 @@ namespace DDari.Controllers
         // GET: Appointment/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var task = Task.Run(async () => await appointmentService.cancelApp(id));
+            var t=task.Result;
+            return RedirectToAction("Index");
         }
 
         // POST: Appointment/Delete/5
