@@ -15,5 +15,7 @@ namespace DDari.Models
         public int ownerId { get; set; }
         public int customerId { get; set; }
         public int? agentId { get; set; }
+
+        public string custname { get; set; }
     }
 }

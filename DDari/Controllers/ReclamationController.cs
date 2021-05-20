@@ -11,93 +11,95 @@ namespace DDari.Controllers
 {
     public class ReclamationController : Controller
     {
-        static ServiceReclamation serviceReclamation=null;
+        static ServiceReclamation serviceReclamation = null;
+        static ServiceMessages serviceMessages = null;
         public ReclamationController()
         {
             serviceReclamation = new ServiceReclamation();
-
+            serviceMessages = new ServiceMessages();
         }
 
 
-        
+
 
 
 
         // GET: Subscript
-        public  ActionResult Index(string search)
+        public ActionResult Index(string search)
         {
-            List<Reclamation> reclams=null;
+            List<Reclamation> reclams = null;
             if (string.IsNullOrEmpty(search))
             {
 
-            //all reclams
-            var task = Task.Run(async () => await serviceReclamation.FindAll());
-    
-              reclams = task.Result;
+                //all reclams
+                var task = Task.Run(async () => await serviceReclamation.FindAll());
+
+                reclams = task.Result;
             }
             else
             {
                 var task = Task.Run(async () => await serviceReclamation.filter(search));
-                 reclams = task.Result;
+                reclams = task.Result;
             }
 
 
 
             return View(reclams);
         }
-        
+
         public ActionResult treated(bool treated)
         {
             List<Reclamation> reclams = null;
             if (treated == false)
             {
-                 var task = Task.Run(async () => await serviceReclamation.findNotTreated());
-               
-                 reclams = task.Result;
+                var task = Task.Run(async () => await serviceReclamation.findNotTreated());
+
+                reclams = task.Result;
                 ViewBag.treated = false;
             }
             else
             {
                 //all reclams
                 var task = Task.Run(async () => await serviceReclamation.FindAll());
-          
-               reclams = task.Result;
+
+                reclams = task.Result;
                 reclams = reclams.Where(x => x.state == true).ToList();
                 ViewBag.treated = true;
             }
-          
 
-            return View("Index",reclams);
+
+            return View("Index", reclams);
         }
 
 
 
-        public ActionResult betweendate(string date1,string date2)
-        { 
-            if(string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
+        public ActionResult betweendate(string date1, string date2)
+        {
+            if (string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
             {
                 return RedirectToAction("Index");
             }
-            DateTime d1=DateTime.Now, d2=DateTime.Now;
+            DateTime d1 = DateTime.Now, d2 = DateTime.Now;
             if (string.IsNullOrEmpty(date1))
             {
                 d1 = DateTime.Now.AddYears(-20);
                 d2 = DateTime.Parse(date2);
-            }else if (string.IsNullOrEmpty(date2))
+            }
+            else if (string.IsNullOrEmpty(date2))
             {
                 d1 = DateTime.Parse(date1);
                 d2 = DateTime.Now.AddDays(30);
             }
-            else if(!string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
+            else if (!string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
             {
                 d1 = DateTime.Parse(date1);
                 d2 = DateTime.Parse(date2);
             }
-            
-            var task = Task.Run(async () => await serviceReclamation.findBetweenDate(d1.ToString("yyyy-MM-dd HH:mm"),d2.ToString("yyyy-MM-dd HH:mm")));
+
+            var task = Task.Run(async () => await serviceReclamation.findBetweenDate(d1.ToString("yyyy-MM-dd HH:mm"), d2.ToString("yyyy-MM-dd HH:mm")));
 
             List<Reclamation> reclams = task.Result;
-            return View("Index",reclams);
+            return View("Index", reclams);
 
         }
 
@@ -130,18 +132,20 @@ namespace DDari.Controllers
             if (ModelState.IsValid)
             {
 
-            
-            try
-            {
-                    _ = serviceReclamation.Create(reclamation, 1);
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                try
+                {
+                    _ = serviceReclamation.Create(reclamation, 1);
+                    serviceMessages.sendmail("mohamedkarim.slaimi@esprit.tn", "Claim created", "Your claim " + reclamation.title + " have been posted stay tuned for a response from the admin");
+                    // TODO: Add insert logic here
+
+                    return RedirectToAction("MyReclam");
+                }
+                catch
+                {
+                    return View(reclamation);
+                }
             }
-            catch
-            {
-                return View(reclamation);
-            }}
             return View(reclamation);
         }
 
@@ -176,13 +180,14 @@ namespace DDari.Controllers
         }
 
         // POST: Reclamation/Delete/5
-       
+
 
 
         public ActionResult TreatClaim(int id, string treatement)
         {
             var task = Task.Run(async () => await serviceReclamation.treat(id, treatement));
             var res = task.Result;
+            serviceMessages.sendSMS("Your claim have been treated check your account", "51887898");
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -190,9 +195,9 @@ namespace DDari.Controllers
 
         public ActionResult MyReclam(string search)
         {
-          
-        
-        
+
+
+
             List<Reclamation> reclams = null;
             if (string.IsNullOrEmpty(search))
             {
@@ -204,7 +209,7 @@ namespace DDari.Controllers
             }
             else
             {
-                var task = Task.Run(async () => await serviceReclamation.searchMultiCriteria(search,null,true,null,null,false,1));
+                var task = Task.Run(async () => await serviceReclamation.searchMultiCriteria(search, null, true, null, null, false, 1));
                 reclams = task.Result;
             }
 
@@ -216,12 +221,12 @@ namespace DDari.Controllers
 
         public ActionResult findbytype(string type)
         {
-            List<Reclamation> reclams=null;
+            List<Reclamation> reclams = null;
             if (!string.IsNullOrEmpty(type))
             {
                 var task = Task.Run(async () => await serviceReclamation.findByType(type));
                 reclams = task.Result;
-            
+
             }
             else
             {
@@ -229,17 +234,19 @@ namespace DDari.Controllers
             }
             return View("Index", reclams);
         }
-         
-        
-       
 
-        public ActionResult searchMulti(string filter,string type,string date1,string date2, bool treat)
+
+
+
+        public ActionResult searchMulti(string filter="", string type="", string date1="", string date2="", bool treat=false)
         {
             DateTime d1 = DateTime.Now, d2 = DateTime.Now;
-            if(string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
+            if (string.IsNullOrEmpty(date1) && string.IsNullOrEmpty(date2))
             {
-
-            }else if (string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
+                d1=d1.AddYears(-7);
+                d2=d2.AddYears(7);
+            }
+            else if (string.IsNullOrEmpty(date1) && !string.IsNullOrEmpty(date2))
             {
                 d1 = DateTime.Now.AddYears(-20);
                 d2 = DateTime.Parse(date2);
@@ -254,21 +261,21 @@ namespace DDari.Controllers
                 d1 = DateTime.Parse(date1);
                 d2 = DateTime.Parse(date2);
             }
-            List<Reclamation> reclams = new List<Reclamation>() ;
+            List<Reclamation> reclams = new List<Reclamation>();
             var task = Task.Run(async () => await serviceReclamation.searchMultiCriteria(filter, type, false, d1.ToString("yyyy-MM-dd HH:mm"), d2.ToString("yyyy-MM-dd HH:mm"), treat, 0));
             reclams = task.Result;
             return View("Index", reclams);
         }
 
-   
-        
-        
-        
-      public ActionResult DeleteMy(int id)
+
+
+
+
+        public ActionResult DeleteMy(int id)
         {
             var task = Task.Run(async () => await serviceReclamation.Delete(id));
             var result = task.Result;
-            return RedirectToAction("Index");
+            return RedirectToAction("MyReclam");
         }
 
 
@@ -301,7 +308,7 @@ namespace DDari.Controllers
             return View("MyReclam", reclams);
         }
 
-      
+
 
 
 

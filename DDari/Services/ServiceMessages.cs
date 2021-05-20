@@ -9,6 +9,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using Cloudmersive.APIClient.NET.NLP.Api;
+using Cloudmersive.APIClient.NET.NLP.Client;
+using Cloudmersive.APIClient.NET.NLP.Model;
+using System.Net.Mail;
+using System.Text;
+using RestSharp;
 
 namespace DDari.Services
 {
@@ -28,7 +34,7 @@ namespace DDari.Services
 
         public async Task<bool> AddMessageAsync(string message, long by, long to)
         {
-            if (isSpam(message))
+            if (isSpam(message) || profanityDetection(message))
             {
                 return false;
             }
@@ -71,7 +77,16 @@ namespace DDari.Services
             return message;
 
         }
-       // public List<Utilisateur> getUsers(int id);
+        public async Task<List<Utilisateur>> getUsers(int id)
+        {
+            IEnumerable<Utilisateur> users = null;
+            HttpResponseMessage response = await client.GetAsync($"/message/getUsers/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                users = await response.Content.ReadAsAsync<IEnumerable<Utilisateur>>();
+            }
+            return users.ToList();
+        }
 
 
         public bool isSpam(string text)
@@ -80,7 +95,9 @@ namespace DDari.Services
             MLContext mlContext = new MLContext();
             //Define DataViewSchema for data preparation pipeline and trained model
             DataViewSchema modelSchema;
-            string filePath = HttpContext.Current.Server.MapPath("~/Content/model.zip");
+    
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Content", "model.zip");
+
             // Load trained model
             var model = mlContext.Model.Load(filePath, out modelSchema);
 
@@ -96,7 +113,101 @@ namespace DDari.Services
             return false;
         }
 
+        public bool profanityDetection(string text)
+        {
+            // Configure API key authorization: Apikey
+            Configuration.Default.AddApiKey("Apikey", "128ffe67-a3e7-4ec4-b723-980fa639eaeb");
 
+            var apiInstance = new AnalyticsApi();
+      
+            // Detect language of text
+           
+                var input = new ProfanityAnalysisRequest(text);
+            try
+            {
+               
+                ProfanityAnalysisResponse result = apiInstance.AnalyticsProfanity(input);
+                //if the score is over 0.6 that means it s profanity other wise is not if it s less than 0.6 the return result is false
+                return result.ProfanityScoreResult>0.6;
+            }
+            catch (Exception e)
+            {
+              
+            }
+            //false no profanity detected
+            return false;
+        }
+
+
+        public String sendmail(string mails, string obj, string body)
+        {
+            try
+            {
+                string sendermail = System.Configuration.ConfigurationManager.AppSettings["SenderMail"].ToString();
+                string senderpassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 1000000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                string from = sendermail;
+
+                MailMessage mailMessage = new MailMessage(from, mails);
+
+
+
+                mailMessage.Subject = obj;
+                mailMessage.Body = body;
+
+                client.Credentials = new NetworkCredential(sendermail, senderpassword);
+
+                mailMessage.IsBodyHtml = true;
+
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+
+                client.Send(mailMessage);
+
+            }
+            catch (Exception e)
+            {
+
+                return "error occured";
+
+            }
+            return "success";
+        }
+
+        public void sendSMS(string body, string phone)
+        {
+
+
+            try
+            {
+
+
+
+
+                var client = new RestClient("https://rest.nexmo.com/sms/json?api_key=e5668206&api_secret=P4VhyGeOyadg8AVr&from=Dari&to=216" + phone + "&text=" + Uri.EscapeUriString(body) + "");
+                var request = new RestRequest();
+
+
+                request.Method = Method.POST;
+                request.AddHeader("content-type", "application/x-www-form-urlencoded");
+
+                IRestResponse response = client.Execute(request);
+                Console.WriteLine(response);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+
+
+
+        }
 
     }
 }

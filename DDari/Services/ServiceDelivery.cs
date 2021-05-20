@@ -30,7 +30,7 @@ namespace DDari.Services
             response.EnsureSuccessStatusCode();
 
             // return URI of the created resource.
-            return response.StatusCode==HttpStatusCode.OK;
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         public async Task<List<DeliveryMan>> FindAllDm()
@@ -57,7 +57,7 @@ namespace DDari.Services
         public async Task<bool> UpdateDSAsync(int id, int state)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                 $"/Appointments/deliverystate/{id}?deliveryState={state}", "");
+                 $"/deliveries/deliverystate/{id}?deliveryState={state}", "");
 
             response.EnsureSuccessStatusCode();
 
@@ -83,6 +83,17 @@ namespace DDari.Services
             return dms;
 
         }
+        public async Task<List<Delivery>> ListDeliveryPerCust(long id)
+        {
+            List<Delivery> dms = null;
+            HttpResponseMessage response = await client.GetAsync($"/deliveries/deliveriescust/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                dms = response.Content.ReadAsAsync<IEnumerable<Delivery>>().Result.ToList();
+            }
+            return dms;
+
+        }
         public async Task<List<Delivery>> ListDeliveries()
         {
             List<Delivery> dms = null;
@@ -100,7 +111,7 @@ namespace DDari.Services
             HttpResponseMessage response = await client.GetAsync($"/deliveries/cancel/{id}");
             if (response.IsSuccessStatusCode)
             {
-             return true;
+                return true;
             }
             return false;
 
@@ -115,7 +126,7 @@ namespace DDari.Services
             return false;
 
         }
-        public async Task<bool> LocateAsync(int id, double latitude, string longitude)
+        public async Task<bool> LocateAsync(int id, double latitude, double longitude)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
                  $"/deliveries/locate/{id}?latitude={latitude}&longitude={longitude}", "");
@@ -134,6 +145,26 @@ namespace DDari.Services
             }
         }
 
+        public async Task<List<Orders>> FindAllOrds()
+        {
+            List<Orders> dms = null;
+            HttpResponseMessage response = await client.GetAsync($"/orders/allorders");
+            if (response.IsSuccessStatusCode)
+            {
+                dms = response.Content.ReadAsAsync<IEnumerable<Orders>>().Result.ToList();
+            }
+            return dms;
 
-    }
+        }
+
+        public async Task<dynamic> getRoute(string address)
+        {
+        
+
+          HttpResponseMessage response = await client.GetAsync($"https://geocoder.ls.hereapi.com/6.2/geocode.json?searchtext="+address+"&gen=9&apiKey=CxxCHigH6e2itFdUuYEJdiNCKYOFT2wwtIF2QxxIjiw");
+            return response.Content.ReadAsAsync<dynamic>().Result;
+        }
+
+
+}
 }

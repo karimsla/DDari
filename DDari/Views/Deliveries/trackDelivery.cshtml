@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DDari.Models.Delivery>
+
+@{
+    ViewBag.Title = "trackDelivery";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+
+
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit">
+            <h4>My Deliveries</h4>
+        </div>
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+               
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="singles-dashboard-list">
+
+                        <div class="sd-list-right">
+                            <h4 class="listing_dashboard_title" style="color:blue;">@item.deliveryState</h4>
+                            <div class="user_dashboard_listed">
+                                <b>Delivery date :</b> @item.date
+                            </div>
+                    
+           
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<body style="border: 0; margin: 0;">
+    <div id="map" style="width: 100%; height: 530px;"></div>
+</body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+
+
+        var map = L.mapquest.map('map', {
+            center: [36, 10],
+            layers: L.mapquest.tileLayer('map'),
+            zoom: 5
+        });
+        $.get("/Deliveries/trackjson/", function (data, status) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                console.log(data);
+                if (data[i].dmLat != 0) {
+    L.marker([data[i].Latitude, data[i].Longitude], {
+                    icon: L.mapquest.icons.marker({
+                        primaryColor: '#22407F',
+                        secondaryColor: '#3B5998',
+                        shadow: true,
+                        size: 'md',
+                        symbol: 'D'
+                    }),
+                    draggable: false
+                }).bindPopup("Your address : " + data[i].Address).addTo(map);
+
+                    L.marker([data[i].dmLat, data[i].dmLon], {
+                        icon: L.mapquest.icons.marker({
+                            primaryColor: '#d91414',
+                            secondaryColor: 'd91414',
+                            shadow: true,
+                            size: 'md',
+                            symbol: 'P'
+                        }),
+                        draggable: false
+                    }).bindPopup("Delivery man position").addTo(map);
+                }
+            }
+        });
+
+        map.addControl(L.mapquest.control());
+
+    }
+</script>

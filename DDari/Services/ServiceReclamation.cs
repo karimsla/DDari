@@ -25,6 +25,11 @@ namespace DDari.Services
 
         public async Task<Uri> Create(Reclamation reclamation, long userId)
         {
+            ServiceMessages serviceMessages = new ServiceMessages();
+            if(serviceMessages.isSpam(reclamation.explication)|| serviceMessages.profanityDetection(reclamation.explication))
+            {
+                return null;
+            }
             HttpResponseMessage response = await client.PostAsJsonAsync(
                  $"/reclamation/add/{userId}", reclamation);
             response.EnsureSuccessStatusCode();
@@ -107,12 +112,12 @@ namespace DDari.Services
             IEnumerable<Reclamation> reclamations = null;
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri("/reclamation/search"),
-                Method = HttpMethod.Get,
+                RequestUri = new Uri(client.BaseAddress+"reclamation/filter"),
+                Method = HttpMethod.Post,
             };
             request.Content = new StringContent(filter, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.SendAsync(request);
+            HttpResponseMessage response = await client.SendAsync(request) ;
             if (response.IsSuccessStatusCode)
             {
                 reclamations = await response.Content.ReadAsAsync<IEnumerable<Reclamation>>();

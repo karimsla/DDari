@@ -3,57 +3,61 @@
 @{
     ViewBag.Title = "Index";
 }
+<center>
+    <h2>All Contract For Rent Properties</h2>
 
-<h2>All Contract For Rent Properties</h2>
+    <p>
+        <div class="add_button ml-10">
+            @Html.ActionLink("Add New", "Create", null, new { @class = "btn_1" })
+        </div>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_user)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_property)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.details)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    <div class="add_button ml-10">
-        @Html.ActionLink("Add New", "Create", null, new { @class = "btn_1" })
-    </div>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id_user)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_property)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateDebut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateFin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.details)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_user)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_property)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateDebut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.details)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id_user = item.id_user, id_property = item.id_property }) |
+                    @Html.ActionLink("Details", "Details", new { id_user = item.id_user, id_property = item.id_property })|
+                    @Html.ActionLink("Delete", "Delete", new { id_user = item.id_user, id_property = item.id_property }) |
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_user)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_property)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateDebut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.details)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id_user }, new { id = item.id_property }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id_user }, new { id = item.id_property }) |
-            @Html.ActionLink("Delete", "Delete", new { id_user = item.id_user, id_property = item.id_property })
-        </td>
-    </tr>
-}
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+    @Html.ActionLink("Back to the Menu", "Index", "StaForProperty")
+</center>

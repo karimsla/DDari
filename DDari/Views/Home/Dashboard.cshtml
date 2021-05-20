@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="main_content_iner " style="min-height:0px">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="dashboard_header mb_50">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="dashboard_header_title">
+                                <h3> Default Dashboard</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="dashboard_breadcam text-right">
+                                <p><a href="index.html">Dashboard</a> <i class="fas fa-caret-right"></i> Chart Box</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3 widget-chart">
+                    <div class="icon-wrapper rounded-circle">
+                        <div class="icon-wrapper-bg bg-primary"></div>
+                        <i class="ti-settings text-primary"></i>
+                    </div>
+                    <div class="widget-numbers"><span>@ViewBag.nbclaims</span></div>
+                    <div class="widget-subheading">Total Claims</div>
+                    <div class="widget-description text-success">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3 widget-chart">
+                    <div class="icon-wrapper rounded-circle">
+                        <div class="icon-wrapper-bg bg-danger"></div>
+                        <i class="ti-settings text-danger"></i>
+                    </div>
+                    <div class="widget-numbers"><span> @ViewBag.nbhigh </span></div>
+                    <div class="widget-subheading">High priority Claims</div>
+                    <div class="widget-description text-primary">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3 widget-chart">
+                    <div class="icon-wrapper rounded-circle">
+                        <div class="icon-wrapper-bg bg-info"></div>
+                        <i class="ti-settings text-info"></i>
+                    </div>
+                    <div class="widget-numbers"><span>@ViewBag.treated</span></div>
+                    <div class="widget-subheading">Claim Treated</div>
+                    <div class="widget-description text-info">
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+@Html.Action("chart")
+</div>

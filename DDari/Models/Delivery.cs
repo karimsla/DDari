@@ -15,5 +15,7 @@ namespace DDari.Models
         public double longitude { get; set; }
         public long? deliverymanId { get; set; }
         public string dateJson { get; set; }
+        public int orderId { get; set; }
+        public DeliveryMan deliveryMan { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using DDari.ViewModels;
 
 namespace DDari.Controllers
 {
@@ -43,47 +44,166 @@ namespace DDari.Controllers
         }
 
         // GET: ContractBuy/Details/5
-        public ActionResult Details(int id)
+
+        public ActionResult Details(int id_user, int id_property)
         {
-            return View();
+
+            Contract_buy contract_Buy = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/Contract_Buy/");
+                //HTTP GET
+                var responseTask = client.GetAsync("getOne/" + id_user + "/" + id_property);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<Contract_buy>();
+                    readTask.Wait();
+
+                    contract_Buy = readTask.Result;
+                }
+            }
+            return View(contract_Buy);
         }
+
+
+        public ActionResult PrintAll(int id_user,int id_property)
+        {
+            return new Rotativa.ActionAsPdf("Details", new { id_user = id_user, id_property= id_property });
+        }
+
 
         // GET: ContractBuy/Create
         public ActionResult Create()
         {
-            return View();
+            // For users 
+            IEnumerable<long> users = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/");
+                //HTTP GET
+                var responseTask = client.GetAsync("/Contract_Buy/getIdUser");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IEnumerable<long>>();
+                    readTask.Wait();
+
+                    users = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+                    //log response status here..
+
+                    users = Enumerable.Empty<long>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
+            }
+
+            // FOR properties 
+
+            IEnumerable<int> properties = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/");
+                //HTTP GET
+                var responseTask = client.GetAsync("/Contract_Buy/getIdPropertyBuy");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IEnumerable<int>>();
+                    readTask.Wait();
+
+                    properties = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+                    //log response status here..
+
+                    properties = Enumerable.Empty<int>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
+            }
+            var model = new CreateContractViewModel
+            {
+                Users = users,
+                Properties = properties
+            };
+
+
+            return View(model);
         }
 
         // POST: ContractBuy/Create
         [HttpPost]
         public ActionResult Create(Contract_buy cb)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
-            client.PostAsJsonAsync<Contract_buy>("/Contract_Buy/Add", cb).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/");
+                //HTTP GET
+                var responseTask = client.PostAsJsonAsync<Contract_buy>("/Contract_Buy/Add", cb).Result;
+            }
             return RedirectToAction("Index");
+
         }
 
-        // GET: ContractBuy/Edit/5
-        public ActionResult Edit(int id)
+
+        public ActionResult Edit(int id_user, int id_property)
         {
-            return View();
+            Contract_buy contract_Buy = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8081/Contract_Buy/");
+                //HTTP GET
+                var responseTask = client.GetAsync("getOne/" + id_user + "/" + id_property);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<Contract_buy>();
+                    readTask.Wait();
+
+                    contract_Buy = readTask.Result;
+                }
+            }
+            return View(contract_Buy);
         }
 
-        // POST: ContractBuy/Edit/5
+
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Contract_buy contract_Buy)
         {
-            try
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri("http://localhost:8081/Contract_Buy/");
 
-                return RedirectToAction("Index");
+                //HTTP POST
+                var putTask = client.PutAsJsonAsync<Contract_buy>("put", contract_Buy);
+                putTask.Wait();
+
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(contract_Buy);
         }
         public async System.Threading.Tasks.Task<ActionResult> Delete(int id_user,int id_property)
         {

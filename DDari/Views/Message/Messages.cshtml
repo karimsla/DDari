@@ -1,8 +1,156 @@
-﻿
+﻿@model IEnumerable<DDari.Models.Message>
 @{
     ViewBag.Title = "Messages";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
 }
+<link href="~/Content/Back/css/style.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="~/Content/css/styles.css" rel="stylesheet">
 
-<h2>Messages</h2>
+<!-- Custom Color Option -->
+<link href="~/Content/css/colors.css" rel="stylesheet">
 
+<link href="~/Scripts/vendors/datepicker/date-picker.css" rel="stylesheet" />
+
+<div class="col-lg-9 col-md-12">
+
+
+
+
+    <div class="row">
+
+        <div class="col-lg-10 col-md-12">
+            <div class="dashboard-wraper">
+
+
+                <div class="row">
+
+                    <div class="container-fluid p-0">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="messages_box_area">
+                                    <div class="messages_list">
+                                        <div class="white_box ">
+                                            <div class="white_box_tittle list_header">
+                                                <h4>Chat List</h4>
+                                            </div>
+                                            <div class="serach_field_2">
+                                                <div class="search_inner">
+
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                @foreach (var item in (IEnumerable<DDari.Models.Utilisateur>)ViewBag.contacts)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("Messages","Message",new { sentTo=item.utilisateurId})">
+                                                            <div class="message_pre_left">
+                                                                <div class="message_preview_thumb">
+                                                                    <img src="~/Content/Back/img/messages/1.png" alt="">
+                                                                </div>
+                                                                <div class="messges_info">
+                                                                    <h4>@item.firstName  @item.lastName</h4>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="messge_time">
+
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="messages_chat mb_30">
+                                        @if (Model != null)
+                                         {
+
+                                        <div class="white_box " id="white_box" style="overflow-y: auto; height:500px;">
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.sender != 1)
+                                                {
+
+
+                                                    <div class="single_message_chat">
+                                                        <div class="message_pre_left">
+                                                            <div class="message_preview_thumb">
+                                                                <img src="~/Content/Back/img/messages/1.png" alt="">
+                                                            </div>
+                                                            <div class="messges_info">
+                                                                <h4>@ViewBag.fullname</h4>
+                                                                <p>@item.dateTime</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="message_content_view red_border">
+                                                            <p>
+                                                                @item.content
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="single_message_chat sender_message">
+                                                        <div class="message_pre_left">
+                                                            <div class="messges_info">
+                                                                <h4></h4>
+                                                                <p>@item.dateTime</p>
+                                                            </div>
+                                                            <div class="message_preview_thumb">
+                                                                <img src="~/Content/Back/img/messages/1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="message_content_view">
+                                                            <p>
+                                                                @item.content
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        }
+
+
+
+                                        </div> 
+                                     <span style="color:red">@ViewBag.error</span>
+                                        <form method="post" action="@Url.Action("sendMessage","Message")">
+                                            <div class="message_send_field row">
+                                                <input hidden="hidden" name="to" value="@ViewBag.sentTo" />
+                                                <input hidden="hidden" name="by" value="1" />
+                                                <input type="text" name="content" placeholder="Write your message"  autocomplete="off" >
+                                                <button class="btn_1" type="submit">Send</button>
+
+                                            </div>
+                                        </form>
+                                        }
+
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+
+<script>
+    window.onload = function () {
+        var objDiv = document.getElementById("white_box");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+</script>

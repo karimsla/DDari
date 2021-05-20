@@ -3,86 +3,217 @@
 @{
     ViewBag.Title = "Index";
 }
+<center>
 
-<h2>Properties For BUY </h2>
+    <h2>Properties For BUY </h2>
 
-<div class="add_button ml-10">
-    @Html.ActionLink("Add New", "Create",null,new { @class = "form-control" })
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id_prop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nbrooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.surface)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.superficie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.adress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th></th>
-    </tr>
+    <h4>Multi criteria search</h4>
 
+    <div class="row">
+        <form action="@Url.Action("searchMulti","Buy")" method="post">
+            <div class="form-row">
+                <div class="search_field">
+                    <input type="text" name="filter" placeholder="filter..." class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+        </form>
+    </div>
+
+
+
+
+
+
+    <div class="form-control">
+        <table>
+            <td> @Html.ActionLink("Add New", "Create") ||</td>
+            <td>@Html.ActionLink("Tri", "Tri")</td>
+        </table>
+    </div>
+    @{ var i = 0;
+        var ch2 = "";}
     @foreach (var item in Model)
     {
+        i++;
+        ch2 = "../../assets/img/p-" + i.ToString() + ".jpg";
+
+        <div class="col-lg-6 col-md-12">
+            <div class="property-listing property-1">
+
+                <div class="listing-img-wrapper">
+                    <a href="single-property-2.html">
+                        <img src=@ch2 class="img-fluid mx-auto" alt="Image not available">
+                    </a>
+                </div>
+
+                <div class="listing-content">
+
+                    <div class="listing-detail-wrapper-box">
+                        <div class="listing-detail-wrapper">
+                            <div class="listing-short-detail">
+                                <h4 class="listing-name"><a href="single-property-2.html">@Html.DisplayFor(modelItem => item.adress)</a></h4>
+                                <div class="fr-can-rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="reviews_text">(42 Reviews)</span>
+                                </div>
+                                <span class="prt-types sale">For buy</span>
+                            </div>
+                            <div class="list-price">
+                                <h6 class="listing-card-info-price"> €@Html.DisplayFor(modelItem => item.price)</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/assets/img/bed.svg" width="13" alt=""></div>@Html.DisplayFor(modelItem => item.nbrooms)
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/assets/img/move.svg" width="13" alt=""></div>@Html.DisplayFor(modelItem => item.surface) m²
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-footer-wrapper">
+                        <div class="listing-locate">
+                            <span class="listing-location"><i class="ti-location-pin"></i>@Html.DisplayFor(modelItem => item.type), @Html.DisplayFor(modelItem => item.city)</span>
+                        </div>
+                        <div class="listing-detail-btn">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+</center>
+@*
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_prop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nbrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.surface)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.superficie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.state)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.zipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nbrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.surface)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.superficie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th></th>
         </tr>
 
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nbrooms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.surface)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.superficie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
+                </td>
+
+            </tr>
+
+        }
+    </table>
+*@
+
+
+
+
+
+
+
+
+
+<center>
+
+    <form method="post">
+        <h5>
+            Put your state here : </h5><input type="text" value="" id="get" name="get" class="form-control" runat="server" />
+
+            <a href="#" id="btnBuy" class="form-control">Estimate the m²</a>
+
+            <input type="text" id="set" value=@ViewBag.res name="set" class="form-control" />
+    </form>
+    <br />
+    <br />
+    @Html.ActionLink("Back to the Menu", "Index", "StaForProperty")
+
+</center>
+@section scripts {
+
+    <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+
+
+    <script type="text/javascript">
+                $("#btnBuy").on("click", function (e) {
+                    console.log("heeeyyyy");
+            e.preventDefault();
+            let txt = $("#get").val();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Estim", "Buy")",
+                data: { text: txt },
+                success: function (response) {
+                    $("#set").val(response.txt)
+                }
+            })
+        })
+    </script>
+}

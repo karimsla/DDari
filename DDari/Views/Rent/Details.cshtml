@@ -1,0 +1,193 @@
+﻿@model DDari.Models.Rent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="featured_slick_gallery gray">
+    <div class="featured_slick_gallery-slide">
+        <div class="featured_slick_padd"><a href="~/assets/img/p-1.jpg" class="mfp-gallery"><img src="~/assets/img/p-1.jpg" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="~/assets/img/p-2.jpg" class="mfp-gallery"><img src="~/assets/img/p-2.jpg" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="~/assets/img/p-3.jpg" class="mfp-gallery"><img src="~/assets/img/p-3.jpg" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="~/assets/img/p-4.jpg" class="mfp-gallery"><img src="~/assets/img/p-4.jpg" class="img-fluid mx-auto" alt=""></a></div>
+    </div>
+    <a href="JavaScript:Void(0);" class="btn-view-pic top">View photos</a>
+</div>
+<section class="gray-simple rtl p-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-md-12">
+
+                <div class="property_block_wrap style-3">
+
+                    <div class="pbw-flex-1">
+                        <div class="pbw-flex-thumb">
+                            <img src="~/assets/img/agency-1.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="pbw-flex">
+                        <div class="prt-detail-title-desc">
+                            <span class="prt-types sale">For Rent</span>
+                            <h3>Tunisie, @Html.DisplayFor(model => model.state)</h3>
+                            <span><i class="lni-map-marker"></i> @Html.DisplayNameFor(model => model.adress),@Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.zipCode)</span>
+                            <h3 class="prt-price-fix">Price Per Day : €@Html.DisplayFor(model => model.pricePerDay)<sub></sub></h3>
+                            <h3 class="prt-price-fix">Price Per Month : €@Html.DisplayFor(model => model.pricePerMonth)<sub></sub></h3>
+                            <div class="list-fx-features">
+                                <div class="listing-card-info-icon">
+                                    <div class="inc-fleat-icon"><img src="~/assets/img/bed.svg" width="13" alt=""></div>@Html.DisplayFor(model => model.nbrooms) rooms
+                                </div>
+
+                                <div class="listing-card-info-icon">
+                                    <div class="inc-fleat-icon"><img src="~/assets/img/move.svg" width="13" alt=""></div>@Html.DisplayFor(model => model.surface) m²
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="property_block_wrap style-2">
+
+    <div class="property_block_wrap_header">
+        <a data-bs-toggle="collapse" data-parent="#features" data-bs-target="#clOne" aria-controls="clOne" href="javascript:void(0);" aria-expanded="false"><h4 class="property_block_title">Detail & Features</h4></a>
+    </div>
+    <div id="clOne" class="panel-collapse collapse show" aria-labelledby="clOne">
+        <div class="block-body">
+            <ul class="deatil_features">
+                <li><strong>Bedrooms:</strong>@Html.DisplayFor(model => model.nbrooms)</li>
+                <li><strong>Property Type:</strong>@Html.DisplayFor(model => model.type)</li>
+                <li><strong>Status:</strong>Active</li>
+                <li><strong>Cooling:</strong>Central A/C</li>
+                <li><strong>Heating Type:</strong>Forced Air</li>
+                <li><strong>Fireplace:</strong>Yes</li>
+                <li><strong>Free WiFi:</strong>Yes</li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+@*
+    <center>
+        <h2>Details</h2>
+
+        <div>
+            <h4>Rent</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.id_prop)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.id_prop)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.nbrooms)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nbrooms)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.surface)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.surface)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.superficie)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.superficie)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.loyer)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.loyer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.prix)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.prix)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.adress)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.adress)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.state)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.state)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.city)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.city)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.zipCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.zipCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.pricePerMonth)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.pricePerMonth)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.pricePerDay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.pricePerDay)
+                </dd>
+
+            </dl>
+
+        </div>
+    *@
+    <center>
+    <img src="@ViewBag.QRCode" style="width:200px;height:200px;" />
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.id_prop }) |
+            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Print And Download", "PrintAll", new { id = Model.id_prop }, new { @class = "form-control" })
+        </p>
+    </center>

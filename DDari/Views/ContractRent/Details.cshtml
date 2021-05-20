@@ -1,0 +1,68 @@
+﻿@model DDari.Models.Contract_rent
+
+@{
+    ViewBag.Title = "Details";
+}
+<center>
+    <h2>Details</h2>
+
+    <div>
+        <h4>Contract_rent</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.id_user)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.id_user)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.id_property)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.id_property)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.dateDebut)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.dateDebut)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.dateFin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.dateFin)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.details)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.details)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.rented)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.rented)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id_user = Model.id_user, id_property = Model.id_property }) |
+        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Print And Download", "PrintAll", new { id_user = Model.id_user, id_property = Model.id_property }, new { @class = "form-control" })
+    </p>
+</center>

@@ -14,6 +14,29 @@
 
     <!-- Custom Color Option -->
     <link href="~/Content/css/colors.css" rel="stylesheet">
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+
+    <script type="text/javascript">
+        window.onload = function () {
+            L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+
+            var map = L.mapquest.map('map', {
+                center: [40.7128, -74.0059],
+                layers: L.mapquest.tileLayer('map'),
+                zoom: 13
+            });
+
+            L.mapquest.directions().route({
+                start: '350 5th Ave, New York, NY 10118',
+                end: 'One Liberty Plaza, New York, NY 10006'
+            });
+
+            map.addControl(L.mapquest.control());
+
+        }
+    </script>
 
 </head>
 
@@ -156,8 +179,8 @@
                                 }
                                 else
                                 {
-                                    @Html.ActionLink("Profile"+ role, "Edit", new { id = user.utilisateurId })
-                                   // @Html.ActionLink("profile", "Edit","User", new { id = user.utilisateurId })
+                                    @Html.ActionLink("Profile" + role, "Edit", new { id = user.utilisateurId })
+                                    // @Html.ActionLink("profile", "Edit","User", new { id = user.utilisateurId })
                                 }
                             </li>
                         </ul>
@@ -301,42 +324,7 @@
                         <h4 class="modal-header-title">Log In</h4>
                         <div class="login-form">
 
-                            @using (Html.BeginForm("Login", "User"))
-                            {
-                                @model DDari.Models.Utilisateur
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @*  <label>User Name</label>
-                <div class="input-with-icon">
-                    <input type="text" class="form-control" placeholder="Username">
-                    <i class="ti-user"></i>
-                </div>*@
-                                    @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label></label>
-                                    @* <div class="input-with-icon">
-                    <input type="password" class="form-control" placeholder="*******">
-                    <i class="ti-unlock"></i>
-                </div>*@
-                                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Login</button>
-                                </div>
-
-                            }
+                         
                         </div>
 
                         <div class="modal-divider"><span>Or login via</span></div>
@@ -400,18 +388,13 @@
     <script src="~/Scripts/js/slider-bg.js"></script>
     <script src="~/Scripts/js/lightbox.js"></script>
     <script src="~/Scripts/js/imagesloaded.js"></script>
-
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/19945649.js"></script>
     <script src="~/Scripts/js/custom.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
 
-    <script>
-        $(document).ready(function () {
-            console.log("@((Request.Url.PathAndQuery == "/Home/Index" || Request.Url.PathAndQuery == "/Home" || Request.Url.PathAndQuery == "/" || Request.Url.PathAndQuery=="")? "header header-transparent change-logo":"header header-light head-shadow")")
-        })
-
-    </script>
+   
 
 </body>
 </html>

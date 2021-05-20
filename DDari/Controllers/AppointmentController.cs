@@ -22,17 +22,37 @@ namespace DDari.Controllers
         public ActionResult Index()
         {
   
-            var task = Task.Run(async () => await appointmentService.ownerAppAsync(4));
-            
-            return View(task.Result);
+            var task = Task.Run(async () => await appointmentService.ownerAppAsync(8));
+            List<Appointment> ls= task.Result;
+            foreach (Appointment app in ls)
+            {
+                var t1 = Task.Run(async () => await appointmentService.getCustAsync(app.customerId));
+                Customer c = t1.Result;
+                app.custname = c.firstName + " " + c.lastName;
+            }
+            return View(ls);
         }
-
-        // GET: Appointment
-        public ActionResult requested()
+        public ActionResult request()
+        {
+            Appointment app = new Appointment();
+            app.customerId = 8;
+            app.ownerId = 9;
+            var task = Task.Run(async () => await appointmentService.RequestAppAsync(app));
+            task.Wait();
+            return RedirectToAction("Index");
+        }
+            // GET: Appointment
+            public ActionResult requested()
         {
 
-            var task = Task.Run(async () => await appointmentService.CustAppAsync(4));
-
+            var task = Task.Run(async () => await appointmentService.CustAppAsync(8));
+            List<Appointment> ls = task.Result;
+            foreach (Appointment app in ls)
+            {
+                var t1 = Task.Run(async () => await appointmentService.getCustAsync(app.ownerId));
+                Customer c = t1.Result;
+                app.custname = c.firstName + " " + c.lastName;
+            }
             return PartialView(task.Result);
         }
         // GET: Appointment/Details/5

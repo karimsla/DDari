@@ -49,6 +49,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cloudmersive.APIClient.NET.NLP, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cloudmersive.APIClient.NET.NLP.4.1.0\lib\net452\Cloudmersive.APIClient.NET.NLP.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonSubTypes, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonSubTypes.1.2.0\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -84,6 +96,12 @@
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -91,8 +109,19 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="ProfanityFilter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Profanity.Detector.0.1.8\lib\netstandard2.0\ProfanityFilter.dll</HintPath>
+    </Reference>
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -222,6 +251,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -239,6 +269,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
+    <Compile Include="Controllers\StaForPropertyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\SimulationController.cs" />
@@ -258,6 +289,7 @@
     <Compile Include="Models\DeliveryMan.cs" />
     <Compile Include="Models\ForgotPasswordRequest.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\PropertyType.cs" />
@@ -271,14 +303,144 @@
     <Compile Include="Models\Subscribe.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\chatHub.cs" />
     <Compile Include="Services\ServiceAppointment.cs" />
+    <Compile Include="Services\ServiceBuy.cs" />
     <Compile Include="Services\ServiceDelivery.cs" />
     <Compile Include="Services\ServiceMessages.cs" />
     <Compile Include="Services\ServiceReclamation.cs" />
+    <Compile Include="Services\ServiceRent.cs" />
+    <Compile Include="Services\ServiceSimulation.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utils\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Utils\HttpClientBuilder.cs" />
     <Compile Include="Services\ServiceSubscription.cs" />
+    <Compile Include="ViewModels\CreateContractRentViewModel.cs" />
+    <Compile Include="ViewModels\CreateContractViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\colors.css" />
+    <Content Include="assets\css\fonts\fa-brands-400.svg" />
+    <Content Include="assets\css\fonts\fa-regular-400.svg" />
+    <Content Include="assets\css\fonts\fa-solid-900.svg" />
+    <Content Include="assets\css\fonts\LineIcons.svg" />
+    <Content Include="assets\css\fonts\themify.svg" />
+    <Content Include="assets\css\img\close.png" />
+    <Content Include="assets\css\img\lightbox-next.png" />
+    <Content Include="assets\css\img\lightbox-prev.png" />
+    <Content Include="assets\css\img\loading.gif" />
+    <Content Include="assets\css\plugins\animation.css" />
+    <Content Include="assets\css\plugins\css\bootstrap.min.css" />
+    <Content Include="assets\css\plugins\dropzone.css" />
+    <Content Include="assets\css\plugins\font-awesome.css" />
+    <Content Include="assets\css\plugins\fonts\slick.svg" />
+    <Content Include="assets\css\plugins\icofont.css" />
+    <Content Include="assets\css\plugins\ion.rangeSlider.min.css" />
+    <Content Include="assets\css\plugins\light-box.css" />
+    <Content Include="assets\css\plugins\line-icon.css" />
+    <Content Include="assets\css\plugins\magnific-popup.css" />
+    <Content Include="assets\css\plugins\select2.css" />
+    <Content Include="assets\css\plugins\slick-theme.css" />
+    <Content Include="assets\css\plugins\slick.css" />
+    <Content Include="assets\css\plugins\themify.css" />
+    <Content Include="assets\css\styles.css" />
+    <Content Include="assets\img\404.png" />
+    <Content Include="assets\img\ag-1.png" />
+    <Content Include="assets\img\ag-2.png" />
+    <Content Include="assets\img\ag-3.png" />
+    <Content Include="assets\img\ag-4.png" />
+    <Content Include="assets\img\ag-5.png" />
+    <Content Include="assets\img\ag-6.png" />
+    <Content Include="assets\img\ag-7.png" />
+    <Content Include="assets\img\ag-8.png" />
+    <Content Include="assets\img\agency-1.png" />
+    <Content Include="assets\img\app.png" />
+    <Content Include="assets\img\arrow.png" />
+    <Content Include="assets\img\banner-1.jpg" />
+    <Content Include="assets\img\banner-2.jpg" />
+    <Content Include="assets\img\banner-3.jpg" />
+    <Content Include="assets\img\banner-6.png" />
+    <Content Include="assets\img\banner.svg" />
+    <Content Include="assets\img\bathtub.svg" />
+    <Content Include="assets\img\bed.svg" />
+    <Content Include="assets\img\c-1.png" />
+    <Content Include="assets\img\c-2.png" />
+    <Content Include="assets\img\c-3.png" />
+    <Content Include="assets\img\c-4.png" />
+    <Content Include="assets\img\c-5.png" />
+    <Content Include="assets\img\c-6.png" />
+    <Content Include="assets\img\dream.jpg" />
+    <Content Include="assets\img\edu.png" />
+    <Content Include="assets\img\floor.jpg" />
+    <Content Include="assets\img\food.png" />
+    <Content Include="assets\img\home-2.png" />
+    <Content Include="assets\img\logo-light.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\move.svg" />
+    <Content Include="assets\img\off.svg" />
+    <Content Include="assets\img\p-1.jpg" />
+    <Content Include="assets\img\p-10.jpg" />
+    <Content Include="assets\img\p-11.jpg" />
+    <Content Include="assets\img\p-12.jpg" />
+    <Content Include="assets\img\p-13.jpg" />
+    <Content Include="assets\img\p-14.jpg" />
+    <Content Include="assets\img\p-15.jpg" />
+    <Content Include="assets\img\p-16.jpg" />
+    <Content Include="assets\img\p-17.jpg" />
+    <Content Include="assets\img\p-2.jpg" />
+    <Content Include="assets\img\p-25.jpg" />
+    <Content Include="assets\img\p-3.jpg" />
+    <Content Include="assets\img\p-4.jpg" />
+    <Content Include="assets\img\p-5.jpg" />
+    <Content Include="assets\img\p-6.jpg" />
+    <Content Include="assets\img\p-7.jpg" />
+    <Content Include="assets\img\p-8.jpg" />
+    <Content Include="assets\img\p-9.jpg" />
+    <Content Include="assets\img\pattern.png" />
+    <Content Include="assets\img\pin.svg" />
+    <Content Include="assets\img\pl-6.jpg" />
+    <Content Include="assets\img\sb.png" />
+    <Content Include="assets\img\submit.svg" />
+    <Content Include="assets\img\team-1.jpg" />
+    <Content Include="assets\img\team-2.jpg" />
+    <Content Include="assets\img\team-3.jpg" />
+    <Content Include="assets\img\team-4.jpg" />
+    <Content Include="assets\img\team-5.jpg" />
+    <Content Include="assets\img\team-6.jpg" />
+    <Content Include="assets\img\tour-1.jpg" />
+    <Content Include="assets\img\tour-2.jpg" />
+    <Content Include="assets\img\tour-3.jpg" />
+    <Content Include="assets\img\tour-4.jpg" />
+    <Content Include="assets\img\tour-5.jpg" />
+    <Content Include="assets\img\user-1.jpg" />
+    <Content Include="assets\img\user-2.jpg" />
+    <Content Include="assets\img\user-3.jpg" />
+    <Content Include="assets\img\user-4.jpg" />
+    <Content Include="assets\img\user-5.jpg" />
+    <Content Include="assets\img\user-6.jpg" />
+    <Content Include="assets\img\user-7.jpg" />
+    <Content Include="assets\img\user-8.jpg" />
+    <Content Include="assets\img\user-9.jpg" />
+    <Content Include="assets\img\user-dark.svg" />
+    <Content Include="assets\img\user-light.svg" />
+    <Content Include="assets\img\user.svg" />
+    <Content Include="assets\img\vec-2.png" />
+    <Content Include="assets\img\veryfy.svg" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\custom.js" />
+    <Content Include="assets\js\dropzone.js" />
+    <Content Include="assets\js\imagesloaded.js" />
+    <Content Include="assets\js\jquery.magnific-popup.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\lightbox.js" />
+    <Content Include="assets\js\map.js" />
+    <Content Include="assets\js\map_infobox.js" />
+    <Content Include="assets\js\markerclusterer.js" />
+    <Content Include="assets\js\popper.min.js" />
+    <Content Include="assets\js\rangeslider.js" />
+    <Content Include="assets\js\select2.min.js" />
+    <Content Include="assets\js\slick.js" />
+    <Content Include="assets\js\slider-bg.js" />
     <Content Include="Content\Back\css\bootstrap.min.css" />
     <Content Include="Content\Back\css\metisMenu.css" />
     <Content Include="Content\Back\css\style.css" />
@@ -577,6 +739,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -652,12 +818,44 @@
     <Content Include="Content\Back\vendors\themefy_icon\fonts\themify.eot" />
     <Content Include="Content\Back\vendors\themefy_icon\fonts\themify.ttf" />
     <Content Include="Content\Back\vendors\themefy_icon\fonts\themify.woff" />
+    <Content Include="Content\model.zip" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="assets\css\fonts\fa-brands-400-1.eot" />
+    <Content Include="assets\css\fonts\fa-brands-400.eot" />
+    <Content Include="assets\css\fonts\fa-brands-400.ttf" />
+    <Content Include="assets\css\fonts\fa-brands-400.woff" />
+    <Content Include="assets\css\fonts\fa-brands-400.woff2" />
+    <Content Include="assets\css\fonts\fa-regular-400-1.eot" />
+    <Content Include="assets\css\fonts\fa-regular-400.eot" />
+    <Content Include="assets\css\fonts\fa-regular-400.ttf" />
+    <Content Include="assets\css\fonts\fa-regular-400.woff" />
+    <Content Include="assets\css\fonts\fa-regular-400.woff2" />
+    <Content Include="assets\css\fonts\fa-solid-900-1.eot" />
+    <Content Include="assets\css\fonts\fa-solid-900.eot" />
+    <Content Include="assets\css\fonts\fa-solid-900.ttf" />
+    <Content Include="assets\css\fonts\fa-solid-900.woff" />
+    <Content Include="assets\css\fonts\fa-solid-900.woff2" />
+    <Content Include="assets\css\fonts\icofont.woff" />
+    <Content Include="assets\css\fonts\icofont.woff2" />
+    <Content Include="assets\css\fonts\LineIcons.eot" />
+    <Content Include="assets\css\fonts\LineIcons.ttf" />
+    <Content Include="assets\css\fonts\LineIcons.woff" />
+    <Content Include="assets\css\fonts\themify-1.eot" />
+    <Content Include="assets\css\fonts\themify.eot" />
+    <Content Include="assets\css\fonts\themify.ttf" />
+    <Content Include="assets\css\fonts\themify.woff" />
+    <Content Include="assets\css\plugins\fonts\slick-1.eot" />
+    <Content Include="assets\css\plugins\fonts\slick.eot" />
+    <Content Include="assets\css\plugins\fonts\slick.ttf" />
+    <Content Include="assets\css\plugins\fonts\slick.woff" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -934,10 +1132,32 @@
     <Content Include="Views\ContractRent\Create.cshtml" />
     <Content Include="Views\Buy\Edit.cshtml" />
     <Content Include="Views\Reclamation\MyReclam.cshtml" />
+    <Content Include="Views\Simulation\Simul.cshtml" />
+    <Content Include="Views\Subscribe\Create.cshtml" />
+    <Content Include="Views\Subscribe\Index.cshtml" />
+    <Content Include="Views\Subscription\Create.cshtml" />
+    <Content Include="Views\Subscription\Edit.cshtml" />
+    <Content Include="Views\Subscription\Index.cshtml" />
+    <Content Include="Views\Shared\dashboardCustomer.cshtml" />
+    <Content Include="Views\Message\chat_bot.cshtml" />
+    <Content Include="Views\Message\Messages.cshtml" />
+    <Content Include="Views\Message\Chat.cshtml" />
+    <Content Include="Views\Appointment\requested.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\chart.cshtml" />
+    <Content Include="Views\Deliveries\deliveriesDM.cshtml" />
+    <Content Include="Views\Deliveries\trackDelivery.cshtml" />
+    <Content Include="Views\Buy\Details.cshtml" />
+    <Content Include="Views\ContractBuy\Details.cshtml" />
+    <Content Include="Views\ContractBuy\Edit.cshtml" />
+    <Content Include="Views\ContractRent\Details.cshtml" />
+    <Content Include="Views\ContractRent\Edit.cshtml" />
+    <Content Include="Views\Rent\Details.cshtml" />
+    <Content Include="Views\Rent\Edit.cshtml" />
+    <Content Include="Views\StaForProperty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

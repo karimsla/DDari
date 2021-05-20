@@ -91,6 +91,17 @@ namespace DDari.Services
             return false;
 
         }
+        public async Task<Customer> getCustAsync(int id)
+        {
+            Customer applist = null;
+            HttpResponseMessage response = await client.GetAsync(
+                 $"/UserCrud/getallUsers/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                applist = response.Content.ReadAsAsync<Customer>().Result;
+            }
+            return applist;
+        }
 
 
     }

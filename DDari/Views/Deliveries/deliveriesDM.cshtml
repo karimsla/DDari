@@ -1,0 +1,139 @@
+﻿@model IEnumerable<DDari.Models.Delivery>
+
+@{
+    ViewBag.Title = "deliveriesDM";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit">
+            <h4>My deliveries</h4>
+        </div>
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="singles-dashboard-list">
+
+                        <div class="sd-list-right">
+                            <h4 class="listing_dashboard_title" style="color:blue;">@item.deliveryState</h4>
+                            <div class="user_dashboard_listed">
+                                <b>Delivery date :</b> @item.date
+                            </div>
+                            <a href="#" data-bs-toggle="modal" data-id="@item.deliveryId" class="appoint" data-bs-target="#login" title="Edit"><i class="ti-pencil"></i></a>
+                            <a href="#" onclick="@{Session["currentd"] = item.deliveryId;} " class="appoint" title="Get Directions"><i class="ti-eye"></i></a>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+
+
+        </div>
+
+    </div>
+
+</div><div class="modal fade" id="login" tabindex="-1" aria-labelledby="registermodal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+        <div class="modal-content" id="registermodal">
+            <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+            <div class="modal-body">
+                <h4 class="modal-header-title">Change state</h4>
+                <div class="login-form">
+                    <form method="post" action="@Url.Action("updateDel")">
+                        <input name="id" id="appid" hidden="hidden" />
+
+                        <input type="radio" id="picked" name="state" value="1">
+                        <label for="picked">Picked</label><br>
+                        <input type="radio" id="delivering" name="state" value="2">
+                        <label for="delivering">Delivering</label><br>
+                        <input type="radio" id="delivered" name="state" value="3">
+                        <label for="delivered">Delivered</label><br>
+                        <input type="radio" id="notd" name="state" value="4">
+                        <label for="notd">Not Delivered (Problem encountered)</label><br>
+                        <div class="modal-divider"></div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Accept</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<body style="border: 0; margin: 0;">
+    <div id="map" style="width: 100%; height: 530px;"></div>
+</body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+
+
+        var map = L.mapquest.map('map', {
+            center: [36, 10],
+            layers: L.mapquest.tileLayer('map'),
+            zoom: 5
+        });
+        $.get("/Deliveries/trackdm/", function (data, status) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                console.log(data);
+                    L.marker([data[i].Latitude, data[i].Longitude], {
+                        icon: L.mapquest.icons.marker({
+                            primaryColor: '#22407F',
+                            secondaryColor: '#3B5998',
+                            shadow: true,
+                            size: 'md',
+                            symbol: 'D'
+                        }),
+                        draggable: false
+                    }).bindPopup("Destination : " + data[i].Address).addTo(map);
+
+                    L.marker([data[i].dmLat, data[i].dmLon], {
+                        icon: L.mapquest.icons.marker({
+                            primaryColor: '#d91414',
+                            secondaryColor: 'd91414',
+                            shadow: true,
+                            size: 'md',
+                            symbol: 'P'
+                        }),
+                        draggable: false
+                    }).bindPopup("You are here").addTo(map);
+                
+            }
+        });
+
+        map.addControl(L.mapquest.control());
+
+    }
+</script>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $(document).on("click", ".appoint", function () {
+        var appid = $(this).data('id');
+        $(".modal-body #appid").val(appid);
+        // As pointed out in comments,
+        // it is unnecessary to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+
+</script>

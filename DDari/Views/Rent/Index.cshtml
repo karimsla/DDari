@@ -4,90 +4,183 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Properties for RENT</h2>
+<center>
+    <h2>Properties For Rent </h2>
+    <h4>Multi criteria search</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "form-control" })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id_prop)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nbrooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.surface)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.superficie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.adress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pricePerMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pricePerDay)
-        </th>
-        <th></th>
-    </tr>
+    <div class="row">
+        <form action="@Url.Action("searchMulti","Rent")" method="post">
+            <div class="form-row">
+                <div class="search_field">
+                    <input type="text" name="filter" placeholder="filter..." class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+        </form>
+    </div>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.id_prop)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.type)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.nbrooms)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.surface)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.superficie)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.adress)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.state)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.zipCode)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.pricePerMonth)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.pricePerDay)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
-    </td>
-</tr>
-}
+    <div class="form-control">
+        <table>
+            <td> @Html.ActionLink("Add New", "Create") ||</td>
+            <td>@Html.ActionLink("Tri", "Tri")</td>
+        </table>
+    </div>
+    @{ var i = 0;
+        var ch2 = "";}
+    @foreach (var item in Model)
+    {
+        i++;
+        ch2 = "../../assets/img/p-" + i.ToString() + ".jpg";
 
-</table>
+        <div class="col-lg-6 col-md-12">
+            <div class="property-listing property-1">
+
+                <div class="listing-img-wrapper">
+                    <a href="single-property-2.html">
+                        <img src=@ch2 class="img-fluid mx-auto" alt="Image not available">
+                    </a>
+                </div>
+
+                <div class="listing-content">
+
+                    <div class="listing-detail-wrapper-box">
+                        <div class="listing-detail-wrapper">
+                            <div class="listing-short-detail">
+                                <h4 class="listing-name"><a href="single-property-2.html">@Html.DisplayFor(modelItem => item.adress)</a></h4>
+                                <div class="fr-can-rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="reviews_text">(42 Reviews)</span>
+                                </div>
+                                <span class="prt-types sale">For rent</span>
+                            </div>
+                            <div class="list-price">
+                                <h6 class="listing-card-info-price">Per Day : €@Html.DisplayFor(modelItem => item.pricePerDay)</h6>
+                                <br />
+                                <h6 class="listing-card-info-price">Per Month : €@Html.DisplayFor(modelItem => item.pricePerMonth)</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-features-wrapper">
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/assets/img/bed.svg" width="13" alt=""></div>@Html.DisplayFor(modelItem => item.nbrooms)
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/assets/img/move.svg" width="13" alt=""></div>@Html.DisplayFor(modelItem => item.surface) m²
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-footer-wrapper">
+                        <div class="listing-locate">
+                            <span class="listing-location"><i class="ti-location-pin"></i>@Html.DisplayFor(modelItem => item.type), @Html.DisplayFor(modelItem => item.city)</span>
+                        </div>
+                        <div class="listing-detail-btn">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+    @Html.ActionLink("Back to the Menu", "Index", "StaForProperty")
+</center>
+
+
+@*
+<Center>
+    <h2>Properties for RENT</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "form-control" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nbrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.surface)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.superficie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pricePerMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pricePerDay)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nbrooms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.surface)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.superficie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pricePerMonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pricePerDay)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_prop }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_prop }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_prop })
+                </td>
+            </tr>
+        }
+
+    </table>
+</Center>
+    *@

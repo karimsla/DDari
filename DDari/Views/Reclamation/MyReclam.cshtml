@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "MyReclam";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
 }
 
 <!-- datatable CSS -->
@@ -18,69 +18,7 @@
 
 <link href="~/Scripts/vendors/datepicker/date-picker.css" rel="stylesheet" />
 
-<div id="main-wrapper">
-    <!-- ============================ Page Title Start================================== -->
-    <div class="page-title">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
 
-                    <h2 class="ipt-title">Welcome!</h2>
-                    <span class="ipn-subtitle">Welcome To Your Account</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ============================ Page Title End ================================== -->
-    <!-- ============================ User Dashboard ================================== -->
-    <section class="bg-light">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="filter_search_opt">
-                        <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-lg-3 col-md-12">
-
-                    <div class="simple-sidebar sm-sidebar" id="filter_search">
-
-                        <div class="search-sidebar_header">
-                            <h4 class="ssh_heading">Close Filter</h4>
-                            <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
-                        </div>
-
-                        <div class="sidebar-widgets">
-                            <div class="dashboard-navbar">
-
-                                <div class="d-user-avater">
-                                    <img src="~/Content/img/user-3.jpg" class="img-fluid avater" alt="">
-                                    <h4>Adam Harshvardhan</h4>
-                                    <span>Canada USA</span>
-                                </div>
-
-                                <div class="d-navigation">
-                                    <ul>
-                                        <li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
-                                        <li><a href="my-profile.html"><i class="ti-user"></i>My Profile</a></li>
-                                        <li><a href="bookmark-list.html"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
-                                        <li><a href="my-property.html"><i class="ti-layers"></i>My Properties</a></li>
-                                        <li><a href="submit-property-dashboard.html"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
-                                        <li><a href="change-password.html"><i class="ti-unlock"></i>Change Password</a></li>
-                                        <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
                 <div class="col-lg-9 col-md-12">
                     <div class="dashboard-wraper">
@@ -238,8 +176,7 @@
                                                                             @Html.DisplayFor(modelItem => item.state)
                                                                         </td>
                                                                         <td>
-                                                                            <a  
-                                                                               id="modalin"   style="color: #2c323f" 
+                                                                            <a id="modalin" style="color: #2c323f"
                                                                                href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#modaltreat"
                                                                                data-id="@item.id"
                                                                                data-title="@item.title"
@@ -272,248 +209,244 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
-    <!-- ============================ User Dashboard End ================================== -->
-</div>
+     
 
 
-<div class="modal fade signup" id="modaltreat" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-        <div class="modal-content">
-            <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+    <div class="modal fade signup" id="modaltreat" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+            <div class="modal-content">
+                <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
 
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
 
 
-                <div class="card_box position-relative  mb_30 white_bg  ">
-                    <div class="white_box_tittle blue_bg    ">
-                        <div class="main-title2 ">
-                            <h4 class="mb-2 nowrap text_white" id="ctit">  </h4>
+                    <div class="card_box position-relative  mb_30 white_bg  ">
+                        <div class="white_box_tittle blue_bg    ">
+                            <div class="main-title2 ">
+                                <h4 class="mb-2 nowrap text_white" id="ctit">  </h4>
+
+                            </div>
+                        </div>
+                        <div class="box_body">
+
+
+                            <h4>
+                                Claim type
+                            </h4>
+
+                            <p class="f-w-400 " id="ctype">
+
+                            </p>
+
+
+
+                            <h4>
+                                Explication
+                            </h4>
+
+                            <p class="f-w-400 " id="cexp">
+
+                            </p>
+
+                            <h4>
+                                Date
+                            </h4>
+
+                            <p id="cdate">
+
+                            </p>
+
+
+
+                            <h4>
+                                Treatement
+                            </h4>
+
+                            <p class="f-w-400 " id="ctreat">
+
+                            </p>
+
+
+
+                            <div class="" role="alert">
+                                <div class="alert-text" id="cstate"></div>
+                            </div>
+                            <p class="f-w-400 ">
+
+                            </p>
+
+                        </div>
+                        <div class="card_footer">
 
                         </div>
                     </div>
-                    <div class="box_body">
 
 
-                        <h4>
-                            Claim type
-                        </h4>
+                </div>
+                <div class="modal-footer  ">
 
-                        <p class="f-w-400 " id="ctype">
-
-                        </p>
+                    <div id="formaff" class="w-100">
 
 
+                        <div class="col-md-4  form-group">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
 
-                        <h4>
-                            Explication
-                        </h4>
-
-                        <p class="f-w-400 " id="cexp">
-
-                        </p>
-
-                        <h4>
-                            Date
-                        </h4>
-
-                        <p id="cdate">
-
-                        </p>
-
-
-
-                        <h4>
-                            Treatement
-                        </h4>
-
-                        <p class="f-w-400 " id="ctreat">
-
-                        </p>
-
-
-
-                        <div class="" role="alert">
-                            <div class="alert-text" id="cstate"></div>
                         </div>
-                        <p class="f-w-400 ">
-
-                        </p>
-
                     </div>
-                    <div class="card_footer">
 
-                    </div>
+
                 </div>
-
-
-            </div>
-            <div class="modal-footer  ">
-
-                <div id="formaff" class="w-100">
-
-
-                    <div class="col-md-4  form-group">
-                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>
-</div>
-
- 
-
-<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
-
-<script>
-    $(document).on("click", "#modalin", function () {
 
 
 
-        let cid = $(this).data("id");
-        let title = $(this).data("title");
-        let explication = $(this).data("desc");
-        let datec = $(this).data("datec");
+    <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
 
-        let state = $(this).data('state');
-        let type = $(this).data('type');
-        let treat = $(this).data("treat");
-
-        $("#ctype").empty().append(type);
-        $("#cexp").empty().append(explication);
-        $("#cdate").empty().append(datec);
-        console.log(state);
-        if (state == "True") {
-            $("#cstate").empty().append("Treated").removeClass().addClass("alert text-white bg-success");
-
-        } else {
-            $("#cstate").empty().append("Not Treated").removeClass().addClass("alert text-white bg-danger");
-
-        }
-        $("#ctreat").empty().append(treat);
+    <script>
+        $(document).on("click", "#modalin", function () {
 
 
-        $('.modal-title').empty().append(title);
+
+            let cid = $(this).data("id");
+            let title = $(this).data("title");
+            let explication = $(this).data("desc");
+            let datec = $(this).data("datec");
+
+            let state = $(this).data('state');
+            let type = $(this).data('type');
+            let treat = $(this).data("treat");
+
+            $("#ctype").empty().append(type);
+            $("#cexp").empty().append(explication);
+            $("#cdate").empty().append(datec);
+            console.log(state);
+            if (state == "True") {
+                $("#cstate").empty().append("Treated").removeClass().addClass("alert text-white bg-success");
+
+            } else {
+                $("#cstate").empty().append("Not Treated").removeClass().addClass("alert text-white bg-danger");
+
+            }
+            $("#ctreat").empty().append(treat);
 
 
-        $("exampleModalLong").modal("show");
-    });
-</script>
+            $('.modal-title').empty().append(title);
 
 
-<script>
-    $(document).ready(function () {
+            $("exampleModalLong").modal("show");
+        });
+    </script>
 
-        $("#adsear").click(() => {
 
-            $("#searcharea").toggle(500);
+    <script>
+        $(document).ready(function () {
+
+            $("#adsear").click(() => {
+
+                $("#searcharea").toggle(500);
+            })
+
         })
-
-    })
-</script>
+    </script>
 
 
-<script>
-    $('#treatr').bind('click mousedown', (function () {
-        //Capture radio button status within its handler scope,
-        //so we do not use any global vars and every radio button keeps its own status.
-        //This required to uncheck them later.
-        //We need to store status separately as browser updates checked status before click handler called,
-        //so radio button will always be checked.
-        var isChecked;
+    <script>
+        $('#treatr').bind('click mousedown', (function () {
+            //Capture radio button status within its handler scope,
+            //so we do not use any global vars and every radio button keeps its own status.
+            //This required to uncheck them later.
+            //We need to store status separately as browser updates checked status before click handler called,
+            //so radio button will always be checked.
+            var isChecked;
 
-        return function (event) {
-            //console.log(event.type + ": " + this.checked);
+            return function (event) {
+                //console.log(event.type + ": " + this.checked);
 
-            if (event.type == 'click') {
-                //console.log(isChecked);
+                if (event.type == 'click') {
+                    //console.log(isChecked);
 
-                if (isChecked) {
-                    //Uncheck and update status
-                    isChecked = this.checked = false;
-                } else {
-                    //Update status
-                    //Browser will check the button by itself
-                    isChecked = true;
-
-                    //Do something else if radio button selected
-                    /*
-                    if(this.value == 'somevalue') {
-                        doSomething();
+                    if (isChecked) {
+                        //Uncheck and update status
+                        isChecked = this.checked = false;
                     } else {
-                        doSomethingElse();
+                        //Update status
+                        //Browser will check the button by itself
+                        isChecked = true;
+
+                        //Do something else if radio button selected
+                        /*
+                        if(this.value == 'somevalue') {
+                            doSomething();
+                        } else {
+                            doSomethingElse();
+                        }
+                        */
                     }
-                    */
-                }
-            } else {
-                //Get the right status before browser sets it
-                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
-                isChecked = this.checked;
-            }
-        }
-    })()); $('#treatr1').bind('click mousedown', (function () {
-        //Capture radio button status within its handler scope,
-        //so we do not use any global vars and every radio button keeps its own status.
-        //This required to uncheck them later.
-        //We need to store status separately as browser updates checked status before click handler called,
-        //so radio button will always be checked.
-        var isChecked;
-
-        return function (event) {
-            //console.log(event.type + ": " + this.checked);
-
-            if (event.type == 'click') {
-                //console.log(isChecked);
-
-                if (isChecked) {
-                    //Uncheck and update status
-                    isChecked = this.checked = false;
                 } else {
-                    //Update status
-                    //Browser will check the button by itself
-                    isChecked = true;
-
-                    //Do something else if radio button selected
-                    /*
-                    if(this.value == 'somevalue') {
-                        doSomething();
-                    } else {
-                        doSomethingElse();
-                    }
-                    */
+                    //Get the right status before browser sets it
+                    //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                    isChecked = this.checked;
                 }
-            } else {
-                //Get the right status before browser sets it
-                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
-                isChecked = this.checked;
             }
-        }
-    })());
-</script>
+        })()); $('#treatr1').bind('click mousedown', (function () {
+            //Capture radio button status within its handler scope,
+            //so we do not use any global vars and every radio button keeps its own status.
+            //This required to uncheck them later.
+            //We need to store status separately as browser updates checked status before click handler called,
+            //so radio button will always be checked.
+            var isChecked;
 
-<script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
-<script src="~/Content/Back/js/custom.js"></script>
-<!-- responsive table -->
-<script src="~/Content/Back/vendors/datatable/js/jquery.dataTables.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/dataTables.responsive.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/dataTables.buttons.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/buttons.flash.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/jszip.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/pdfmake.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/vfs_fonts.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/buttons.html5.min.js"></script>
-<script src="~/Content/Back/vendors/datatable/js/buttons.print.min.js"></script>
+            return function (event) {
+                //console.log(event.type + ": " + this.checked);
 
-<script src="~/Scripts/vendors/datepicker/datepicker.js"></script>
+                if (event.type == 'click') {
+                    //console.log(isChecked);
+
+                    if (isChecked) {
+                        //Uncheck and update status
+                        isChecked = this.checked = false;
+                    } else {
+                        //Update status
+                        //Browser will check the button by itself
+                        isChecked = true;
+
+                        //Do something else if radio button selected
+                        /*
+                        if(this.value == 'somevalue') {
+                            doSomething();
+                        } else {
+                            doSomethingElse();
+                        }
+                        */
+                    }
+                } else {
+                    //Get the right status before browser sets it
+                    //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                    isChecked = this.checked;
+                }
+            }
+        })());
+    </script>
+
+    <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/Back/js/custom.js"></script>
+    <!-- responsive table -->
+    <script src="~/Content/Back/vendors/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.flash.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/jszip.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/pdfmake.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/vfs_fonts.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.html5.min.js"></script>
+    <script src="~/Content/Back/vendors/datatable/js/buttons.print.min.js"></script>
+
+    <script src="~/Scripts/vendors/datepicker/datepicker.js"></script>

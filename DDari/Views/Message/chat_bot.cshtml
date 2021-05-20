@@ -1,74 +1,94 @@
 ﻿
 @{
     ViewBag.Title = "chatbot";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+
 }
 
 
+<link href="~/Content/Back/css/style.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="~/Content/css/styles.css" rel="stylesheet">
 
 <!-- Custom Color Option -->
-<link href="~/Content/Back/css/style.css" rel="stylesheet">
+<link href="~/Content/css/colors.css" rel="stylesheet">
+
+<div class="col-lg-9 col-md-12">
 
 
-<div class="main_content_iner  align-content-center">
-    <div class="container-fluid p-0">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="dashboard_header mb_50">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="dashboard_header_title">
-                                <h3>Chat bot</h3>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="dashboard_breadcam text-right">
-                               
+
+
+    <div class="row">
+
+        <div class="col-lg-10 col-md-12">
+            <div class="dashboard-wraper">
+
+
+                <div class="row">
+
+                    <div class="container-fluid p-0">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="messages_box_area col-md-12" style="display:block">
+
+                                    <div class="messages_chat mb_30 ">
+                                        <div class="white_box ">
+
+                                            <div id="whitebox" style="overflow-y: auto; height:500px;">
+                                           
+                                                <div class="single_message_chat">
+                                                    <div class="message_pre_left">
+                                                        <div class="message_preview_thumb">
+                                                            <img src="~/Content/Back/img/messages/1.png" alt="">
+                                                        </div>
+                                                        <div class="messges_info">
+                                                            <h4>Chat Bot</h4>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="message_content_view red_border">
+                                                        <p>
+                                                            I am here to answer you questions
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="message_send_field">
+                                                <input type="text" id="msgin" placeholder="Write your message" value="">
+                                                <button class="btn_1" id="sendbtn" type="reset">Send</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="messages_box_area">
-
-                    <div class="messages_chat mb_30">
-                        <div class="white_box " >
-
-                            <div id="whitebox" style="overflow-y: auto; height:400px;">
-                               <div class="single_message_chat">
-                                <div class="message_pre_left">
-                                    <div class="message_preview_thumb">
-                                        <img src="~/Content/Back/img/messages/1.png" alt="">
-                                    </div>
-                                    <div class="messges_info">
-                                        <h4>Chat Bot</h4>
-
-                                    </div>
-                                </div>
-                                <div class="message_content_view red_border">
-                                    <p>
-                                        I am here to answer you questions
-                                    </p>
-                                </div>
-                            </div>
-                            </div>
-                            
 
 
-
-
-                            <div class="message_send_field">
-                                <input type="text" id="msgin" placeholder="Write your message" value="">
-                                <button class="btn_1" id="sendbtn" type="reset">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="~/Content/Back/js/jquery-3.4.1.min.js"></script>
 
 <script>

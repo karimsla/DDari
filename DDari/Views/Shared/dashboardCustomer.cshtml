@@ -41,7 +41,7 @@
                         <div class="dashboard-navbar">
 
                             <div class="d-user-avater">
-                                <img src="assets/img/user-3.jpg" class="img-fluid avater" alt="">
+                                <img src="~/Content/img/user-3.jpg" class="img-fluid avater" alt="">
                                 <h4>Adam Harshvardhan</h4>
                                 <span>Canada USA</span>
                             </div>
@@ -50,10 +50,11 @@
                                 <ul>
                                     <li class="active"><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
                                     <li><a href="my-profile.html"><i class="ti-user"></i>My Profile</a></li>
-                                    <li><a href="bookmark-list.html"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
-                                    <li><a href="my-property.html"><i class="ti-layers"></i>My Properties</a></li>
-                                    <li><a href="submit-property-dashboard.html"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
-                                    <li><a href="change-password.html"><i class="ti-unlock"></i>Change Password</a></li>
+                                    <li><a href="@Url.Action("Index","Appointment")"><i class="ti-bookmark"></i>Appointments</a></li>
+                                    <li><a href="@Url.Action("trackDelivery","Deliveries")"><i class="ti-layers"></i>Track my deliveries</a></li>
+                                    <li><a href="@Url.Action("MyReclam","Reclamation")"><i class="ti-alert"></i>My claims</a></li>
+                                    <li><a href="@Url.Action("Messages","Message")"><i class="ti-email"></i>Messages</a></li>
+                                    <li><a href="@Url.Action("chat_bot","Message")"><i class="fas fa-robot"></i>Chat bot</a></li>
                                     <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
@@ -64,7 +65,7 @@
                 </div>
             </div>
 
-        @RenderBody()
+            @RenderBody()
 
         </div>
     </div>

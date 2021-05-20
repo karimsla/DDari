@@ -14,6 +14,8 @@
         <!-- Bookmark Property -->
         <div class="form-submit">
             <h4>My Appointments</h4>
+            <a href="#" id="app" title="Show"><i class="ti-map"></i></a>
+
         </div>
 
         <div class="row">
@@ -27,13 +29,13 @@
                     apptype = "The appointment will be " + (item.appointmentType.Equals("FACE_TO_FACE") ? "face to face" : "Online");
                 }
 
-                <div class="col-md-12 col-sm-12 col-md-12">
+                <div class="col-md-12 col-sm-12 col-md-12" id="myapp" style="display:normal">
                     <div class="singles-dashboard-list">
 
                         <div class="sd-list-right">
                             <h4 class="listing_dashboard_title" style="color:@color;">@item.state</h4>
                             <div class="user_dashboard_listed">
-                                <b>Requested by :</b> @item.customerId
+                                <b>Requested by :</b> @item.custname
                             </div>
                             <div class="user_dashboard_listed">
                                 @if (item.agentId == null)
@@ -59,7 +61,8 @@
 
                             <div class="action">
                                 @if (!item.state.Equals("ACCEPTED"))
-                                {<a href="#" data-bs-toggle="modal" data-id="@item.appointmentId" class="appoint" data-bs-target="#login" title="Edit"><i class="ti-pencil"></i></a>
+                                {
+                                    <a href="#" data-bs-toggle="modal" data-id="@item.appointmentId" class="appoint" data-bs-target="#login" title="Edit"><i class="ti-pencil"></i></a>
                                 }
                                 <a href="@Url.Action("Delete",new { id = item.appointmentId })" onclick="return confirm('Are you sure you want to cancel this appointment?');" class="delete"><i class="ti-close"></i></a>
                             </div>
@@ -70,25 +73,28 @@
 
 
 
-            <div class="form-submit">
-                <h4>Requested Appointments</h4>
-            </div>
+        <div class="form-submit">
+            <h4>Requested Appointments</h4>
+            <a href="#"  id="appsecond" title="Show"><i class="ti-map"></i></a>
 
+        </div>
+        <div id="second" style="display:normal">
             @Html.Action("requested")
+        </div>
         </div>
 
     </div>
-   
+
 </div>
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="registermodal" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
         <div class="modal-content" id="registermodal">
             <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
             <div class="modal-body">
-                <h4 class="modal-header-title">Log In</h4>
+                <h4 class="modal-header-title">Request</h4>
                 <div class="login-form">
                     <form method="post" action="@Url.Action("Edit",new { id = 0 } )">
-                        <input name="id" id="appid" />
+                        <input name="id" id="appid" hidden="hidden" />
                         <div class="form-group">
                             <label>Appointment date</label>
                             <div class="input-with-icon">
@@ -117,7 +123,7 @@
 
                     </form>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -130,9 +136,20 @@
     $(document).on("click", ".appoint", function () {
         var appid = $(this).data('id');
         $(".modal-body #appid").val(appid);
-        // As pointed out in comments, 
+        // As pointed out in comments,
         // it is unnecessary to have to manually call the modal.
         // $('#addBookDialog').modal('show');
     });
 
+</script>
+
+
+<script>
+
+    $(document).on("click", "#app", function () {
+        $('#myapp').toggle(500);
+    });
+    $(document).on("click", "#appsecond", function () {
+        $('#second').toggle(500);
+    });
 </script>
