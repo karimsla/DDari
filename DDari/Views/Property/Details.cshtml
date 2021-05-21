@@ -1,0 +1,334 @@
+﻿@model DDari.Models.Property
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="featured_slick_gallery gray">
+    <div class="featured_slick_gallery-slide">
+        <div class="featured_slick_padd"><a href="assets/img/p-1.jpg" class="mfp-gallery"><img src="~/Content/Upload/@Model.image" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="assets/img/p-2.jpg" class="mfp-gallery"><img src="~/Content/img/p-2.jpg" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="assets/img/p-3.jpg" class="mfp-gallery"><img src="~/Content/Upload/@Model.image" class="img-fluid mx-auto" alt=""></a></div>
+        <div class="featured_slick_padd"><a href="assets/img/p-4.jpg" class="mfp-gallery"><img src="~/Content/img/p-4.jpg" class="img-fluid mx-auto" alt=""></a></div>
+    </div>
+    <a href="JavaScript:Void(0);" class="btn-view-pic">View photos</a>
+</div>
+<!-- ============================ Hero Banner End ================================== -->
+<!-- ============================ Property Detail Start ================================== -->
+<section class="gray-simple">
+    <div class="container">
+        <div class="row">
+
+            <!-- property main detail -->
+            <div class="col-lg-8 col-md-12 col-sm-12">
+
+                <div class="property_block_wrap style-2 p-4">
+                    <div class="prt-detail-title-desc">
+                        @if (Model.state == "Sale")
+                        {
+
+
+
+                            <span class="prt-types sale">For Sale</span>
+                        }
+                        else
+                        {
+                            <span class="prt-types rent">For Rent</span>
+                        }
+                        <h3>@Model.city</h3>
+                        <span><i class="lni-map-marker"></i> @Model.adress</span>
+                        <h3 class="prt-price-fix">
+                            @Model.prix $
+                            @if (Model.state == "Sale")
+                            {
+
+
+
+                           
+                            }
+                            else
+                            {
+                                <sub>/month</sub>
+                            }
+                      
+                        </h3>
+                        
+                        <div class="list-fx-features">
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/Content/img/bed.svg" width="13" alt=""></div>@Model.nbrooms
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/Content/img/bathtub.svg" width="13" alt=""></div>@Model.type
+                            </div>
+                            <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="~/Content/img/move.svg" width="13" alt=""></div>@Model.surface m²
+                            </div>
+                            <br /><br />
+                            <ul class="like_share_list">
+                                <li><a href="@Url.Action("request","Appointment")" class="btn btn-likes"><i class="fas fa-phone"></i>Request Appointment</a></li>
+</ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Block Wrap -->
+                <div class="property_block_wrap style-2">
+
+                    <div class="property_block_wrap_header">
+                        <a data-bs-toggle="collapse" data-parent="#features" data-bs-target="#clOne" aria-controls="clOne" href="javascript:void(0);" aria-expanded="false"><h4 class="property_block_title">Detail & Features</h4></a>
+                    </div>
+                    <div id="clOne" class="panel-collapse collapse show" aria-labelledby="clOne">
+                        <div class="block-body">
+                            <ul class="deatil_features">
+                                <li><strong>Room number:</strong>@Model.nbrooms</li>
+                                <li><strong>Area:</strong>@Model.surface m²</li>
+                                <li><strong>Built Areas:</strong>@Model.superficie m²</li>
+
+                                <li><strong>Property Type:</strong>@Model.type</li>
+                                <li><strong>State:</strong>@Model.state</li>
+                                <li><strong>Adress:</strong>@Model.adress</li>
+                                <li><strong>Zip Code:</strong>@Model.zipCode</li>
+                                <li><strong>City:</strong>@Model.city</li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Single Block Wrap -->
+                <div class="property_block_wrap style-2">
+
+                    <div class="property_block_wrap_header">
+                        <a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true"><h4 class="property_block_title">Description</h4></a>
+                    </div>
+                    <div id="clTwo" class="panel-collapse collapse show">
+                        <div class="block-body">
+                            <p>@Model.description</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Single Block Wrap -->
+                <div class="property_block_wrap style-2">
+
+                    <div class="property_block_wrap_header">
+                        <a data-bs-toggle="collapse" data-parent="#clSev" data-bs-target="#clSev" aria-controls="clOne" href="javascript:void(0);" aria-expanded="true" class="collapsed"><h4 class="property_block_title">Gallery</h4></a>
+                    </div>
+
+                    <div id="clSev" class="panel-collapse collapse">
+                        <div class="block-body">
+                            <ul class="list-gallery-inline">
+                                <li>
+                                    <a href="~/Content/img/p-1.jpg" class="mfp-gallery"><img src="~/Content/img/p-1.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="~/Content/img/p-2.jpg" class="mfp-gallery"><img src="~/Content/img/p-2.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="~/Content/img/p-3.jpg" class="mfp-gallery"><img src="~/Content/img/p-3.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="~/Content/img/p-4.jpg" class="mfp-gallery"><img src="~/Content/img/p-4.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="~/Content/img/p-5.jpg" class="mfp-gallery"><img src="~/Content/img/p-5.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="~/Content/img/p-6.jpg" class="mfp-gallery"><img src="~/Content/img/p-6.jpg" class="img-fluid mx-auto" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!-- property Sidebar -->
+            <div class="col-lg-4 col-md-12 col-sm-12">
+
+                <!-- Like And Share -->
+                <div class="like_share_wrap b-0">
+                    <ul class="like_share_list">
+                        <li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" data-original-title="Share"><i class="fas fa-share"></i>Share</a></li>
+                        <li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" data-original-title="Save"><i class="fas fa-heart"></i>Save</a></li>
+                    </ul>
+                </div>
+
+                <div class="details-sidebar">
+
+                    <!-- Agent Detail -->
+                    <div class="sides-widget">
+                        <div class="sides-widget-header">
+                            <div class="agent-photo"><img src="assets/img/user-6.jpg" alt=""></div>
+                            <div class="sides-widget-details">
+                                <h4><a href="#">Shivangi Preet</a></h4>
+                                <span><i class="lni-phone-handset"></i>(91) 123 456 7895</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="sides-widget-body simple-form">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone No.</label>
+                                <input type="text" class="form-control" placeholder="Your Phone">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control">I'm interested in this property.</textarea>
+                            </div>
+                            <button class="btn btn-black btn-md rounded full-width">Send Message</button>
+                        </div>
+                    </div>
+
+                    <!-- Mortgage Calculator -->
+                    <div class="sides-widget">
+
+                        <div class="sides-widget-header">
+                            <div class="sides-widget-details">
+                                <h4><a href="#">Shivangi Preet</a></h4>
+                                <span>View your Interest Rate</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="sides-widget-body simple-form">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Sale Price">
+                                    <i class="ti-money"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Down Payment">
+                                    <i class="ti-money"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Loan Term (Years)">
+                                    <i class="ti-calendar"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Interest Rate">
+                                    <i class="fa fa-percent"></i>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-black btn-md rounded full-width">Calculate</button>
+
+                        </div>
+                    </div>
+
+                    <!-- Featured Property -->
+                    <div class="sidebar-widgets">
+
+                        <h4>Featured Property</h4>
+
+                        <div class="sidebar_featured_property">
+
+                            <!-- List Sibar Property -->
+                            <div class="sides_list_property">
+                                <div class="sides_list_property_thumb">
+                                    <img src="assets/img/p-1.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="sides_list_property_detail">
+                                    <h4><a href="single-property-1.html">Loss vengel New Apartment</a></h4>
+                                    <span><i class="ti-location-pin"></i>Sans Fransico</span>
+                                    <div class="lists_property_price">
+                                        <div class="lists_property_types">
+                                            <div class="property_types_vlix sale">For Sale</div>
+                                        </div>
+                                        <div class="lists_property_price_value">
+                                            <h4>$4,240</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- List Sibar Property -->
+                            <div class="sides_list_property">
+                                <div class="sides_list_property_thumb">
+                                    <img src="assets/img/p-4.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="sides_list_property_detail">
+                                    <h4><a href="single-property-1.html">Montreal Quriqe Apartment</a></h4>
+                                    <span><i class="ti-location-pin"></i>Liverpool, London</span>
+                                    <div class="lists_property_price">
+                                        <div class="lists_property_types">
+                                            <div class="property_types_vlix">For Rent</div>
+                                        </div>
+                                        <div class="lists_property_price_value">
+                                            <h4>$7,380</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- List Sibar Property -->
+                            <div class="sides_list_property">
+                                <div class="sides_list_property_thumb">
+                                    <img src="assets/img/p-7.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="sides_list_property_detail">
+                                    <h4><a href="single-property-1.html">Curmic Studio For Office</a></h4>
+                                    <span><i class="ti-location-pin"></i>Montreal, Canada</span>
+                                    <div class="lists_property_price">
+                                        <div class="lists_property_types">
+                                            <div class="property_types_vlix buy">For Buy</div>
+                                        </div>
+                                        <div class="lists_property_price_value">
+                                            <h4>$8,730</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- List Sibar Property -->
+                            <div class="sides_list_property">
+                                <div class="sides_list_property_thumb">
+                                    <img src="assets/img/p-5.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="sides_list_property_detail">
+                                    <h4><a href="single-property-1.html">Montreal Quebec City</a></h4>
+                                    <span><i class="ti-location-pin"></i>Sreek View, New York</span>
+                                    <div class="lists_property_price">
+                                        <div class="lists_property_types">
+                                            <div class="property_types_vlix">For Rent</div>
+                                        </div>
+                                        <div class="lists_property_price_value">
+                                            <h4>$6,240</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Property Detail End ================================== -->

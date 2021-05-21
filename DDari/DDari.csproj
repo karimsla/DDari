@@ -61,6 +61,9 @@
     <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -123,6 +126,9 @@
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
+    <Reference Include="Stripe.net, Version=39.49.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.39.49.0\lib\net461\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -170,6 +176,11 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -266,14 +277,18 @@
     <Compile Include="Controllers\ContractRentController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PanierController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\ReclamationController.cs" />
     <Compile Include="Controllers\StaForPropertyController.cs" />
+    <Compile Include="Controllers\SubscribController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\RentController.cs" />
     <Compile Include="Controllers\SimulationController.cs" />
-    <Compile Include="Controllers\SubscribeController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,9 +302,14 @@
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DeliveryMan.cs" />
+    <Compile Include="Models\Detail_Panier.cs" />
     <Compile Include="Models\ForgotPasswordRequest.cs" />
+    <Compile Include="Models\Furniture.cs" />
+    <Compile Include="Models\FurnitureType.cs" />
+    <Compile Include="Models\LigneCommande.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\Panier.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\PropertyType.cs" />
@@ -307,7 +327,11 @@
     <Compile Include="Services\ServiceAppointment.cs" />
     <Compile Include="Services\ServiceBuy.cs" />
     <Compile Include="Services\ServiceDelivery.cs" />
+    <Compile Include="Services\ServiceDetailPanier.cs" />
+    <Compile Include="Services\ServiceFurniture.cs" />
     <Compile Include="Services\ServiceMessages.cs" />
+    <Compile Include="Services\ServiceOrders.cs" />
+    <Compile Include="Services\ServiceProperty.cs" />
     <Compile Include="Services\ServiceReclamation.cs" />
     <Compile Include="Services\ServiceRent.cs" />
     <Compile Include="Services\ServiceSimulation.cs" />
@@ -1058,6 +1082,7 @@
     <Content Include="Scripts\vendors\verctorMap\jvectormap-world-mill-en.js" />
     <Content Include="Scripts\vendors\verctorMap\map-vector.js" />
     <Content Include="Scripts\vendors\verctorMap\vector-map.css" />
+    <Content Include="Views\Orders\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1155,6 +1180,24 @@
     <Content Include="Views\Rent\Details.cshtml" />
     <Content Include="Views\Rent\Edit.cshtml" />
     <Content Include="Views\StaForProperty\Index.cshtml" />
+    <Content Include="Views\Furniture\Create.cshtml" />
+    <Content Include="Views\Furniture\Details.cshtml" />
+    <Content Include="Views\Furniture\Edit.cshtml" />
+    <Content Include="Views\Furniture\Index.cshtml" />
+    <Content Include="Views\Furniture\MyFurnitures.cshtml" />
+    <Content Include="Views\Orders\Error.cshtml" />
+    <Content Include="Views\Orders\myOrders.cshtml" />
+    <Content Include="Views\Orders\orderDetail.cshtml" />
+    <Content Include="Views\Orders\passOrder.cshtml" />
+    <Content Include="Views\Orders\Success.cshtml" />
+    <Content Include="Views\Panier\Index.cshtml" />
+    <Content Include="Views\Property\Create.cshtml" />
+    <Content Include="Views\Property\Details.cshtml" />
+    <Content Include="Views\Property\Edit.cshtml" />
+    <Content Include="Views\Property\Index.cshtml" />
+    <Content Include="Views\Property\MyProperties.cshtml" />
+    <Content Include="Views\Subscrib\Create.cshtml" />
+    <Content Include="Views\Subscrib\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

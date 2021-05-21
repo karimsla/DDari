@@ -13,6 +13,6 @@ namespace DDari.Models
 
         public Subscription subscriptions { get; set; }
 
-        //public Customer customers { get; set; }
+        public Customer customers { get; set; }
     }
 }

@@ -8,47 +8,58 @@ using System.Web.Mvc;
 
 namespace DDari.Controllers
 {
-    public class SubscribeController : Controller
+    public class SubscribController : Controller
     {
 
         static ServiceSubscription serviceSub = null;
 
-        public SubscribeController()
+        public SubscribController()
         {
             serviceSub = new ServiceSubscription();
 
         }
-        // GET: Subscribe
+        // GET: Subscrib
         public ActionResult Index()
         {
-            return View();
+            var task = Task.Run(async () => await serviceSub.FindAll());
+
+            var subscribes = task.Result;
+
+            return View(subscribes);
         }
 
-        // GET: Subscribe/Details/5
+        // GET: Subscrib/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Subscribe/Create
+        // GET: Subscrib/Create
         public ActionResult Creates()
         {
             return View();
         }
 
-        // POST: Subscribe/Create
+        // POST: Subscrib/Create
         
-        public ActionResult Create(Models.Subscribe subscribe)
+        public ActionResult Create(Models.Subscribe subscribe )
         {
+
+            DateTime dateTime = new DateTime(2021, 12, 31);
+            subscribe.DateF = dateTime;
+
+
+            long idC = 1;
             if (ModelState.IsValid)
             {
 
 
                 try
                 {
-                    await(_ = serviceSub.CreateSubscribe(subscribe));
+                    var task = Task.Run(async () => await serviceSub.CreateSubscribe(subscribe , idC));
                     // TODO: Add insert logic here
 
+                    var subsribe = task.Result;
                     return RedirectToAction("Index");
                 }
                 catch
@@ -60,19 +71,16 @@ namespace DDari.Controllers
 
         }
 
-        private void await(Task<Uri> task)
-        {
-            throw new NotImplementedException();
-        }
+       
 
 
-        // GET: Subscribe/Edit/5
+        // GET: Subscrib/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Subscribe/Edit/5
+        // POST: Subscrib/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -88,13 +96,13 @@ namespace DDari.Controllers
             }
         }
 
-        // GET: Subscribe/Delete/5
+        // GET: Subscrib/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Subscribe/Delete/5
+        // POST: Subscrib/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

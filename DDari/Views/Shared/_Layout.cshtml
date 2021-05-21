@@ -193,7 +193,7 @@
                                 </a>
                             </li>
                             <li class="add-listing theme-bg">
-                                <a href="submit-property.html">Add Property</a>
+                                <a href="@Url.Action("Create","Property")">Add Property</a>
                             </li>
                         </ul>
                     </div>
@@ -324,7 +324,26 @@
                         <h4 class="modal-header-title">Log In</h4>
                         <div class="login-form">
 
-                         
+                                    <div class="form-group">
+                                        <label>User Name</label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control" placeholder="Username">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="input-with-icon">
+                                            <input type="password" class="form-control" placeholder="*******">
+                                            <i class="ti-unlock"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button  onclick="location.href='@Url.Action("Index","Property")'" class="btn btn-md full-width btn-theme-light-2 rounded">Login</button>
+                                    </div>
+
                         </div>
 
                         <div class="modal-divider"><span>Or login via</span></div>

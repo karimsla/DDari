@@ -23,7 +23,7 @@ namespace DDari.Services
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
         }
-        public async Task<string> mensualite(double montantCredit, float taux_period , long duree)
+        public async Task<string> mensualite(double montantCredit, float taux_period, long duree)
         {
             double message = 0;
             HttpResponseMessage response = await client.GetAsync($"/Simulation/mensualiteSA/{montantCredit}/{taux_period}/{duree}");
@@ -32,8 +32,25 @@ namespace DDari.Services
             {
                 message = await response.Content.ReadAsAsync<double>();
             }
-            return message+"";
+            return message + "";
 
         }
+
+        public async Task<string> total(double montantCredit, long duree, float interet, double assurance, double frais)
+        {
+            double message = 0;
+            HttpResponseMessage response = await client.GetAsync($"/Simulation/Total/{montantCredit}/{duree}/{interet}/{assurance}/{frais}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                message = await response.Content.ReadAsAsync<double>();
+            }
+            return message + "";
+
+        }
+
+
+
+
     }
 }

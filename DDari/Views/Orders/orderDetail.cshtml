@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DDari.Models.Furniture>
+@{
+    ViewBag.Title = "MyFurnitures";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit  ">
+
+
+            <h4 class="d-inline-block">Order Furnitures</h4>
+            <div class="col-lg-2 col-md-4 col-sm-6 float-end">
+
+               
+            </div>
+
+        </div>
+
+
+        <div class="row  mt-5">
+            @foreach (var item in Model)
+            {
+                <!-- Single Property -->
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="singles-dashboard-list">
+                        <div class="sd-list-left">
+                            <img src="~/Content/Upload/@item.picture" class="img-fluid" alt="">
+                        </div>
+                        <div class="sd-list-right">
+                            <h4 class="listing_dashboard_title"><a href="#" class="theme-cl">@item.title</a></h4>
+                            <div class="user_dashboard_listed">
+                                Price: @item.price $
+                            </div>
+                            <div class="user_dashboard_listed">
+                                Listed in <a href="javascript:void(0);" class="theme-cl">Rentals</a> and <a href="javascript:void(0);" class="theme-cl">@item.type</a>
+                            </div>
+                            <div class="user_dashboard_listed">
+
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+    </div>
+</div>
+
+

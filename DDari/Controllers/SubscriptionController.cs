@@ -93,9 +93,8 @@ namespace DDari.Controllers
         }
 
         // POST: Subscription/Edit/5
-      
         [HttpPost]
-        public ActionResult Edit(Subscription subscription)
+        public ActionResult Edit( Subscription subscription)
         {
             using (var client = new HttpClient())
             {
@@ -113,7 +112,6 @@ namespace DDari.Controllers
                 }
             }
             return View(subscription);
-
 
         }
 

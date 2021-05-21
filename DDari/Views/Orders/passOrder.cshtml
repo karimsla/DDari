@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "passOrder";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+<title>Confirm Order</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit  ">
+
+
+            <h4 class="d-inline-block">My Furnitures</h4>
+            <div class="col-lg-2 col-md-4 col-sm-6 float-end">
+                 
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe('pk_test_51IncNxGyQHQcbQ8NiNpBqNSMyAiNjNDhiSL2wyptlHX1nArZ0UGIudGcDE2qsINOVly8PdRttnHgZrTs6WSnaLOv00uSqddamj');
+    var checkoutButton = document.getElementById('buy-button');
+    window.addEventListener('load', function () {
+     
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+      fetch("@Html.Raw(Url.Action("Create","Orders",new {price=ViewBag.sum,count=ViewBag.count }))", {
+                            method: "GET",
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, you should display the localized error message to your
+                // customer using `error.message`.
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+ 

@@ -43,7 +43,25 @@ namespace DDari.Controllers
             }
             else
             {
-                return Json(sim[0]);
+                return Json(sim,JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public ActionResult total(double montantCredit, long duree, float interet, double assurance, double frais)
+        {
+
+            var task = Task.Run(async () => await serviceSimulations.total(montantCredit, duree,interet,assurance,frais ));
+
+            var total = task.Result;
+
+            if (string.IsNullOrEmpty(total))
+            {
+                return Json("something wrong happened! please enter data needed");
+            }
+            else
+            {
+                return Json(total, JsonRequestBehavior.AllowGet);
             }
 
         }

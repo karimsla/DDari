@@ -12,5 +12,7 @@ namespace DDari.Models
         public int? idc { get; set; }
         public int idf { get; set; }
         public int? fur { get; set; }
+        public float somme { get; set; }
+
     }
 }

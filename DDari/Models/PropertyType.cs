@@ -7,6 +7,6 @@ namespace DDari.Models
 {
     public enum PropertyType
     {
-        Apartment, Office, Collocation, Building, Shop, Villa, Ground, ConstructionZone, Garage
+        Apartment, Office, Collocation, Building, Shop, Villa, Ground, ConstructionZone, Garage,House
     }
 }

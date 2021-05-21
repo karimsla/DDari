@@ -34,10 +34,13 @@ namespace DDari.Services
         }
 
 
-        public async Task<Uri> CreateSubscribe(Models.Subscribe subscribe)
+        public async Task<Uri> CreateSubscribe(Models.Subscribe subscribe , long idC)
         {
+            
+            
+
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                 $"/Subscription/addsubscribe", subscribe);
+                 $"/Subscription/addsubscribe/{idC}", subscribe);
             response.EnsureSuccessStatusCode();
 
             // return URI of the created resource.
@@ -64,13 +67,13 @@ namespace DDari.Services
 
         public async Task<dynamic> FindAll()
         {
-            dynamic subs = null;
+            dynamic subsc = null;
             HttpResponseMessage response = await client.GetAsync($"/Subscription/GetAll");
             if (response.IsSuccessStatusCode)
             {
-                subs = response.Content.ReadAsAsync < IEnumerable<Subscription>>().Result;
+                subsc = response.Content.ReadAsAsync < IEnumerable<Subscription>>().Result;
             }
-            return subs;
+            return subsc;
 
         }
 

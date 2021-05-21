@@ -95,7 +95,7 @@ namespace DDari.Services
         {
             Customer applist = null;
             HttpResponseMessage response = await client.GetAsync(
-                 $"/UserCrud/getallUsers/{id}");
+                 $"/UserCrud/getUserById/{id}");
             if (response.IsSuccessStatusCode)
             {
                 applist = response.Content.ReadAsAsync<Customer>().Result;

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DDari.Models.Furniture>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+
+
+@{TempData["sum"] = ViewBag.sum;
+    TempData["count"] = Model.Count();
+}
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+
+
+        <!-- Bookmark Property -->
+        <div class="form-submit  ">
+
+
+            <h4 class="d-inline-block">Furniture Cart</h4><br />
+            <h5 class="d-inline-block">Total: @ViewBag.sum</h5>
+            <div class="col-lg-2 col-md-4 col-sm-6 float-end">
+
+                <div class="form-group ">
+
+                    <button  class="btn search-btn black" id="pass-order" style="background: #1a2340 !important">Pass Order</button>
+                </div>
+            </div>
+
+        </div>
+
+        <table class="property-table-wrap responsive-table bkmark">
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <!-- Item #1 -->
+                    <tr>
+                        <td class="property-container">
+                            <img src="~/Content/Upload/@item.picture" alt="">
+                            <div class="title">
+                                <h4><a href="#">@item.title</a></h4>
+                                <span>@item.description </span>
+                                <span class="table-property-price">@item.price</span>
+                            </div>
+                        </td>
+                        <td class="action">
+                            <a href="@Url.Action("removeFurn","Panier",new { id=item.id_fur})" class="delete"><i class="ti-close"></i> Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe('pk_test_51IncNxGyQHQcbQ8NiNpBqNSMyAiNjNDhiSL2wyptlHX1nArZ0UGIudGcDE2qsINOVly8PdRttnHgZrTs6WSnaLOv00uSqddamj');
+    var checkoutButton = document.getElementById('pass-order');
+    checkoutButton.addEventListener('click', function () {
+
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+      fetch("@Html.Raw(Url.Action("Create","Orders",new {price=ViewBag.sum,count=Model.Count() }))", {
+                            method: "GET",
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, you should display the localized error message to your
+                // customer using `error.message`.
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    });
+</script>
+

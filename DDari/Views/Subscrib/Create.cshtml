@@ -1,0 +1,25 @@
+﻿@model DDari.Models.Subscribe
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="card  text-dark border-warning mb-3" style="background-color: aliceblue">
+        <div>
+            <h4 style="color:Highlight">you'll get a subscription till the end of the year from today's date! hope you enjoy it !! </h4>
+        </div>
+        <div class="form-group">
+            <div  class="d-grid gap-6 col-6 mx-auto">
+                <input type="submit" value="Get a Subscription" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+    </div>
+    }
+
+   

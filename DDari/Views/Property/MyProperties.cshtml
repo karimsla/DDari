@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DDari.Models.Property>
+
+@{
+    ViewBag.Title = "MyProperties";
+    Layout = "~/Views/Shared/dashboardCustomer.cshtml";
+}
+
+<div class="col-lg-9 col-md-12">
+    <div class="dashboard-wraper">
+
+        <!-- Bookmark Property -->
+        <div class="form-submit">
+            <h4>My Property</h4>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <!-- Single Property -->
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="singles-dashboard-list">
+                        <div class="sd-list-left">
+                            <img src="~/Content/Upload/@item.image" class="img-fluid" alt="">
+                        </div>
+                        <div class="sd-list-right">
+                            <h4 class="listing_dashboard_title"><a href="#" class="theme-cl">@item.title</a></h4>
+                            <div class="user_dashboard_listed">
+                                Price: @item.prix $
+                            </div>
+                            <div class="user_dashboard_listed">
+                                Listed in <a href="javascript:void(0);" class="theme-cl">Rentals</a> and <a href="javascript:void(0);" class="theme-cl">@item.type</a>
+                            </div>
+                            <div class="user_dashboard_listed">
+                                City: <a href="javascript:void(0);" class="theme-cl">@item.city</a> , Area:@item.surface m²
+                            </div>
+                            <div class="action">
+                                <a href="@Url.Action("Edit","Property",new {id=item.id_prop })" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil"></i></a>
+                                <a href="@Url.Action("Details","Property",new { id = item.id_prop })" data-toggle="tooltip" data-placement="top" title="202 User View"><i class="ti-eye"></i></a>
+                                <a href="@Url.Action("Delete","Property",new { id=item.id_prop})" data-toggle="tooltip" data-placement="top" title="Delete Property" class="delete"><i class="ti-close"></i></a>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            </div>
+
+    </div>
+</div>
+
+ 

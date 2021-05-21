@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DDari.Models.Subscription>
+
+<div class="card  text-dark border-warning mb-3" style="background-color:lightgrey">
+    <table class="class=" table table-stripped">
+        <thead>
+            <tr>
+
+                <th class="table-success">
+                    @Html.DisplayNameFor(model => model.title)
+                </th>
+                <th class="table-success">
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th class="table-success">
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                    <td>
+                        @Html.ActionLink("Get this one ", "Create", new { id = item.id_sub })
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
